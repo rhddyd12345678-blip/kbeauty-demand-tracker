@@ -2,7 +2,8 @@
 
 소스 (키 불필요)
  - 재무 (연간 5년 + 추정 3년, 분기 5개 + 추정 3개): 네이버 증권 기업분석(WiseReport) 주요재무정보
-   실패 시 m.stock.naver.com 재무 API로 폴백. 지난 실행에서 받은 과거 기간은 유지(누적)하고 추정치만 덮어씀.
+   실패 시(예: GitHub Actions 해외 IP 차단) m.stock.naver.com 재무 API로 폴백. 기간·필드 단위로 병합해
+   폴백 소스에 없는 FY2 추정치·발행주식수 등은 마지막 WiseReport 값을 유지. 로컬 실행 시 WiseReport로 갱신됨.
  - 현재가·PER·PBR·컨센서스 목표가: m.stock.naver.com integration
  - 일별 종가 (2021~) + KOSPI/KOSDAQ 지수: api.stock.naver.com chart
 사용: python scripts/fetch_companies.py
@@ -118,9 +119,17 @@ def prices(kind: str, code: str) -> list[list]:
 
 
 def merge_fin(old: dict, new: dict) -> dict:
-    """과거 실적은 누적 보관, 새로 받은 기간(실적·추정)은 덮어씀. 이미 실적이 된 기간의 옛 추정치는 제거."""
-    out = {p: v for p, v in (old or {}).items() if not v.get("e")}
-    out.update(new)
+    """기간별·필드별 병합. 새 값(None 제외)이 기존 값을 덮어씀.
+    - 같은 기간이 추정→실적으로 바뀌면 옛 추정 필드는 버림
+    - 새 소스에 없는 기간(과거 실적, 폴백 소스에 없는 FY2 추정 등)은 유지"""
+    out = {p: dict(v) for p, v in (old or {}).items()}
+    for p, nv in new.items():
+        ov = out.get(p, {})
+        base = ov if ov.get("e") == nv.get("e") else {}
+        out[p] = {**base, **{k: v for k, v in nv.items() if v is not None}}
+    # 실적이 나온 가장 최근 기간 이전에 남아있는 옛 추정치는 제거
+    last_actual = max((p for p, v in out.items() if not v.get("e")), default="")
+    out = {p: v for p, v in out.items() if not (v.get("e") and p <= last_actual)}
     return dict(sorted(out.items()))
 
 
