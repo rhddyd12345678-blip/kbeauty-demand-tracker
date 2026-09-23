@@ -126,7 +126,11 @@ def main() -> None:
             r = parse_amazon(p); amazon += r; print(f"{n}: 아마존 {len(r)}행")
 
     if customs:
-        save_json("trade.json", merge_long(load_json("trade.json", []), customs, ("hs", "freq", "period")))
+        old = load_json("trade.json", [])
+        # API(data.go.kr)로 받은 월은 수동 엑셀로 덮어쓰지 않음
+        api_keys = {(r["hs"], r["freq"], r["period"]) for r in old if r.get("source") == "data.go.kr"}
+        customs = [r for r in customs if (r["hs"], r["freq"], r["period"]) not in api_keys]
+        save_json("trade.json", merge_long(old, customs, ("hs", "freq", "period")))
         update_meta("trade", "ok", "raw 엑셀 ingest")
     if naver:
         save_json("naver_trend.json", merge_naver_columnar(load_json("naver_trend.json", {}), naver))
