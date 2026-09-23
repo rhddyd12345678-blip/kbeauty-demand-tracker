@@ -55,6 +55,8 @@ td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
 .news a:hover{text-decoration:underline}
 .news .m{color:var(--ink3);font-size:12px}
 .tag{display:inline-block;font-size:11px;padding:1px 7px;border-radius:999px;background:var(--bg);border:1px solid var(--line);color:var(--ink2);margin-right:4px}
+.tag.en{border-color:var(--accent);color:var(--accent);font-weight:600}
+.news .orig{font-size:12px;color:var(--ink3);margin-top:1px;line-height:1.4}
 .muted{color:var(--ink3)}
 details summary{cursor:pointer;color:var(--ink2);font-size:13px}
 .grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
@@ -201,7 +203,7 @@ tbody tr.pick{cursor:pointer}tbody tr.pick:hover td{background:var(--bg)}
     <div class="card">
       <h2>뉴스 피드</h2>
       <div class="sub" id="newsSub">Google News RSS · 최근 120일 · 매일 자동 수집 · 기사별 3줄 요약</div>
-      <div class="row"><input type="search" id="newsQ" placeholder="제목·요약 검색"><label style="font-size:13px;color:var(--ink2)"><input type="checkbox" id="newsSum" checked> 요약 보기</label><span class="chips" id="newsTags"></span></div>
+      <div class="row"><input type="search" id="newsQ" placeholder="제목(한/영)·요약 검색"><label style="font-size:13px;color:var(--ink2)"><input type="checkbox" id="newsSum" checked> 요약 보기</label><span class="chips" id="newsTags"></span></div>
       <div class="news" id="newsList"></div>
     </div>
   </section>
@@ -407,7 +409,7 @@ function renderCoDetail(){const c=CO.companies.find(x=>x.code===$('#coSel').valu
   const R=[['매출액','rev'],['매출 YoY %','rev',1],['영업이익','op'],['영업이익 YoY %','op',1],['영업이익률 %','opm'],['지배순이익','ni_ctrl'],['EPS (원)','eps'],['PER (배)','per'],['BPS (원)','bps'],['PBR (배)','pbr'],['ROE %','roe'],['부채비율 %','debt_ratio'],['DPS (원)','dps'],['FCF','fcf']];
   $('#coFin').innerHTML=`<table><thead><tr><th>${fq==='Q'?'분기':'연간'} (억원)</th>${ps.map((p,i)=>`<th class="num ${est[i]?'e':''}">${lab(p)}${est[i]?'E':''}</th>`).join('')}</tr></thead><tbody>`+
     R.map(([n,key,yy])=>`<tr><td>${n}</td>${ps.map((p,i)=>{const v=yy?yoyOf(obj,p,key):obj[p][key];return `<td class="num ${est[i]?'e':''} ${yy?cls(v):''}">${yy?sgn(v):fmt(v)}</td>`}).join('')}</tr>`).join('')+'</tbody></table>';
-  const rel=NEWS.filter(a=>a.title.includes(c.name)).slice(0,8);
+  const rel=NEWS.filter(a=>newsText(a).includes(c.name.toLowerCase())).slice(0,8);
   $('#coNews').innerHTML=rel.length?rel.map(newsItem).join(''):'<p class="muted">최근 120일 관련 기사 없음</p>'}
 
 // ---------- trade
@@ -442,10 +444,12 @@ $('#nvMode').onchange=renderNaver;$('#nvPick').onchange=renderNaver;
 
 // ---------- news
 function newsItem(a){const showSum=!$('#newsSum')||$('#newsSum').checked;const href=/^https?:\/\//.test(a.url||'')?a.url:a.link;
-  return `<div style="padding:9px 0;border-bottom:1px solid var(--line)"><a href="${esc(href)}" target="_blank" rel="noopener">${esc(a.title)}</a><div class="m">${(a.tags||[]).map(t=>`<span class="tag">${esc(t)}</span>`).join('')}${esc(a.source||'')} · ${esc(a.published)}${a.summary_method==='claude'?' · AI 요약':''}</div>${showSum&&a.summary&&a.summary.length?`<ul class="sum">${a.summary.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>`:''}</div>`}
+  const ko=(a.title_ko||'').trim();const sum=(a.summary||[]).filter(x=>x&&String(x).trim());
+  return `<div style="padding:9px 0;border-bottom:1px solid var(--line)"><a href="${esc(href)}" target="_blank" rel="noopener">${esc(ko||a.title)}</a>${ko?`<div class="orig">${esc(a.title)}</div>`:''}<div class="m">${ko?'<span class="tag en">EN</span>':''}${(a.tags||[]).map(t=>`<span class="tag">${esc(t)}</span>`).join('')}${esc(a.source||'')} · ${esc(a.published)}${a.summary_method==='claude'?' · AI 요약':''}</div>${showSum&&sum.length?`<ul class="sum">${sum.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>`:''}</div>`}
+const newsText=a=>(a.title+' '+(a.title_ko||'')).toLowerCase();
 function renderNews(){const tags=[...new Set(NEWS.flatMap(a=>a.tags||[]))];const el=$('#newsTags');if(!el.children.length)chips(el,['전체',...tags],t=>{el.dataset.t=t;renderNews()},'전체');
   const t=el.dataset.t||'전체',q=$('#newsQ').value.trim().toLowerCase();
-  const rows=NEWS.filter(a=>(t==='전체'||(a.tags||[]).includes(t))&&(!q||a.title.toLowerCase().includes(q)||(a.summary||[]).join(' ').toLowerCase().includes(q)));
+  const rows=NEWS.filter(a=>(t==='전체'||(a.tags||[]).includes(t))&&(!q||newsText(a).includes(q)||(a.summary||[]).join(' ').toLowerCase().includes(q)));
   $('#newsList').innerHTML=rows.length?rows.slice(0,300).map(newsItem).join(''):'<p class="muted">아직 수집된 기사가 없습니다. GitHub Actions 첫 실행 후 표시됩니다.</p>'}
 $('#newsQ').oninput=renderNews;$('#newsSum').onchange=()=>{renderNews();renderHome()};
 
