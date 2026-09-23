@@ -1,41 +1,41 @@
 {
  "trade": {
-  "updated": "2026-09-23 14:19",
+  "updated": "2026-09-23 14:24",
   "status": "manual",
   "note": "API 키 없음, 엑셀 ingest 사용"
  },
  "naver_trend": {
-  "updated": "2026-09-23 14:19",
+  "updated": "2026-09-23 14:24",
   "status": "manual",
   "note": "API 키 없음, 엑셀 ingest 사용"
  },
  "amazon": {
-  "updated": "2026-09-23 14:20",
+  "updated": "2026-09-23 14:25",
   "status": "ok",
   "note": "신규 0개 스냅샷 [], 미분류 브랜드 4"
  },
  "news": {
-  "updated": "2026-09-23 14:14",
+  "updated": "2026-09-23 14:23",
   "status": "ok",
-  "note": "신규 911건, 보관 1747건"
+  "note": "신규 702건, 보관 1759건"
  },
  "news_summary": {
-  "updated": "2026-09-23 14:16",
+  "updated": "2026-09-23 14:23",
   "status": "ok",
-  "note": "추출 요약 +202, 실패 18, 누적 1702/1747"
+  "note": "추출 요약 +22, 실패 8, 누적 1724/1759"
  },
  "companies": {
-  "updated": "2026-09-23 14:22",
+  "updated": "2026-09-23 14:24",
   "status": "ok",
   "note": "6개사 갱신"
  },
  "comtrade": {
-  "updated": "2026-09-23 14:19",
+  "updated": "2026-09-23 14:24",
   "status": "ok",
   "note": "미국 수입 ~2026-07, 일본 수입 ~2026-07, 한국 수출 ~2025-12"
  },
  "fx": {
-  "updated": "2026-09-23 14:19",
+  "updated": "2026-09-23 14:24",
   "status": "ok",
   "note": "~2026-09-22"
  }
