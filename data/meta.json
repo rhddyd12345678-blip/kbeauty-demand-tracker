@@ -1,0 +1,22 @@
+{
+ "trade": {
+  "updated": "2026-09-23 12:51",
+  "status": "ok",
+  "note": "raw 엑셀 ingest"
+ },
+ "naver_trend": {
+  "updated": "2026-09-23 12:51",
+  "status": "ok",
+  "note": "raw 엑셀 ingest"
+ },
+ "amazon": {
+  "updated": "2026-09-23 12:51",
+  "status": "ok",
+  "note": "raw 엑셀 ingest"
+ },
+ "news": {
+  "updated": "2026-09-23 12:51",
+  "status": "ok",
+  "note": "신규 0건, 보관 0건"
+ }
+}

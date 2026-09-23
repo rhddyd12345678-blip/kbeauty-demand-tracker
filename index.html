@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>K뷰티 전방수요 트래커</title>
+<style>
+:root{
+  color-scheme:light;
+  --bg:#f5f5f3;--surface:#fcfcfb;--line:#e4e3df;--grid:#ebeae6;
+  --ink:#0b0b0b;--ink2:#52514e;--ink3:#8a8985;
+  --s1:#2a78d6;--s2:#eb6834;--s3:#1baf7a;--s4:#eda100;--s5:#e87ba4;--s6:#008300;--s7:#4a3aa7;--s8:#e34948;
+  --good:#008300;--bad:#e34948;--accent:#2a78d6;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  color-scheme:dark;--bg:#111110;--surface:#1a1a19;--line:#2e2e2c;--grid:#262624;
+  --ink:#fff;--ink2:#c3c2b7;--ink3:#8a8985;
+  --s1:#3987e5;--s2:#d95926;--s3:#199e70;--s4:#c98500;--s5:#d55181;--s6:#008300;--s7:#9085e9;--s8:#e66767;--good:#4caf50;--bad:#e66767;--accent:#3987e5}}
+:root[data-theme="dark"]{
+  color-scheme:dark;--bg:#111110;--surface:#1a1a19;--line:#2e2e2c;--grid:#262624;
+  --ink:#fff;--ink2:#c3c2b7;--ink3:#8a8985;
+  --s1:#3987e5;--s2:#d95926;--s3:#199e70;--s4:#c98500;--s5:#d55181;--s6:#008300;--s7:#9085e9;--s8:#e66767;--good:#4caf50;--bad:#e66767;--accent:#3987e5}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.5 -apple-system,"Pretendard","Apple SD Gothic Neo",system-ui,sans-serif}
+header{display:flex;align-items:center;gap:16px;padding:14px 16px;border-bottom:1px solid var(--line);background:var(--surface);position:sticky;top:0;z-index:5;flex-wrap:wrap}
+header h1{font-size:17px;margin:0;font-weight:700}
+header .upd{color:var(--ink3);font-size:12px;margin-left:auto}
+nav{display:flex;gap:4px;flex-wrap:wrap}
+nav button{border:1px solid var(--line);background:transparent;color:var(--ink2);padding:6px 12px;border-radius:8px;cursor:pointer;font-size:13px}
+nav button.on{background:var(--accent);color:#fff;border-color:var(--accent)}
+main{max-width:1180px;margin:0 auto;padding:16px}
+section{display:none}section.on{display:block}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-bottom:16px}
+.tile{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.tile .k{font-size:12px;color:var(--ink2)}
+.tile .v{font-size:26px;font-weight:700;letter-spacing:-.02em;margin:2px 0}
+.tile .d{font-size:12px;color:var(--ink3)}
+.up{color:var(--good)}.down{color:var(--bad)}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px;margin-bottom:16px}
+.card h2{font-size:15px;margin:0 0 2px}
+.card .sub{font-size:12px;color:var(--ink3);margin-bottom:10px}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:10px}
+select,input[type=search]{border:1px solid var(--line);background:var(--bg);color:var(--ink);padding:6px 10px;border-radius:8px;font-size:13px}
+.chip{border:1px solid var(--line);background:transparent;color:var(--ink2);padding:4px 10px;border-radius:999px;cursor:pointer;font-size:12px}
+.chip.on{background:var(--ink);color:var(--surface);border-color:var(--ink)}
+svg{width:100%;height:auto;display:block}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--ink2);margin-top:6px}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px;vertical-align:-1px}
+.tip{position:fixed;pointer-events:none;background:var(--ink);color:var(--surface);padding:6px 9px;border-radius:6px;font-size:12px;display:none;z-index:9;white-space:nowrap}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{padding:7px 8px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{color:var(--ink2);font-weight:600;font-size:12px}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+.news a{color:var(--ink);text-decoration:none;font-weight:500}
+.news a:hover{text-decoration:underline}
+.news .m{color:var(--ink3);font-size:12px}
+.tag{display:inline-block;font-size:11px;padding:1px 7px;border-radius:999px;background:var(--bg);border:1px solid var(--line);color:var(--ink2);margin-right:4px}
+.muted{color:var(--ink3)}
+details summary{cursor:pointer;color:var(--ink2);font-size:13px}
+@media (max-width:640px){header{gap:8px}main{padding:12px}.tile .v{font-size:22px}}
+</style>
+</head>
+<body>
+<header>
+  <h1>K뷰티 전방수요 트래커</h1>
+  <nav id="nav">
+    <button data-t="home" class="on">홈</button>
+    <button data-t="trade">수출</button>
+    <button data-t="amazon">아마존 US</button>
+    <button data-t="naver">네이버 트렌드</button>
+    <button data-t="news">뉴스</button>
+  </nav>
+  <span class="upd" id="upd"></span>
+</header>
+<main>
+  <section id="home" class="on">
+    <div class="tiles" id="homeTiles"></div>
+    <div class="card"><h2>최신 뉴스</h2><div class="sub">최근 수집 기사 상위 12건</div><div class="news" id="homeNews"></div></div>
+    <div class="card"><h2>수집 상태</h2><div id="status"></div></div>
+  </section>
+
+  <section id="trade">
+    <div class="card">
+      <h2>관세청 월별 수출액</h2>
+      <div class="sub">단위: 백만 달러 · 통계기준 수리일 · 출처 관세청 수출입무역통계</div>
+      <div class="row"><label>품목 <select id="hsSel"></select></label>
+        <span class="chips" id="tradeRange"></span></div>
+      <div id="tradeChart"></div>
+      <div class="legend"><span><i style="background:var(--s1)"></i>수출액</span><span><i style="background:var(--s2)"></i>수입액</span></div>
+    </div>
+    <div class="card"><h2>전년동월 대비 증감률 (수출)</h2><div class="sub">%</div><div id="yoyChart"></div></div>
+    <div class="card"><details><summary>표로 보기</summary><div id="tradeTable"></div></details></div>
+  </section>
+
+  <section id="amazon">
+    <div class="tiles" id="amzTiles"></div>
+    <div class="card">
+      <h2>아마존 US Skin Care Top50 내 한국 비중</h2>
+      <div class="sub">% · Wayback Machine 스냅샷 기준 · 한국생산 = Made in Korea, 한국브랜드 = 한국 기업 브랜드</div>
+      <div id="amzChart"></div>
+      <div class="legend"><span><i style="background:var(--s1)"></i>한국생산 비중</span><span><i style="background:var(--s2)"></i>한국브랜드 비중</span></div>
+    </div>
+    <div class="card"><h2>최신 스냅샷 Top50</h2><div class="sub" id="amzSnapDate"></div><div id="amzTable"></div></div>
+  </section>
+
+  <section id="naver">
+    <div class="card">
+      <h2>네이버 검색 트렌드 (주간 평균)</h2>
+      <div class="sub">네이버 데이터랩 통합검색 상대지수 · 연령대별</div>
+      <div class="row">
+        <label>보기 <select id="nvMode"><option value="kw">키워드 고정 · 연령대 비교</option><option value="age">연령대 고정 · 키워드 비교</option></select></label>
+        <label id="nvPickWrap">선택 <select id="nvPick"></select></label>
+        <span class="chips" id="nvRange"></span>
+      </div>
+      <div id="nvChart"></div><div class="legend" id="nvLegend"></div>
+    </div>
+  </section>
+
+  <section id="news">
+    <div class="card">
+      <h2>뉴스 피드</h2>
+      <div class="sub">Google News RSS · 최근 120일 · 매일 자동 수집</div>
+      <div class="row"><input type="search" id="newsQ" placeholder="제목 검색"><span class="chips" id="newsTags"></span></div>
+      <div class="news" id="newsList"></div>
+    </div>
+  </section>
+</main>
+<div class="tip" id="tip"></div>
+
+<script>
+const $=s=>document.querySelector(s);
+const fmt=n=>n==null?'–':n.toLocaleString('ko-KR',{maximumFractionDigits:1});
+const css=v=>getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+const S=['--s1','--s2','--s3','--s4','--s5','--s6','--s7','--s8'];
+let SUM, NEWS=[], AMZ=[], NV;
+
+// ---------- tabs
+$('#nav').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
+  document.querySelectorAll('#nav button').forEach(x=>x.classList.toggle('on',x===b));
+  document.querySelectorAll('main section').forEach(s=>s.classList.toggle('on',s.id===b.dataset.t));
+  location.hash=b.dataset.t;});
+function chips(el,items,onSel,init){el.innerHTML='';items.forEach(it=>{const b=document.createElement('button');b.className='chip'+(it===init?' on':'');b.textContent=it;
+  b.onclick=()=>{[...el.children].forEach(c=>c.classList.toggle('on',c===b));onSel(it)};el.appendChild(b)})}
+
+function nice(lo,hi,n=5){const r=hi-lo||1,raw=r/n,p=Math.pow(10,Math.floor(Math.log10(raw))),m=raw/p,st=(m<=1?1:m<=2?2:m<=2.5?2.5:m<=5?5:10)*p;return{lo:Math.floor(lo/st)*st,hi:Math.ceil(hi/st)*st,st}}
+// ---------- SVG line chart (multi-series, hover crosshair)
+function lineChart(el,{x,series,fmtY=fmt,h=300,yMin}){
+  const W=900,H=h,P={l:52,r:14,t:10,b:28};
+  const n=x.length;if(!n){el.innerHTML='<p class="muted">데이터 없음</p>';return}
+  const all=series.flatMap(s=>s.v.filter(v=>v!=null));
+  let lo=yMin!=null?yMin:Math.min(...all),hi=Math.max(...all);if(lo===hi){hi=lo+1}
+  ({lo,hi}=nice(lo,hi));const NS=nice(lo,hi);
+  const X=i=>P.l+(n===1?0:i/(n-1))*(W-P.l-P.r), Y=v=>P.t+(1-(v-lo)/(hi-lo))*(H-P.t-P.b);
+  let g='';for(let v=lo;v<=hi+1e-9;v+=NS.st){const y=Y(v);
+    g+=`<line x1="${P.l}" x2="${W-P.r}" y1="${y}" y2="${y}" stroke="${css('--grid')}"/><text x="${P.l-6}" y="${y+4}" font-size="11" text-anchor="end" fill="${css('--ink3')}">${fmtY(Math.round(v*10)/10)}</text>`}
+  if(lo<0&&hi>0)g+=`<line x1="${P.l}" x2="${W-P.r}" y1="${Y(0)}" y2="${Y(0)}" stroke="${css('--ink3')}" stroke-width="1"/>`;
+  const step=Math.max(1,Math.ceil(n/8));
+  for(let i=0;i<n;i+=step)g+=`<text x="${X(i)}" y="${H-8}" font-size="11" text-anchor="${i===0?'start':i>=n-1-step/2?'end':'middle'}" fill="${css('--ink3')}">${x[i]}</text>`;
+  if((n-1)%step!==0&&(n-1)%step>step/2)g+=`<text x="${X(n-1)}" y="${H-8}" font-size="11" text-anchor="end" fill="${css('--ink3')}">${x[n-1]}</text>`;
+  let paths='';series.forEach((s,k)=>{const c=css(s.color||S[k%8]);let d='',pen=false;
+    s.v.forEach((v,i)=>{if(v==null){pen=false;return}d+=(pen?'L':'M')+X(i).toFixed(1)+' '+Y(v).toFixed(1);pen=true});
+    paths+=`<path d="${d}" fill="none" stroke="${c}" stroke-width="2" stroke-linejoin="round"/>`;
+    const last=[...s.v].map((v,i)=>[v,i]).filter(a=>a[0]!=null).pop();
+    if(last)paths+=`<circle cx="${X(last[1])}" cy="${Y(last[0])}" r="3.5" fill="${c}" stroke="${css('--surface')}" stroke-width="2"/>`});
+  el.innerHTML=`<svg viewBox="0 0 ${W} ${H}">${g}${paths}<line id="xh" x1="0" x2="0" y1="${P.t}" y2="${H-P.b}" stroke="${css('--ink3')}" stroke-dasharray="3 3" visibility="hidden"/><rect x="${P.l}" y="${P.t}" width="${W-P.l-P.r}" height="${H-P.t-P.b}" fill="transparent"/></svg>`;
+  const svg=el.firstChild,xh=svg.querySelector('#xh'),tip=$('#tip');
+  svg.addEventListener('mousemove',e=>{const r=svg.getBoundingClientRect();const px=(e.clientX-r.left)/r.width*W;
+    const i=Math.max(0,Math.min(n-1,Math.round((px-P.l)/(W-P.l-P.r)*(n-1))));
+    xh.setAttribute('x1',X(i));xh.setAttribute('x2',X(i));xh.setAttribute('visibility','visible');
+    tip.style.display='block';tip.style.left=(e.clientX+12)+'px';tip.style.top=(e.clientY+12)+'px';
+    tip.innerHTML=`<b>${x[i]}</b><br>`+series.map((s,k)=>`<span style="color:${css(s.color||S[k%8])}">●</span> ${s.name}: ${fmtY(s.v[i])}`).join('<br>')});
+  svg.addEventListener('mouseleave',()=>{xh.setAttribute('visibility','hidden');tip.style.display='none'});
+}
+function barChart(el,{x,v,h=220}){
+  const W=900,H=h,P={l:44,r:14,t:10,b:28},n=x.length;if(!n){el.innerHTML='<p class="muted">데이터 없음</p>';return}
+  const vals=v.filter(a=>a!=null);let lo=Math.min(0,...vals),hi=Math.max(0,...vals);if(lo===hi)hi=lo+1;const NS=nice(lo,hi,4);lo=NS.lo;hi=NS.hi;
+  const bw=(W-P.l-P.r)/n,Y=a=>P.t+(1-(a-lo)/(hi-lo))*(H-P.t-P.b);let g='';
+  for(let t=lo;t<=hi+1e-9;t+=NS.st){g+=`<line x1="${P.l}" x2="${W-P.r}" y1="${Y(t)}" y2="${Y(t)}" stroke="${css('--grid')}"/><text x="${P.l-6}" y="${Y(t)+4}" font-size="11" text-anchor="end" fill="${css('--ink3')}">${Math.round(t)}</text>`}
+  g+=`<line x1="${P.l}" x2="${W-P.r}" y1="${Y(0)}" y2="${Y(0)}" stroke="${css('--ink3')}"/>`;
+  const step=Math.max(1,Math.ceil(n/8));let bars='';
+  v.forEach((a,i)=>{if(a==null)return;const y0=Y(0),y1=Y(a);const c=a>=0?css('--s1'):css('--s2');
+    bars+=`<rect x="${(P.l+i*bw+1).toFixed(1)}" y="${Math.min(y0,y1)}" width="${Math.max(1,bw-2).toFixed(1)}" height="${Math.abs(y0-y1)}" fill="${c}" rx="2"><title>${x[i]}: ${fmt(a)}%</title></rect>`;
+    if(i%step===0)bars+=`<text x="${P.l+i*bw+bw/2}" y="${H-8}" font-size="11" text-anchor="middle" fill="${css('--ink3')}">${x[i]}</text>`});
+  el.innerHTML=`<svg viewBox="0 0 ${W} ${H}">${g}${bars}</svg>`;
+}
+
+// ---------- trade
+function renderTrade(){const t=SUM.trade;const sel=$('#hsSel');if(!sel.options.length){Object.keys(t).forEach(hs=>{const o=document.createElement('option');o.value=hs;o.textContent=`${hs} ${t[hs].item}`;sel.appendChild(o)});sel.onchange=renderTrade}
+  const hs=sel.value||Object.keys(t)[0];if(!hs)return;let s=t[hs].series;
+  const rng=$('#tradeRange');if(!rng.children.length)chips(rng,['1년','3년','전체'],r=>{rng.dataset.r=r;renderTrade()},'3년');
+  const r=rng.dataset.r||'3년';const k={ '1년':12,'3년':36}[r];if(k)s=s.slice(-k);
+  lineChart($('#tradeChart'),{x:s.map(a=>a.period),series:[{name:'수출액',v:s.map(a=>a.export/1000)},{name:'수입액',v:s.map(a=>a.import/1000)}],yMin:0});
+  barChart($('#yoyChart'),{x:s.map(a=>a.period),v:s.map(a=>a.yoy)});
+  $('#tradeTable').innerHTML='<table><tr><th>기간</th><th class="num">수출(백만$)</th><th class="num">YoY%</th><th class="num">12M누적</th><th class="num">수입(백만$)</th></tr>'+
+    [...s].reverse().map(a=>`<tr><td>${a.period}</td><td class="num">${fmt(a.export/1000)}</td><td class="num ${a.yoy>0?'up':a.yoy<0?'down':''}">${fmt(a.yoy)}</td><td class="num">${a.ttm?fmt(a.ttm/1000):'–'}</td><td class="num">${fmt(a.import/1000)}</td></tr>`).join('')+'</table>'}
+
+// ---------- amazon
+function renderAmazon(){const a=SUM.amazon;if(!a.length)return;const L=a[a.length-1],prev=a.find(x=>x.date<=new Date(new Date(L.date)-365*864e5).toISOString().slice(0,10))||a[0];
+  $('#amzTiles').innerHTML=[['한국생산 비중',L.mik_pct+'%',`${L.made_in_korea}/50 · 1년전 ${prev.mik_pct}%`],['한국브랜드 비중',L.kb_pct+'%',`${L.korean_brand}/50 · 1년전 ${prev.kb_pct}%`],['Top10 내 한국생산',L.top10_mik+'개',L.date+' 스냅샷'],['한국생산 브랜드 수',L.korean_brands.length+'개',L.korean_brands.slice(0,3).join(', ')+(L.korean_brands.length>3?' 외':'')]]
+    .map(t=>`<div class="tile"><div class="k">${t[0]}</div><div class="v">${t[1]}</div><div class="d">${t[2]}</div></div>`).join('');
+  lineChart($('#amzChart'),{x:a.map(x=>x.date.slice(2,7)),series:[{name:'한국생산',v:a.map(x=>x.mik_pct)},{name:'한국브랜드',v:a.map(x=>x.kb_pct)}],yMin:0,fmtY:v=>v+'%'});
+  const rows=AMZ.filter(r=>r.date===L.date).sort((p,q)=>p.rank-q.rank);$('#amzSnapDate').textContent=L.date+' · '+rows.length+'개';
+  $('#amzTable').innerHTML='<table><tr><th class="num">순위</th><th>브랜드</th><th>제품</th><th>한국생산</th><th>한국브랜드</th></tr>'+rows.map(r=>`<tr><td class="num">${r.rank}</td><td>${r.brand||''}</td><td class="muted">${r.title}</td><td>${r.made_in_korea===1?'●':r.made_in_korea===-1?'?':''}</td><td>${r.korean_brand===1?'●':''}</td></tr>`).join('')+'</table>'}
+
+// ---------- naver
+function renderNaver(){const nv=SUM.naver;if(!nv.weeks)return;const keys=Object.keys(nv.series);const ages=[...new Set(keys.map(k=>k.split('|')[0]))],kws=[...new Set(keys.map(k=>k.split('|')[1]))];
+  const mode=$('#nvMode').value,pick=$('#nvPick');const opts=mode==='kw'?kws:ages;
+  if(pick.dataset.mode!==mode){pick.innerHTML=opts.map(o=>`<option>${o}</option>`).join('');pick.dataset.mode=mode;pick.value=mode==='kw'?(kws.includes('스킨부스터')?'스킨부스터':kws[0]):opts[0]}
+  const rng=$('#nvRange');if(!rng.children.length)chips(rng,['1년','3년','전체'],r=>{rng.dataset.r=r;renderNaver()},'3년');
+  const k={'1년':53,'3년':157}[rng.dataset.r||'3년'];const from=k?Math.max(0,nv.weeks.length-k):0;
+  const x=nv.weeks.slice(from).map(d=>d.slice(2,7));
+  const series=(mode==='kw'?ages.map(a=>[a,`${a}|${pick.value}`]):kws.map(w=>[w,`${pick.value}|${w}`])).filter(p=>nv.series[p[1]]).map(p=>({name:p[0],v:nv.series[p[1]].slice(from)}));
+  lineChart($('#nvChart'),{x,series,yMin:0});
+  $('#nvLegend').innerHTML=series.map((s,i)=>`<span><i style="background:var(${S[i%8]})"></i>${s.name}</span>`).join('')}
+$('#nvMode').onchange=renderNaver;$('#nvPick').onchange=renderNaver;
+
+// ---------- news
+function newsItem(a){return `<div style="padding:8px 0;border-bottom:1px solid var(--line)"><a href="${a.link}" target="_blank" rel="noopener">${a.title}</a><div class="m">${(a.tags||[]).map(t=>`<span class="tag">${t}</span>`).join('')}${a.source||''} · ${a.published}</div></div>`}
+function renderNews(){const tags=[...new Set(NEWS.flatMap(a=>a.tags||[]))];const el=$('#newsTags');if(!el.children.length)chips(el,['전체',...tags],t=>{el.dataset.t=t;renderNews()},'전체');
+  const t=el.dataset.t||'전체',q=$('#newsQ').value.trim().toLowerCase();
+  const rows=NEWS.filter(a=>(t==='전체'||(a.tags||[]).includes(t))&&(!q||a.title.toLowerCase().includes(q)));
+  $('#newsList').innerHTML=rows.length?rows.slice(0,300).map(newsItem).join(''):'<p class="muted">아직 수집된 기사가 없습니다. GitHub Actions 첫 실행 후 표시됩니다.</p>'}
+$('#newsQ').oninput=renderNews;
+
+// ---------- home
+function renderHome(){const t=SUM.trade,tiles=[];const hsPri=t['3304']||t[Object.keys(t)[0]];
+  if(hsPri){const L=hsPri.latest;tiles.push([`${hsPri.item} 수출 (${L.period})`,fmt(L.export/1000)+' M$',`<span class="${L.yoy>0?'up':'down'}">YoY ${L.yoy>0?'+':''}${fmt(L.yoy)}%</span>`])}
+  const a=SUM.amazon;if(a.length){const L=a[a.length-1];tiles.push(['아마존 Top50 한국생산 비중',L.mik_pct+'%',L.date])}
+  const nv=SUM.naver;if(nv.weeks){const k=Object.keys(nv.series).find(x=>x.endsWith('|스킨부스터')&&x.startsWith('25'));if(k){const s=nv.series[k],L=s[s.length-1],Y=s[s.length-53];tiles.push(['스킨부스터 검색 (25~29, 주간)',fmt(L),Y?`1년전 ${fmt(Y)}`:''])}}
+  tiles.push(['수집 기사',SUM.news_count+'건','최근 120일']);
+  $('#homeTiles').innerHTML=tiles.map(t=>`<div class="tile"><div class="k">${t[0]}</div><div class="v">${t[1]}</div><div class="d">${t[2]}</div></div>`).join('');
+  $('#homeNews').innerHTML=NEWS.slice(0,12).map(newsItem).join('')||'<p class="muted">아직 기사 없음</p>';
+  const m=SUM.meta||{};const names={trade:'관세청 수출',amazon:'아마존 Top50',naver_trend:'네이버 트렌드',news:'뉴스'};
+  $('#status').innerHTML='<table><tr><th>소스</th><th>상태</th><th>갱신</th><th>비고</th></tr>'+Object.entries(names).map(([k,n])=>{const s=m[k]||{};return `<tr><td>${n}</td><td>${s.status==='ok'?'<span class="up">●</span> 정상':s.status==='manual'?'○ 수동':s.status?'<span class="down">●</span> '+s.status:'–'}</td><td>${s.updated||'–'}</td><td class="muted">${s.note||''}</td></tr>`}).join('')+'</table>'}
+
+// ---------- boot
+(async()=>{const [s,n,a]=await Promise.all([fetch('data/summary.json').then(r=>r.json()),fetch('data/news.json').then(r=>r.ok?r.json():[]).catch(()=>[]),fetch('data/amazon_top50.json').then(r=>r.ok?r.json():[]).catch(()=>[])]);
+  SUM=s;NEWS=n;AMZ=a;$('#upd').textContent='빌드 '+s.built;
+  renderHome();renderTrade();renderAmazon();renderNaver();renderNews();
+  const h=location.hash.slice(1);if(h){const b=document.querySelector(`#nav button[data-t="${h}"]`);b&&b.click()}
+  matchMedia('(prefers-color-scheme: dark)').addEventListener('change',()=>{renderTrade();renderAmazon();renderNaver()});
+})();
+</script>
+</body>
+</html>
