@@ -2,10 +2,14 @@
 
 - API 키 불필요. 키워드는 아래 KEYWORDS 에서 관리 (주제 태그별).
 - 기존 기사와 링크 기준으로 병합, 최근 MAX_DAYS 일만 보관.
-사용: python scripts/fetch_news.py
+- 영문 제목(한글 비율 10% 미만)은 deep-translator GoogleTranslator로 한국어 번역 → title_ko.
+  이미 title_ko 가 있으면 건너뛰고, 1회 최대 TRANSLATE_LIMIT 건. 실패해도 경고만 찍고 수집은 계속.
+사용: python scripts/fetch_news.py            (수집 + 번역)
+      python scripts/fetch_news.py --translate-only   (수집 없이 기존 기사 번역만)
 """
 from __future__ import annotations
 
+import argparse
 import html
 import re
 import time
@@ -29,6 +33,10 @@ KEYWORDS: dict[str, list[str]] = {
 }
 
 MAX_DAYS = 120
+TRANSLATE_LIMIT = 100    # 1회 번역 최대 건수
+TRANSLATE_SLEEP = 0.4    # 요청 간 대기(초)
+TRANSLATE_MAX_TRIES = 3  # 같은 기사 번역 재시도 한도 (실행을 넘어 누적)
+STOP_AFTER_FAILS = 5     # 연속 실패 시 이번 실행의 번역 중단 (차단·요청 제한 상황)
 UA = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"}
 
 
@@ -62,7 +70,70 @@ def fetch(q: str) -> list[dict]:
     return out
 
 
+def is_english(title: str) -> bool:
+    """한글이 거의 없고 영문자가 충분한 제목."""
+    hangul = len(re.findall(r"[가-힣]", title))
+    latin = len(re.findall(r"[A-Za-z]", title))
+    return latin >= 8 and hangul / (hangul + latin) < 0.1
+
+
+def translate_titles(rows: list[dict], limit: int = TRANSLATE_LIMIT) -> tuple[int, int]:
+    """영문 제목 → title_ko. (성공, 실패) 건수 반환. 어떤 오류도 밖으로 던지지 않음."""
+    todo = [a for a in rows if not a.get("title_ko") and a.get("title_ko_tries", 0) < TRANSLATE_MAX_TRIES
+            and is_english(a.get("title", ""))][:limit]
+    if not todo:
+        return 0, 0
+    try:
+        from deep_translator import GoogleTranslator
+        tr = GoogleTranslator(source="auto", target="ko")
+    except Exception as e:  # 패키지 없음 등
+        print(f"[warn] 번역기 초기화 실패, 번역 건너뜀: {e}")
+        return 0, len(todo)
+    ok = fail = streak = 0
+    for a in todo:
+        try:
+            ko = (tr.translate(a["title"]) or "").strip()
+            if not ko or ko == a["title"]:
+                raise ValueError("빈 번역 결과")
+            a["title_ko"] = ko
+            a.pop("title_ko_tries", None)
+            ok += 1
+            streak = 0
+        except Exception as e:
+            a["title_ko_tries"] = a.get("title_ko_tries", 0) + 1
+            fail += 1
+            streak += 1
+            print(f"[warn] 번역 실패 ({type(e).__name__}): {a['title'][:60]}")
+            if streak >= STOP_AFTER_FAILS:
+                rest = len(todo) - ok - fail
+                print(f"[warn] 연속 {streak}건 실패 → 이번 실행 번역 중단 (남은 {rest}건은 다음 실행에서)")
+                break
+        time.sleep(TRANSLATE_SLEEP)
+    return ok, fail
+
+
+def run_translate(rows: list[dict]) -> str:
+    try:
+        ok, fail = translate_titles(rows)
+    except Exception as e:  # 방어: 번역 때문에 수집이 실패하면 안 됨
+        print(f"[warn] 번역 단계 오류: {e}")
+        ok, fail = 0, 0
+    have = sum(1 for a in rows if a.get("title_ko"))
+    en = sum(1 for a in rows if is_english(a.get("title", "")))
+    print(f"translate: +{ok}, 실패 {fail}, 번역 보유 {have}/{en} (영문 제목)")
+    return f"번역 +{ok}, 실패 {fail}, 영문 {have}/{en}"
+
+
 def main() -> None:
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--translate-only", action="store_true", help="수집 없이 기존 기사 제목 번역만")
+    args = ap.parse_args()
+    if args.translate_only:
+        rows = load_json("news.json", [])
+        note = run_translate(rows)
+        save_json("news.json", rows)
+        update_meta("news_translate", "ok", note)
+        return
     existing = {a["link"]: a for a in load_json("news.json", [])}
     added = 0
     for tag, queries in KEYWORDS.items():
@@ -86,7 +157,10 @@ def main() -> None:
     cutoff = (datetime.now(KST) - timedelta(days=MAX_DAYS)).strftime("%Y-%m-%d")
     rows = [a for a in existing.values() if a["published"][:10] >= cutoff]
     rows.sort(key=lambda a: a["published"], reverse=True)
+    save_json("news.json", rows)  # 번역 전에 먼저 저장 (번역 중 문제가 생겨도 수집분은 보존)
+    note = run_translate(rows)
     save_json("news.json", rows)
+    update_meta("news_translate", "ok", note)
     update_meta("news", "ok", f"신규 {added}건, 보관 {len(rows)}건")
     print(f"news: +{added}, total {len(rows)}")
 
