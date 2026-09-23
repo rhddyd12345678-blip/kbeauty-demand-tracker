@@ -1,22 +1,22 @@
 {
  "trade": {
-  "updated": "2026-09-23 12:58",
+  "updated": "2026-09-23 13:04",
   "status": "manual",
   "note": "API 키 없음, 엑셀 ingest 사용"
  },
  "naver_trend": {
-  "updated": "2026-09-23 12:58",
+  "updated": "2026-09-23 13:04",
   "status": "manual",
   "note": "API 키 없음, 엑셀 ingest 사용"
  },
  "amazon": {
-  "updated": "2026-09-23 13:00",
+  "updated": "2026-09-23 13:05",
   "status": "ok",
-  "note": "신규 1개 스냅샷 ['2022-11-11'], 미분류 브랜드 4"
+  "note": "신규 0개 스냅샷 [], 미분류 브랜드 4"
  },
  "news": {
-  "updated": "2026-09-23 12:59",
+  "updated": "2026-09-23 13:04",
   "status": "ok",
-  "note": "신규 2177건, 보관 1492건"
+  "note": "신규 724건, 보관 1527건"
  }
 }
