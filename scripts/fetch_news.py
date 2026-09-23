@@ -2,7 +2,8 @@
 
 - API 키 불필요. 키워드는 아래 KEYWORDS 에서 관리 (주제 태그별).
 - 기존 기사와 링크 기준으로 병합, 최근 MAX_DAYS 일만 보관.
-- 영문 제목(한글 비율 10% 미만)은 deep-translator GoogleTranslator로 한국어 번역 → title_ko.
+- 영문 제목(한글 비율 10% 미만)은 deep-translator로 한국어 번역 → title_ko (GoogleTranslator 우선,
+  구글이 요청 제한/차단이면 MyMemoryTranslator로 대체. title_ko_src 에 사용 엔진 기록).
   이미 title_ko 가 있으면 건너뛰고, 1회 최대 TRANSLATE_LIMIT 건. 실패해도 경고만 찍고 수집은 계속.
 사용: python scripts/fetch_news.py            (수집 + 번역)
       python scripts/fetch_news.py --translate-only   (수집 없이 기존 기사 번역만)
@@ -78,37 +79,58 @@ def is_english(title: str) -> bool:
 
 
 def translate_titles(rows: list[dict], limit: int = TRANSLATE_LIMIT) -> tuple[int, int]:
-    """영문 제목 → title_ko. (성공, 실패) 건수 반환. 어떤 오류도 밖으로 던지지 않음."""
+    """영문 제목 → title_ko. 구글 우선, 막히면 MyMemory. (성공, 실패) 반환. 어떤 오류도 밖으로 던지지 않음."""
     todo = [a for a in rows if not a.get("title_ko") and a.get("title_ko_tries", 0) < TRANSLATE_MAX_TRIES
             and is_english(a.get("title", ""))][:limit]
     if not todo:
         return 0, 0
     try:
-        from deep_translator import GoogleTranslator
-        tr = GoogleTranslator(source="auto", target="ko")
+        from deep_translator import GoogleTranslator, MyMemoryTranslator
+        engines = [("google", GoogleTranslator(source="auto", target="ko")),
+                   ("mymemory", MyMemoryTranslator(source="en-US", target="ko-KR"))]
     except Exception as e:  # 패키지 없음 등
         print(f"[warn] 번역기 초기화 실패, 번역 건너뜀: {e}")
         return 0, len(todo)
+    disabled: set[str] = set()   # 이번 실행에서 차단된 엔진 (계속 두드리지 않음)
     ok = fail = streak = 0
+    used = {"google": 0, "mymemory": 0}
     for a in todo:
-        try:
-            ko = (tr.translate(a["title"]) or "").strip()
-            if not ko or ko == a["title"]:
-                raise ValueError("빈 번역 결과")
-            a["title_ko"] = ko
+        last_err = None
+        for name, tr in engines:
+            if name in disabled:
+                continue
+            try:
+                ko = (tr.translate(a["title"]) or "").strip()
+                # MyMemory는 한도 초과 시 오류 대신 경고문을 결과로 돌려줌
+                if not ko or ko == a["title"] or "MYMEMORY WARNING" in ko.upper() or not re.search(r"[가-힣]", ko):
+                    raise ValueError(f"번역 결과 이상: {ko[:40]}")
+                a["title_ko"], a["title_ko_src"] = ko, name
+                used[name] += 1
+                last_err = None
+                break
+            except Exception as e:
+                last_err = e
+                if type(e).__name__ == "TooManyRequests" or "MYMEMORY WARNING" in str(e).upper():
+                    disabled.add(name)
+                    print(f"[warn] {name} 요청 제한/차단 → 이번 실행에서 {name} 사용 중단")
+        if last_err is None and a.get("title_ko"):
             a.pop("title_ko_tries", None)
             ok += 1
             streak = 0
-        except Exception as e:
-            a["title_ko_tries"] = a.get("title_ko_tries", 0) + 1
+        else:
+            e = last_err
+            # 요청 제한·차단(429)은 기사 문제가 아니므로 재시도 횟수를 깎지 않음
+            if e is not None and type(e).__name__ not in ("TooManyRequests", "RequestError", "ConnectionError", "Timeout"):
+                a["title_ko_tries"] = a.get("title_ko_tries", 0) + 1
             fail += 1
             streak += 1
-            print(f"[warn] 번역 실패 ({type(e).__name__}): {a['title'][:60]}")
-            if streak >= STOP_AFTER_FAILS:
+            print(f"[warn] 번역 실패 ({type(e).__name__ if e else '엔진 없음'}): {a['title'][:60]}")
+            if streak >= STOP_AFTER_FAILS or len(disabled) == len(engines):
                 rest = len(todo) - ok - fail
-                print(f"[warn] 연속 {streak}건 실패 → 이번 실행 번역 중단 (남은 {rest}건은 다음 실행에서)")
+                print(f"[warn] 번역 중단 (연속 실패 {streak}건, 차단 엔진 {sorted(disabled)}) → 남은 {rest}건은 다음 실행에서")
                 break
         time.sleep(TRANSLATE_SLEEP)
+    print(f"번역 엔진별 성공: {used}")
     return ok, fail
 
 
