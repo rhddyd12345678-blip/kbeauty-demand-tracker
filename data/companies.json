@@ -1,5 +1,5 @@
 {
- "updated": "2026-09-23 13:20",
+ "updated": "2026-09-23 14:18",
  "companies": [
   {
    "code": "192820",
@@ -52,8 +52,6 @@
      "op": 1157,
      "ni": 378,
      "ni_ctrl": 571,
-     "capex": 863,
-     "fcf": 1447,
      "opm": 6.51,
      "npm": 2.13,
      "roe": 12.11,
@@ -62,9 +60,7 @@
      "per": 25.11,
      "bps": 31952,
      "pbr": 3.96,
-     "dps": 500,
-     "div_yield": 0.4,
-     "shares": 11349509
+     "dps": 500
     },
     "2024-12": {
      "e": false,
@@ -72,8 +68,6 @@
      "op": 1754,
      "ni": 884,
      "ni_ctrl": 858,
-     "capex": 1649,
-     "fcf": -920,
      "opm": 8.1,
      "npm": 4.08,
      "roe": 20.53,
@@ -82,9 +76,7 @@
      "per": 19.72,
      "bps": 41725,
      "pbr": 3.57,
-     "dps": 2300,
-     "div_yield": 1.54,
-     "shares": 11349509
+     "dps": 2300
     },
     "2025-12": {
      "e": false,
@@ -92,8 +84,6 @@
      "op": 1958,
      "ni": 1311,
      "ni_ctrl": 1231,
-     "capex": 1870,
-     "fcf": -1003,
      "opm": 8.16,
      "npm": 5.46,
      "roe": 23.86,
@@ -102,69 +92,23 @@
      "per": 15.03,
      "bps": 49196,
      "pbr": 3.31,
-     "dps": 3300,
-     "div_yield": 2.02,
-     "shares": 11349509
+     "dps": 3300
     },
     "2026-12": {
      "e": true,
      "rev": 29703,
      "op": 2570,
      "ni": 1770,
-     "ni_ctrl": 1694,
-     "capex": 1411,
-     "fcf": 653,
+     "ni_ctrl": null,
      "opm": 8.65,
      "npm": 5.96,
      "roe": 27.18,
-     "debt_ratio": 227.25,
+     "debt_ratio": null,
      "eps": 14928,
      "per": 18.09,
      "bps": 60704,
      "pbr": 4.45,
-     "dps": 3633,
-     "div_yield": 1.35,
-     "shares": null
-    },
-    "2027-12": {
-     "e": true,
-     "rev": 34636,
-     "op": 3158,
-     "ni": 2164,
-     "ni_ctrl": 2070,
-     "capex": 1216,
-     "fcf": 1249,
-     "opm": 9.12,
-     "npm": 6.25,
-     "roe": 26.85,
-     "debt_ratio": 199.14,
-     "eps": 18241,
-     "per": 14.8,
-     "bps": 75203,
-     "pbr": 3.59,
-     "dps": 3945,
-     "div_yield": 1.46,
-     "shares": null
-    },
-    "2028-12": {
-     "e": true,
-     "rev": 39260,
-     "op": 3707,
-     "ni": 2592,
-     "ni_ctrl": 2486,
-     "capex": 1349,
-     "fcf": 1731,
-     "opm": 9.44,
-     "npm": 6.6,
-     "roe": 26.08,
-     "debt_ratio": 177.44,
-     "eps": 21907,
-     "per": 12.32,
-     "bps": 92846,
-     "pbr": 2.91,
-     "dps": 4123,
-     "div_yield": 1.53,
-     "shares": null
+     "dps": 3633
     }
    },
    "quarter": {
@@ -174,8 +118,6 @@
      "op": 608,
      "ni": 218,
      "ni_ctrl": 209,
-     "capex": 493,
-     "fcf": -836,
      "opm": 9.75,
      "npm": 3.5,
      "roe": 14.52,
@@ -184,9 +126,7 @@
      "per": 51.18,
      "bps": 38522,
      "pbr": 7.26,
-     "dps": 0,
-     "div_yield": 0.0,
-     "shares": 11349509
+     "dps": null
     },
     "2025-09": {
      "e": false,
@@ -194,8 +134,6 @@
      "op": 427,
      "ni": 107,
      "ni_ctrl": 90,
-     "capex": 576,
-     "fcf": 6,
      "opm": 7.3,
      "npm": 1.82,
      "roe": 11.09,
@@ -204,9 +142,7 @@
      "per": 48.81,
      "bps": 40313,
      "pbr": 5.32,
-     "dps": 0,
-     "div_yield": 0.0,
-     "shares": 11349509
+     "dps": null
     },
     "2025-12": {
      "e": false,
@@ -214,8 +150,6 @@
      "op": 409,
      "ni": 879,
      "ni_ctrl": 851,
-     "capex": 469,
-     "fcf": -120,
      "opm": 6.81,
      "npm": 14.63,
      "roe": 23.86,
@@ -224,9 +158,7 @@
      "per": 15.03,
      "bps": 49196,
      "pbr": 3.31,
-     "dps": 3300,
-     "div_yield": 2.02,
-     "shares": 11349509
+     "dps": 3300
     },
     "2026-03": {
      "e": false,
@@ -234,8 +166,6 @@
      "op": 530,
      "ni": 438,
      "ni_ctrl": 416,
-     "capex": 835,
-     "fcf": 162,
      "opm": 7.78,
      "npm": 6.42,
      "roe": 30.59,
@@ -244,9 +174,7 @@
      "per": 14.25,
      "bps": 51613,
      "pbr": 3.81,
-     "dps": null,
-     "div_yield": null,
-     "shares": 11349509
+     "dps": null
     },
     "2026-06": {
      "e": false,
@@ -254,8 +182,6 @@
      "op": 737,
      "ni": 500,
      "ni_ctrl": 487,
-     "capex": 388,
-     "fcf": -755,
      "opm": 9.28,
      "npm": 6.29,
      "roe": 34.01,
@@ -264,18 +190,14 @@
      "per": 9.54,
      "bps": 56990,
      "pbr": 2.72,
-     "dps": null,
-     "div_yield": null,
-     "shares": 11349509
+     "dps": null
     },
     "2026-09": {
      "e": true,
      "rev": 7639,
      "op": 677,
      "ni": 310,
-     "ni_ctrl": 409,
-     "capex": null,
-     "fcf": null,
+     "ni_ctrl": null,
      "opm": 8.86,
      "npm": 4.06,
      "roe": null,
@@ -284,49 +206,7 @@
      "per": null,
      "bps": null,
      "pbr": null,
-     "dps": null,
-     "div_yield": null,
-     "shares": null
-    },
-    "2026-12": {
-     "e": true,
-     "rev": 7331,
-     "op": 625,
-     "ni": 511,
-     "ni_ctrl": 410,
-     "capex": null,
-     "fcf": null,
-     "opm": 8.52,
-     "npm": 6.97,
-     "roe": null,
-     "debt_ratio": 227.25,
-     "eps": 3616,
-     "per": null,
-     "bps": 60704,
-     "pbr": 4.45,
-     "dps": null,
-     "div_yield": null,
-     "shares": null
-    },
-    "2027-03": {
-     "e": true,
-     "rev": 8332,
-     "op": 710,
-     "ni": null,
-     "ni_ctrl": 472,
-     "capex": null,
-     "fcf": null,
-     "opm": 8.53,
-     "npm": null,
-     "roe": null,
-     "debt_ratio": null,
-     "eps": 4159,
-     "per": null,
-     "bps": null,
-     "pbr": null,
-     "dps": null,
-     "div_yield": null,
-     "shares": null
+     "dps": null
     }
    },
    "prices": [
@@ -5961,7 +5841,7 @@
     "recomm": 4.0,
     "cons_date": "2026-09-22"
    },
-   "fin_src": "wisereport",
+   "fin_src": "naver-mobile",
    "kpi": {
     "price": 273500.0,
     "date": "2026-09-23",
@@ -5973,7 +5853,7 @@
     "ytd": 67.8,
     "last_q": "2026-06",
     "fy1": "2026-12",
-    "fy2": "2027-12",
+    "fy2": null,
     "last_fy": "2025-12",
     "q_rev": 7949,
     "q_op": 737,
@@ -5988,16 +5868,8 @@
     "fy1_roe": 27.18,
     "fy1_per": 18.3,
     "fy1_pbr": 4.51,
-    "fy2_rev": 34636,
-    "fy2_op": 3158,
-    "fy2_opm": 9.12,
-    "fy2_roe": 26.85,
-    "fy2_per": 15.0,
-    "fy2_pbr": 3.64,
     "fy1_rev_g": 23.8,
-    "fy1_op_g": 31.3,
-    "fy2_op_g": 22.9,
-    "peg": 0.82
+    "fy1_op_g": 31.3
    }
   },
   {
@@ -6051,8 +5923,6 @@
      "op": 1361,
      "ni": 251,
      "ni_ctrl": 52,
-     "capex": 1068,
-     "fcf": 54,
      "opm": 6.32,
      "npm": 1.17,
      "roe": 0.79,
@@ -6061,18 +5931,14 @@
      "per": 236.22,
      "bps": 28347,
      "pbr": 1.89,
-     "dps": 600,
-     "div_yield": 1.12,
-     "shares": 22881180
+     "dps": 600
     },
     "2024-12": {
      "e": false,
      "rev": 24521,
-     "op": 1938,
+     "op": 1939,
      "ni": 1253,
      "ni_ctrl": 901,
-     "capex": 2472,
-     "fcf": -318,
      "opm": 7.91,
      "npm": 5.11,
      "roe": 12.5,
@@ -6081,9 +5947,7 @@
      "per": 14.39,
      "bps": 33579,
      "pbr": 1.64,
-     "dps": 720,
-     "div_yield": 1.31,
-     "shares": 23605077
+     "dps": 720
     },
     "2025-12": {
      "e": false,
@@ -6091,8 +5955,6 @@
      "op": 2396,
      "ni": 1682,
      "ni_ctrl": 1251,
-     "capex": 1640,
-     "fcf": 1275,
      "opm": 8.8,
      "npm": 6.18,
      "roe": 14.69,
@@ -6101,69 +5963,23 @@
      "per": 11.72,
      "bps": 38566,
      "pbr": 1.61,
-     "dps": 864,
-     "div_yield": 1.39,
-     "shares": 23605077
+     "dps": 864
     },
     "2026-12": {
      "e": true,
      "rev": 31932,
      "op": 3458,
      "ni": 2503,
-     "ni_ctrl": 1955,
-     "capex": 1134,
-     "fcf": 1738,
+     "ni_ctrl": null,
      "opm": 10.83,
      "npm": 7.84,
      "roe": 19.59,
-     "debt_ratio": 102.19,
+     "debt_ratio": null,
      "eps": 8282,
      "per": 17.64,
      "bps": 45973,
      "pbr": 3.18,
-     "dps": 956,
-     "div_yield": 0.65,
-     "shares": null
-    },
-    "2027-12": {
-     "e": true,
-     "rev": 36000,
-     "op": 4117,
-     "ni": 3047,
-     "ni_ctrl": 2390,
-     "capex": 1259,
-     "fcf": 1977,
-     "opm": 11.44,
-     "npm": 8.46,
-     "roe": 19.99,
-     "debt_ratio": 92.62,
-     "eps": 10123,
-     "per": 14.43,
-     "bps": 55322,
-     "pbr": 2.64,
-     "dps": 1059,
-     "div_yield": 0.72,
-     "shares": null
-    },
-    "2028-12": {
-     "e": true,
-     "rev": 39686,
-     "op": 4677,
-     "ni": 3492,
-     "ni_ctrl": 2731,
-     "capex": 1279,
-     "fcf": 2670,
-     "opm": 11.79,
-     "npm": 8.8,
-     "roe": 19.08,
-     "debt_ratio": 83.54,
-     "eps": 11571,
-     "per": 12.63,
-     "bps": 65967,
-     "pbr": 2.21,
-     "dps": 1128,
-     "div_yield": 0.77,
-     "shares": null
+     "dps": 956
     }
    },
    "quarter": {
@@ -6173,8 +5989,6 @@
      "op": 735,
      "ni": 418,
      "ni_ctrl": 349,
-     "capex": 445,
-     "fcf": 73,
      "opm": 10.05,
      "npm": 5.72,
      "roe": 12.26,
@@ -6183,9 +5997,7 @@
      "per": 24.27,
      "bps": 35155,
      "pbr": 2.84,
-     "dps": 0,
-     "div_yield": 0.0,
-     "shares": 23605077
+     "dps": null
     },
     "2025-09": {
      "e": false,
@@ -6193,8 +6005,6 @@
      "op": 583,
      "ni": 424,
      "ni_ctrl": 318,
-     "capex": 263,
-     "fcf": 752,
      "opm": 8.54,
      "npm": 6.21,
      "roe": 13.91,
@@ -6203,9 +6013,7 @@
      "per": 16.18,
      "bps": 36478,
      "pbr": 2.13,
-     "dps": 0,
-     "div_yield": 0.0,
-     "shares": 23605077
+     "dps": null
     },
     "2025-12": {
      "e": false,
@@ -6213,8 +6021,6 @@
      "op": 478,
      "ni": 609,
      "ni_ctrl": 451,
-     "capex": 398,
-     "fcf": 286,
      "opm": 7.3,
      "npm": 9.29,
      "roe": 14.69,
@@ -6223,9 +6029,7 @@
      "per": 11.72,
      "bps": 38566,
      "pbr": 1.61,
-     "dps": 864,
-     "div_yield": 1.39,
-     "shares": 23605077
+     "dps": 864
     },
     "2026-03": {
      "e": false,
@@ -6233,8 +6037,6 @@
      "op": 789,
      "ni": 600,
      "ni_ctrl": 452,
-     "capex": 208,
-     "fcf": 404,
      "opm": 10.84,
      "npm": 8.24,
      "roe": 18.19,
@@ -6243,9 +6045,7 @@
      "per": 11.43,
      "bps": 39667,
      "pbr": 1.92,
-     "dps": null,
-     "div_yield": null,
-     "shares": 23605077
+     "dps": null
     },
     "2026-06": {
      "e": false,
@@ -6253,8 +6053,6 @@
      "op": 1103,
      "ni": 706,
      "ni_ctrl": 628,
-     "capex": 152,
-     "fcf": 22,
      "opm": 12.81,
      "npm": 8.2,
      "roe": 20.19,
@@ -6263,18 +6061,14 @@
      "per": 12.7,
      "bps": 42430,
      "pbr": 2.35,
-     "dps": null,
-     "div_yield": null,
-     "shares": 23605077
+     "dps": null
     },
     "2026-09": {
      "e": true,
      "rev": 8345,
      "op": 921,
      "ni": 702,
-     "ni_ctrl": 498,
-     "capex": null,
-     "fcf": null,
+     "ni_ctrl": null,
      "opm": 11.04,
      "npm": 8.41,
      "roe": null,
@@ -6283,49 +6077,7 @@
      "per": null,
      "bps": null,
      "pbr": null,
-     "dps": null,
-     "div_yield": null,
-     "shares": null
-    },
-    "2026-12": {
-     "e": true,
-     "rev": 7697,
-     "op": 660,
-     "ni": 584,
-     "ni_ctrl": 368,
-     "capex": null,
-     "fcf": null,
-     "opm": 8.58,
-     "npm": 7.59,
-     "roe": null,
-     "debt_ratio": 102.19,
-     "eps": 1557,
-     "per": null,
-     "bps": 45973,
-     "pbr": 3.18,
-     "dps": null,
-     "div_yield": null,
-     "shares": null
-    },
-    "2027-03": {
-     "e": true,
-     "rev": 8165,
-     "op": 985,
-     "ni": null,
-     "ni_ctrl": 584,
-     "capex": null,
-     "fcf": null,
-     "opm": 12.06,
-     "npm": null,
-     "roe": null,
-     "debt_ratio": null,
-     "eps": 2472,
-     "per": null,
-     "bps": null,
-     "pbr": null,
-     "dps": null,
-     "div_yield": null,
-     "shares": null
+     "dps": null
     }
    },
    "prices": [
@@ -11943,14 +11695,14 @@
     ],
     [
      "2026-09-23",
-     149400.0
+     148900.0
     ]
    ],
    "info": {
-    "per_ttm": 19.08,
+    "per_ttm": 19.01,
     "eps_ttm": 7832,
-    "per_fwd_naver": 18.04,
-    "pbr": 3.52,
+    "per_fwd_naver": 17.98,
+    "pbr": 3.51,
     "bps": 42430,
     "div_yield": 0.58,
     "foreign_rate": 40.67,
@@ -11960,43 +11712,35 @@
     "recomm": 4.0,
     "cons_date": "2026-09-22"
    },
-   "fin_src": "wisereport",
+   "fin_src": "naver-mobile",
    "kpi": {
-    "price": 149400.0,
+    "price": 148900.0,
     "date": "2026-09-23",
-    "mcap": 35266,
-    "r1d": 2.33,
-    "r1m": 4.3,
-    "r3m": 72.9,
-    "r1y": 88.9,
-    "ytd": 140.6,
+    "mcap": 34070,
+    "r1d": 1.99,
+    "r1m": 3.9,
+    "r3m": 72.3,
+    "r1y": 88.2,
+    "ytd": 139.8,
     "last_q": "2026-06",
     "fy1": "2026-12",
-    "fy2": "2027-12",
+    "fy2": null,
     "last_fy": "2025-12",
     "q_rev": 8613,
     "q_op": 1103,
     "q_opm": 12.81,
     "q_rev_yoy": 17.9,
     "q_op_yoy": 50.1,
-    "per_ttm": 19.1,
+    "per_ttm": 18.4,
     "opm_ttm": 10.1,
     "fy1_rev": 31932,
     "fy1_op": 3458,
     "fy1_opm": 10.83,
     "fy1_roe": 19.59,
     "fy1_per": 18.0,
-    "fy1_pbr": 3.25,
-    "fy2_rev": 36000,
-    "fy2_op": 4117,
-    "fy2_opm": 11.44,
-    "fy2_roe": 19.99,
-    "fy2_per": 14.8,
-    "fy2_pbr": 2.7,
+    "fy1_pbr": 3.24,
     "fy1_rev_g": 17.3,
-    "fy1_op_g": 44.3,
-    "fy2_op_g": 19.1,
-    "peg": 0.81
+    "fy1_op_g": 44.3
    }
   },
   {
@@ -12050,8 +11794,6 @@
      "op": 492,
      "ni": 339,
      "ni_ctrl": 223,
-     "capex": 186,
-     "fcf": 234,
      "opm": 10.44,
      "npm": 7.2,
      "roe": 14.12,
@@ -12060,9 +11802,7 @@
      "per": 17.37,
      "bps": 15874,
      "pbr": 2.29,
-     "dps": 0,
-     "div_yield": 0.0,
-     "shares": 10680000
+     "dps": null
     },
     "2024-12": {
      "e": false,
@@ -12070,8 +11810,6 @@
      "op": 604,
      "ni": 537,
      "ni_ctrl": 428,
-     "capex": 487,
-     "fcf": 208,
      "opm": 11.51,
      "npm": 10.24,
      "roe": 22.07,
@@ -12080,9 +11818,7 @@
      "per": 13.8,
      "bps": 20450,
      "pbr": 2.7,
-     "dps": 100,
-     "div_yield": 0.18,
-     "shares": 10680000
+     "dps": 100
     },
     "2025-12": {
      "e": false,
@@ -12090,8 +11826,6 @@
      "op": 835,
      "ni": 578,
      "ni_ctrl": 454,
-     "capex": 614,
-     "fcf": -63,
      "opm": 13.03,
      "npm": 9.02,
      "roe": 19.29,
@@ -12100,69 +11834,23 @@
      "per": 15.65,
      "bps": 23663,
      "pbr": 2.81,
-     "dps": 370,
-     "div_yield": 0.56,
-     "shares": 10680000
+     "dps": 370
     },
     "2026-12": {
      "e": true,
      "rev": 8433,
      "op": 1145,
      "ni": 858,
-     "ni_ctrl": 740,
-     "capex": 539,
-     "fcf": 388,
+     "ni_ctrl": null,
      "opm": 13.58,
      "npm": 10.18,
      "roe": 25.97,
-     "debt_ratio": 84.47,
+     "debt_ratio": null,
      "eps": 6926,
      "per": 18.39,
      "bps": 29669,
      "pbr": 4.29,
-     "dps": 409,
-     "div_yield": 0.32,
-     "shares": null
-    },
-    "2027-12": {
-     "e": true,
-     "rev": 9733,
-     "op": 1368,
-     "ni": 1032,
-     "ni_ctrl": 891,
-     "capex": 468,
-     "fcf": 627,
-     "opm": 14.06,
-     "npm": 10.61,
-     "roe": 24.83,
-     "debt_ratio": 72.17,
-     "eps": 8343,
-     "per": 15.27,
-     "bps": 37535,
-     "pbr": 3.39,
-     "dps": 436,
-     "div_yield": 0.34,
-     "shares": null
-    },
-    "2028-12": {
-     "e": true,
-     "rev": 11074,
-     "op": 1593,
-     "ni": 1207,
-     "ni_ctrl": 1044,
-     "capex": 439,
-     "fcf": 932,
-     "opm": 14.38,
-     "npm": 10.9,
-     "roe": 23.14,
-     "debt_ratio": 64.21,
-     "eps": 9772,
-     "per": 13.04,
-     "bps": 46914,
-     "pbr": 2.72,
-     "dps": 455,
-     "div_yield": 0.36,
-     "shares": null
+     "dps": 409
     }
    },
    "quarter": {
@@ -12172,8 +11860,6 @@
      "op": 230,
      "ni": 108,
      "ni_ctrl": 93,
-     "capex": 183,
-     "fcf": -191,
      "opm": 14.23,
      "npm": 6.68,
      "roe": 17.93,
@@ -12182,9 +11868,7 @@
      "per": 17.21,
      "bps": 20598,
      "pbr": 2.91,
-     "dps": 0,
-     "div_yield": 0.0,
-     "shares": 10680000
+     "dps": null
     },
     "2025-09": {
      "e": false,
@@ -12192,8 +11876,6 @@
      "op": 272,
      "ni": 223,
      "ni_ctrl": 167,
-     "capex": 180,
-     "fcf": -12,
      "opm": 14.91,
      "npm": 12.25,
      "roe": 20.63,
@@ -12202,9 +11884,7 @@
      "per": 17.19,
      "bps": 22391,
      "pbr": 3.27,
-     "dps": 0,
-     "div_yield": 0.0,
-     "shares": 10680000
+     "dps": null
     },
     "2025-12": {
      "e": false,
@@ -12212,8 +11892,6 @@
      "op": 210,
      "ni": 155,
      "ni_ctrl": 118,
-     "capex": 112,
-     "fcf": 94,
      "opm": 11.79,
      "npm": 8.68,
      "roe": 19.29,
@@ -12222,9 +11900,7 @@
      "per": 15.65,
      "bps": 23663,
      "pbr": 2.81,
-     "dps": 370,
-     "div_yield": 0.56,
-     "shares": 10680000
+     "dps": 370
     },
     "2026-03": {
      "e": false,
@@ -12232,8 +11908,6 @@
      "op": 219,
      "ni": 196,
      "ni_ctrl": 173,
-     "capex": 109,
-     "fcf": 136,
      "opm": 11.82,
      "npm": 10.6,
      "roe": 23.45,
@@ -12242,9 +11916,7 @@
      "per": 15.45,
      "bps": 23795,
      "pbr": 3.35,
-     "dps": null,
-     "div_yield": null,
-     "shares": 10680000
+     "dps": null
     },
     "2026-06": {
      "e": false,
@@ -12252,8 +11924,6 @@
      "op": 321,
      "ni": 203,
      "ni_ctrl": 181,
-     "capex": 95,
-     "fcf": -159,
      "opm": 14.18,
      "npm": 8.98,
      "roe": 25.85,
@@ -12262,18 +11932,14 @@
      "per": 11.55,
      "bps": 25638,
      "pbr": 2.69,
-     "dps": null,
-     "div_yield": null,
-     "shares": 10680000
+     "dps": null
     },
     "2026-09": {
      "e": true,
      "rev": 2265,
      "op": 331,
      "ni": null,
-     "ni_ctrl": 218,
-     "capex": null,
-     "fcf": null,
+     "ni_ctrl": null,
      "opm": 14.6,
      "npm": null,
      "roe": null,
@@ -12282,49 +11948,7 @@
      "per": null,
      "bps": null,
      "pbr": null,
-     "dps": null,
-     "div_yield": null,
-     "shares": null
-    },
-    "2026-12": {
-     "e": true,
-     "rev": 2074,
-     "op": 280,
-     "ni": null,
-     "ni_ctrl": 182,
-     "capex": null,
-     "fcf": null,
-     "opm": 13.48,
-     "npm": null,
-     "roe": null,
-     "debt_ratio": 84.47,
-     "eps": 1705,
-     "per": null,
-     "bps": 29669,
-     "pbr": 4.29,
-     "dps": null,
-     "div_yield": null,
-     "shares": null
-    },
-    "2027-03": {
-     "e": true,
-     "rev": 2026,
-     "op": 279,
-     "ni": null,
-     "ni_ctrl": 177,
-     "capex": null,
-     "fcf": null,
-     "opm": 13.77,
-     "npm": null,
-     "roe": null,
-     "debt_ratio": null,
-     "eps": 1657,
-     "per": null,
-     "bps": null,
-     "pbr": null,
-     "dps": null,
-     "div_yield": null,
-     "shares": null
+     "dps": null
     }
    },
    "prices": [
@@ -17942,14 +17566,14 @@
     ],
     [
      "2026-09-23",
-     127600.0
+     127500.0
     ]
    ],
    "info": {
-    "per_ttm": 21.35,
+    "per_ttm": 21.34,
     "eps_ttm": 5976,
-    "per_fwd_naver": 18.42,
-    "pbr": 4.98,
+    "per_fwd_naver": 18.41,
+    "pbr": 4.97,
     "bps": 25638,
     "div_yield": 0.29,
     "foreign_rate": 24.11,
@@ -17959,19 +17583,19 @@
     "recomm": 4.0,
     "cons_date": "2026-09-22"
    },
-   "fin_src": "wisereport",
+   "fin_src": "naver-mobile",
    "kpi": {
-    "price": 127600.0,
+    "price": 127500.0,
     "date": "2026-09-23",
-    "mcap": 13628,
-    "r1d": 0.08,
+    "mcap": 13617,
+    "r1d": 0.0,
     "r1m": -8.9,
-    "r3m": 91.3,
-    "r1y": 83.6,
-    "ytd": 91.6,
+    "r3m": 91.2,
+    "r1y": 83.5,
+    "ytd": 91.4,
     "last_q": "2026-06",
     "fy1": "2026-12",
-    "fy2": "2027-12",
+    "fy2": null,
     "last_fy": "2025-12",
     "q_rev": 2261,
     "q_op": 321,
@@ -17986,16 +17610,8 @@
     "fy1_roe": 25.97,
     "fy1_per": 18.4,
     "fy1_pbr": 4.3,
-    "fy2_rev": 9733,
-    "fy2_op": 1368,
-    "fy2_opm": 14.06,
-    "fy2_roe": 24.83,
-    "fy2_per": 15.3,
-    "fy2_pbr": 3.4,
     "fy1_rev_g": 31.6,
-    "fy1_op_g": 37.1,
-    "fy2_op_g": 19.5,
-    "peg": 0.9
+    "fy1_op_g": 37.1
    }
   },
   {
@@ -18049,8 +17665,6 @@
      "op": 1178,
      "ni": 977,
      "ni_ctrl": 931,
-     "capex": 237,
-     "fcf": 940,
      "opm": 36.84,
      "npm": 30.55,
      "roe": 12.09,
@@ -18059,9 +17673,7 @@
      "per": 19.88,
      "bps": 68472,
      "pbr": 2.18,
-     "dps": 0,
-     "div_yield": 0.0,
-     "shares": 12013892
+     "dps": null
     },
     "2024-12": {
      "e": false,
@@ -18069,8 +17681,6 @@
      "op": 1662,
      "ni": 1431,
      "ni_ctrl": 1358,
-     "capex": 124,
-     "fcf": 1367,
      "opm": 44.56,
      "npm": 38.37,
      "roe": 17.51,
@@ -18079,9 +17689,7 @@
      "per": 25.53,
      "bps": 74668,
      "pbr": 3.76,
-     "dps": 0,
-     "div_yield": 0.0,
-     "shares": 12604033
+     "dps": null
     },
     "2025-12": {
      "e": false,
@@ -18089,8 +17697,6 @@
      "op": 2009,
      "ni": 1470,
      "ni_ctrl": 1409,
-     "capex": 134,
-     "fcf": 1367,
      "opm": 47.25,
      "npm": 34.57,
      "roe": 16.06,
@@ -18099,69 +17705,23 @@
      "per": 20.31,
      "bps": 87960,
      "pbr": 2.62,
-     "dps": 0,
-     "div_yield": 0.0,
-     "shares": 12304033
+     "dps": null
     },
     "2026-12": {
      "e": true,
      "rev": 5290,
      "op": 2092,
      "ni": 1725,
-     "ni_ctrl": 1664,
-     "capex": 220,
-     "fcf": 1426,
+     "ni_ctrl": null,
      "opm": 39.54,
      "npm": 32.6,
      "roe": 16.06,
-     "debt_ratio": 8.84,
+     "debt_ratio": null,
      "eps": 13417,
      "per": 14.19,
      "bps": 101906,
      "pbr": 1.87,
-     "dps": null,
-     "div_yield": null,
-     "shares": null
-    },
-    "2027-12": {
-     "e": true,
-     "rev": 6565,
-     "op": 2761,
-     "ni": 2245,
-     "ni_ctrl": 2171,
-     "capex": 133,
-     "fcf": 1884,
-     "opm": 42.06,
-     "npm": 34.2,
-     "roe": 17.62,
-     "debt_ratio": 7.85,
-     "eps": 17344,
-     "per": 10.98,
-     "bps": 121769,
-     "pbr": 1.56,
-     "dps": null,
-     "div_yield": null,
-     "shares": null
-    },
-    "2028-12": {
-     "e": true,
-     "rev": 8074,
-     "op": 3577,
-     "ni": 2898,
-     "ni_ctrl": 2799,
-     "capex": 132,
-     "fcf": 2482,
-     "opm": 44.3,
-     "npm": 35.9,
-     "roe": 18.87,
-     "debt_ratio": 6.86,
-     "eps": 22367,
-     "per": 8.51,
-     "bps": 147534,
-     "pbr": 1.29,
-     "dps": null,
-     "div_yield": null,
-     "shares": null
+     "dps": null
     }
    },
    "quarter": {
@@ -18171,8 +17731,6 @@
      "op": 567,
      "ni": 382,
      "ni_ctrl": 364,
-     "capex": 26,
-     "fcf": 237,
      "opm": 51.4,
      "npm": 34.66,
      "roe": 17.81,
@@ -18181,9 +17739,7 @@
      "per": 33.46,
      "bps": 79585,
      "pbr": 4.88,
-     "dps": 0,
-     "div_yield": 0.0,
-     "shares": 12304033
+     "dps": null
     },
     "2025-09": {
      "e": false,
@@ -18191,8 +17747,6 @@
      "op": 474,
      "ni": 380,
      "ni_ctrl": 368,
-     "capex": 24,
-     "fcf": 159,
      "opm": 44.76,
      "npm": 35.93,
      "roe": 16.52,
@@ -18201,9 +17755,7 @@
      "per": 26.51,
      "bps": 83845,
      "pbr": 3.6,
-     "dps": 0,
-     "div_yield": 0.0,
-     "shares": 12304033
+     "dps": null
     },
     "2025-12": {
      "e": false,
@@ -18211,8 +17763,6 @@
      "op": 578,
      "ni": 398,
      "ni_ctrl": 386,
-     "capex": 47,
-     "fcf": 600,
      "opm": 48.54,
      "npm": 33.43,
      "roe": 16.06,
@@ -18221,9 +17771,7 @@
      "per": 20.31,
      "bps": 87960,
      "pbr": 2.62,
-     "dps": 0,
-     "div_yield": 0.0,
-     "shares": 12304033
+     "dps": null
     },
     "2026-03": {
      "e": false,
@@ -18231,8 +17779,6 @@
      "op": 476,
      "ni": 406,
      "ni_ctrl": 393,
-     "capex": 115,
-     "fcf": 459,
      "opm": 40.83,
      "npm": 34.81,
      "roe": 16.39,
@@ -18241,9 +17787,7 @@
      "per": 19.65,
      "bps": 92882,
      "pbr": 2.59,
-     "dps": 0,
-     "div_yield": 0.0,
-     "shares": 12304033
+     "dps": null
     },
     "2026-06": {
      "e": false,
@@ -18251,8 +17795,6 @@
      "op": 560,
      "ni": 447,
      "ni_ctrl": 433,
-     "capex": 145,
-     "fcf": 264,
      "opm": 40.63,
      "npm": 32.44,
      "roe": 16.5,
@@ -18261,18 +17803,14 @@
      "per": 20.56,
      "bps": 97675,
      "pbr": 2.7,
-     "dps": null,
-     "div_yield": null,
-     "shares": 12304033
+     "dps": null
     },
     "2026-09": {
      "e": true,
      "rev": 1278,
      "op": 490,
      "ni": 424,
-     "ni_ctrl": 372,
-     "capex": null,
-     "fcf": null,
+     "ni_ctrl": null,
      "opm": 38.38,
      "npm": 33.17,
      "roe": null,
@@ -18281,49 +17819,7 @@
      "per": null,
      "bps": null,
      "pbr": null,
-     "dps": null,
-     "div_yield": null,
-     "shares": null
-    },
-    "2026-12": {
-     "e": true,
-     "rev": 1473,
-     "op": 572,
-     "ni": 457,
-     "ni_ctrl": 442,
-     "capex": null,
-     "fcf": null,
-     "opm": 38.87,
-     "npm": 31.05,
-     "roe": null,
-     "debt_ratio": 8.84,
-     "eps": 3532,
-     "per": null,
-     "bps": 101906,
-     "pbr": 1.87,
-     "dps": null,
-     "div_yield": null,
-     "shares": null
-    },
-    "2027-03": {
-     "e": true,
-     "rev": 1431,
-     "op": 575,
-     "ni": 460,
-     "ni_ctrl": 432,
-     "capex": null,
-     "fcf": null,
-     "opm": 40.17,
-     "npm": 32.15,
-     "roe": null,
-     "debt_ratio": null,
-     "eps": 3452,
-     "per": null,
-     "bps": null,
-     "pbr": null,
-     "dps": null,
-     "div_yield": null,
-     "shares": null
+     "dps": null
     }
    },
    "prices": [
@@ -23941,14 +23437,14 @@
     ],
     [
      "2026-09-23",
-     188800.0
+     188000.0
     ]
    ],
    "info": {
-    "per_ttm": 14.71,
+    "per_ttm": 14.64,
     "eps_ttm": 12839,
-    "per_fwd_naver": 14.07,
-    "pbr": 1.93,
+    "per_fwd_naver": 14.01,
+    "pbr": 1.92,
     "bps": 97675,
     "div_yield": null,
     "foreign_rate": 56.83,
@@ -23958,19 +23454,19 @@
     "recomm": 4.0,
     "cons_date": "2026-09-22"
    },
-   "fin_src": "wisereport",
+   "fin_src": "naver-mobile",
    "kpi": {
-    "price": 188800.0,
+    "price": 188000.0,
     "date": "2026-09-23",
-    "mcap": 23230,
-    "r1d": -0.79,
-    "r1m": -24.6,
-    "r3m": -27.2,
-    "r1y": -38.3,
-    "ytd": -18.1,
+    "mcap": 23285,
+    "r1d": -1.21,
+    "r1m": -25.0,
+    "r3m": -27.6,
+    "r1y": -38.6,
+    "ytd": -18.4,
     "last_q": "2026-06",
     "fy1": "2026-12",
-    "fy2": "2027-12",
+    "fy2": null,
     "last_fy": "2025-12",
     "q_rev": 1379,
     "q_op": 560,
@@ -23983,18 +23479,10 @@
     "fy1_op": 2092,
     "fy1_opm": 39.54,
     "fy1_roe": 16.06,
-    "fy1_per": 14.1,
-    "fy1_pbr": 1.85,
-    "fy2_rev": 6565,
-    "fy2_op": 2761,
-    "fy2_opm": 42.06,
-    "fy2_roe": 17.62,
-    "fy2_per": 10.9,
-    "fy2_pbr": 1.55,
+    "fy1_per": 14.0,
+    "fy1_pbr": 1.84,
     "fy1_rev_g": 24.4,
-    "fy1_op_g": 4.1,
-    "fy2_op_g": 32.0,
-    "peg": 0.48
+    "fy1_op_g": 4.1
    }
   },
   {
@@ -24048,8 +23536,6 @@
      "op": 923,
      "ni": 773,
      "ni_ctrl": 766,
-     "capex": 121,
-     "fcf": 529,
      "opm": 35.35,
      "npm": 29.6,
      "roe": 19.71,
@@ -24058,9 +23544,7 @@
      "per": 14.64,
      "bps": 42459,
      "pbr": 2.58,
-     "dps": 950,
-     "div_yield": 0.87,
-     "shares": 10320423
+     "dps": 950
     },
     "2024-12": {
      "e": false,
@@ -24068,8 +23552,6 @@
      "op": 1261,
      "ni": 889,
      "ni_ctrl": 920,
-     "capex": 364,
-     "fcf": 1017,
      "opm": 36.0,
      "npm": 25.4,
      "roe": 18.93,
@@ -24078,9 +23560,7 @@
      "per": 30.49,
      "bps": 46640,
      "pbr": 5.63,
-     "dps": 1100,
-     "div_yield": 0.42,
-     "shares": 10509600
+     "dps": 1100
     },
     "2025-12": {
      "e": false,
@@ -24088,8 +23568,6 @@
      "op": 2144,
      "ni": 1683,
      "ni_ctrl": 1651,
-     "capex": 297,
-     "fcf": 1534,
      "opm": 39.98,
      "npm": 31.37,
      "roe": 26.88,
@@ -24098,69 +23576,23 @@
      "per": 28.36,
      "bps": 59603,
      "pbr": 6.76,
-     "dps": 3700,
-     "div_yield": 0.92,
-     "shares": 10389648
+     "dps": 3700
     },
     "2026-12": {
      "e": true,
      "rev": 6997,
      "op": 2727,
      "ni": 2242,
-     "ni_ctrl": 2229,
-     "capex": 294,
-     "fcf": 1764,
+     "ni_ctrl": null,
      "opm": 38.97,
      "npm": 32.05,
      "roe": 28.66,
-     "debt_ratio": 38.98,
+     "debt_ratio": null,
      "eps": 19274,
      "per": 16.81,
      "bps": 74887,
      "pbr": 4.33,
-     "dps": 4201,
-     "div_yield": 1.3,
-     "shares": null
-    },
-    "2027-12": {
-     "e": true,
-     "rev": 8539,
-     "op": 3411,
-     "ni": 2770,
-     "ni_ctrl": 2740,
-     "capex": 296,
-     "fcf": 2442,
-     "opm": 39.95,
-     "npm": 32.45,
-     "roe": 27.93,
-     "debt_ratio": 32.57,
-     "eps": 23694,
-     "per": 13.67,
-     "bps": 94753,
-     "pbr": 3.42,
-     "dps": 4646,
-     "div_yield": 1.43,
-     "shares": null
-    },
-    "2028-12": {
-     "e": true,
-     "rev": 10218,
-     "op": 4103,
-     "ni": 3320,
-     "ni_ctrl": 3306,
-     "capex": 330,
-     "fcf": 2930,
-     "opm": 40.15,
-     "npm": 32.5,
-     "roe": 26.8,
-     "debt_ratio": 27.72,
-     "eps": 28589,
-     "per": 11.33,
-     "bps": 118595,
-     "pbr": 2.73,
-     "dps": 5157,
-     "div_yield": 1.59,
-     "shares": null
+     "dps": 4201
     }
    },
    "quarter": {
@@ -24170,8 +23602,6 @@
      "op": 559,
      "ni": 420,
      "ni_ctrl": 474,
-     "capex": 68,
-     "fcf": 323,
      "opm": 39.74,
      "npm": 29.9,
      "roe": 23.25,
@@ -24180,9 +23610,7 @@
      "per": 44.1,
      "bps": 52879,
      "pbr": 9.33,
-     "dps": 0,
-     "div_yield": 0.0,
-     "shares": 10389648
+     "dps": null
     },
     "2025-09": {
      "e": false,
@@ -24190,8 +23618,6 @@
      "op": 619,
      "ni": 509,
      "ni_ctrl": 490,
-     "capex": 62,
-     "fcf": 409,
      "opm": 45.69,
      "npm": 37.55,
      "roe": 25.83,
@@ -24200,9 +23626,7 @@
      "per": 46.21,
      "bps": 57153,
      "pbr": 10.52,
-     "dps": 0,
-     "div_yield": 0.0,
-     "shares": 10389648
+     "dps": null
     },
     "2025-12": {
      "e": false,
@@ -24210,8 +23634,6 @@
      "op": 519,
      "ni": 393,
      "ni_ctrl": 326,
-     "capex": 77,
-     "fcf": 538,
      "opm": 36.22,
      "npm": 27.44,
      "roe": 26.88,
@@ -24220,9 +23642,7 @@
      "per": 28.36,
      "bps": 59603,
      "pbr": 6.76,
-     "dps": 3700,
-     "div_yield": 0.92,
-     "shares": 10389648
+     "dps": 3700
     },
     "2026-03": {
      "e": false,
@@ -24230,8 +23650,6 @@
      "op": 573,
      "ni": 487,
      "ni_ctrl": 476,
-     "capex": 83,
-     "fcf": 229,
      "opm": 39.21,
      "npm": 33.37,
      "roe": 27.99,
@@ -24240,9 +23658,7 @@
      "per": 19.63,
      "bps": 60258,
      "pbr": 4.96,
-     "dps": null,
-     "div_yield": null,
-     "shares": 10389648
+     "dps": null
     },
     "2026-06": {
      "e": false,
@@ -24250,8 +23666,6 @@
      "op": 665,
      "ni": 562,
      "ni_ctrl": 566,
-     "capex": 128,
-     "fcf": 203,
      "opm": 37.2,
      "npm": 31.46,
      "roe": 27.2,
@@ -24260,18 +23674,14 @@
      "per": 22.61,
      "bps": 65167,
      "pbr": 5.57,
-     "dps": null,
-     "div_yield": null,
-     "shares": 10389648
+     "dps": null
     },
     "2026-09": {
      "e": true,
      "rev": 1821,
      "op": 735,
      "ni": 591,
-     "ni_ctrl": 592,
-     "capex": null,
-     "fcf": null,
+     "ni_ctrl": null,
      "opm": 40.38,
      "npm": 32.45,
      "roe": null,
@@ -24280,49 +23690,7 @@
      "per": null,
      "bps": null,
      "pbr": null,
-     "dps": null,
-     "div_yield": null,
-     "shares": null
-    },
-    "2026-12": {
-     "e": true,
-     "rev": 1936,
-     "op": 753,
-     "ni": 628,
-     "ni_ctrl": 607,
-     "capex": null,
-     "fcf": null,
-     "opm": 38.91,
-     "npm": 32.42,
-     "roe": null,
-     "debt_ratio": 38.98,
-     "eps": 5251,
-     "per": null,
-     "bps": 74887,
-     "pbr": 4.33,
-     "dps": null,
-     "div_yield": null,
-     "shares": null
-    },
-    "2027-03": {
-     "e": true,
-     "rev": 1733,
-     "op": 686,
-     "ni": null,
-     "ni_ctrl": 511,
-     "capex": null,
-     "fcf": null,
-     "opm": 39.59,
-     "npm": null,
-     "roe": null,
-     "debt_ratio": null,
-     "eps": 4418,
-     "per": null,
-     "bps": null,
-     "pbr": null,
-     "dps": null,
-     "div_yield": null,
-     "shares": null
+     "dps": null
     }
    },
    "prices": [
@@ -29940,16 +29308,16 @@
     ],
     [
      "2026-09-23",
-     324750.0
+     322500.0
     ]
    ],
    "info": {
-    "per_ttm": 20.23,
+    "per_ttm": 20.09,
     "eps_ttm": 16056,
-    "per_fwd_naver": 16.85,
-    "pbr": 4.98,
+    "per_fwd_naver": 16.73,
+    "pbr": 4.95,
     "bps": 65167,
-    "div_yield": 1.14,
+    "div_yield": 1.15,
     "foreign_rate": 12.82,
     "high52": 621000,
     "low52": 254500,
@@ -29957,43 +29325,35 @@
     "recomm": 4.0,
     "cons_date": "2026-09-22"
    },
-   "fin_src": "wisereport",
+   "fin_src": "naver-mobile",
    "kpi": {
-    "price": 324750.0,
+    "price": 322500.0,
     "date": "2026-09-23",
-    "mcap": 33740,
-    "r1d": 0.39,
-    "r1m": -21.9,
-    "r3m": 6.7,
-    "r1y": -44.0,
-    "ytd": -19.4,
+    "mcap": 32611,
+    "r1d": -0.31,
+    "r1m": -22.5,
+    "r3m": 5.9,
+    "r1y": -44.4,
+    "ytd": -20.0,
     "last_q": "2026-06",
     "fy1": "2026-12",
-    "fy2": "2027-12",
+    "fy2": null,
     "last_fy": "2025-12",
     "q_rev": 1787,
     "q_op": 665,
     "q_opm": 37.2,
     "q_rev_yoy": 27.1,
     "q_op_yoy": 19.0,
-    "per_ttm": 18.2,
+    "per_ttm": 17.6,
     "opm_ttm": 39.4,
     "fy1_rev": 6997,
     "fy1_op": 2727,
     "fy1_opm": 38.97,
     "fy1_roe": 28.66,
-    "fy1_per": 16.8,
-    "fy1_pbr": 4.34,
-    "fy2_rev": 8539,
-    "fy2_op": 3411,
-    "fy2_opm": 39.95,
-    "fy2_roe": 27.93,
-    "fy2_per": 13.7,
-    "fy2_pbr": 3.43,
+    "fy1_per": 16.7,
+    "fy1_pbr": 4.31,
     "fy1_rev_g": 30.5,
-    "fy1_op_g": 27.2,
-    "fy2_op_g": 25.1,
-    "peg": 0.73
+    "fy1_op_g": 27.2
    }
   },
   {
@@ -30047,8 +29407,6 @@
      "op": 173,
      "ni": 97,
      "ni_ctrl": 98,
-     "capex": 77,
-     "fcf": 59,
      "opm": 7.83,
      "npm": 4.38,
      "roe": 2.17,
@@ -30057,9 +29415,7 @@
      "per": 189.7,
      "bps": 65468,
      "pbr": 3.68,
-     "dps": 1100,
-     "div_yield": 0.46,
-     "shares": 7298468
+     "dps": 1100
     },
     "2024-12": {
      "e": false,
@@ -30067,8 +29423,6 @@
      "op": 203,
      "ni": 161,
      "ni_ctrl": 170,
-     "capex": 87,
-     "fcf": 278,
      "opm": 8.9,
      "npm": 7.03,
      "roe": 3.62,
@@ -30077,9 +29431,7 @@
      "per": 56.97,
      "bps": 65700,
      "pbr": 1.9,
-     "dps": 1100,
-     "div_yield": 0.88,
-     "shares": 7298497
+     "dps": 1100
     },
     "2025-12": {
      "e": false,
@@ -30087,8 +29439,6 @@
      "op": 170,
      "ni": 157,
      "ni_ctrl": 166,
-     "capex": 157,
-     "fcf": 457,
      "opm": 6.88,
      "npm": 6.33,
      "roe": 3.61,
@@ -30097,69 +29447,23 @@
      "per": 56.34,
      "bps": 64588,
      "pbr": 1.87,
-     "dps": 1200,
-     "div_yield": 0.99,
-     "shares": 7298497
+     "dps": 1200
     },
     "2026-12": {
      "e": true,
      "rev": 2717,
      "op": 294,
      "ni": 226,
-     "ni_ctrl": 231,
-     "capex": 87,
-     "fcf": 250,
+     "ni_ctrl": null,
      "opm": 10.82,
      "npm": 8.33,
      "roe": 5.21,
-     "debt_ratio": 35.41,
+     "debt_ratio": null,
      "eps": 3033,
      "per": 22.19,
      "bps": 67650,
      "pbr": 0.99,
-     "dps": 1200,
-     "div_yield": 1.78,
-     "shares": null
-    },
-    "2027-12": {
-     "e": true,
-     "rev": 3007,
-     "op": 386,
-     "ni": 307,
-     "ni_ctrl": 311,
-     "capex": 97,
-     "fcf": 268,
-     "opm": 12.85,
-     "npm": 10.2,
-     "roe": 6.97,
-     "debt_ratio": 36.95,
-     "eps": 4266,
-     "per": 15.78,
-     "bps": 70726,
-     "pbr": 0.95,
-     "dps": 1200,
-     "div_yield": 1.78,
-     "shares": null
-    },
-    "2028-12": {
-     "e": true,
-     "rev": 3323,
-     "op": 522,
-     "ni": 418,
-     "ni_ctrl": 425,
-     "capex": 97,
-     "fcf": 398,
-     "opm": 15.71,
-     "npm": 12.59,
-     "roe": 9.01,
-     "debt_ratio": 37.32,
-     "eps": 5828,
-     "per": 11.55,
-     "bps": 75505,
-     "pbr": 0.89,
-     "dps": 1200,
-     "div_yield": 1.78,
-     "shares": null
+     "dps": 1200
     }
    },
    "quarter": {
@@ -30169,8 +29473,6 @@
      "op": 63,
      "ni": 82,
      "ni_ctrl": 84,
-     "capex": 23,
-     "fcf": 74,
      "opm": 10.25,
      "npm": 13.26,
      "roe": 4.11,
@@ -30179,9 +29481,7 @@
      "per": 71.74,
      "bps": 65831,
      "pbr": 2.7,
-     "dps": 0,
-     "div_yield": 0.0,
-     "shares": 7298497
+     "dps": null
     },
     "2025-09": {
      "e": false,
@@ -30189,8 +29489,6 @@
      "op": 89,
      "ni": 72,
      "ni_ctrl": 74,
-     "capex": 17,
-     "fcf": 174,
      "opm": 14.58,
      "npm": 11.8,
      "roe": 4.76,
@@ -30199,9 +29497,7 @@
      "per": 40.63,
      "bps": 66248,
      "pbr": 1.81,
-     "dps": 1200,
-     "div_yield": 1.0,
-     "shares": 7298497
+     "dps": 1200
     },
     "2025-12": {
      "e": false,
@@ -30209,8 +29505,6 @@
      "op": -37,
      "ni": -31,
      "ni_ctrl": -30,
-     "capex": 90,
-     "fcf": 68,
      "opm": -6.08,
      "npm": -5.04,
      "roe": 3.61,
@@ -30219,9 +29513,7 @@
      "per": 56.34,
      "bps": 64588,
      "pbr": 1.87,
-     "dps": 0,
-     "div_yield": 0.0,
-     "shares": 7298497
+     "dps": null
     },
     "2026-03": {
      "e": false,
@@ -30229,8 +29521,6 @@
      "op": 74,
      "ni": 79,
      "ni_ctrl": 78,
-     "capex": 17,
-     "fcf": 226,
      "opm": 12.15,
      "npm": 12.98,
      "roe": 4.92,
@@ -30239,9 +29529,7 @@
      "per": 38.08,
      "bps": 53877,
      "pbr": 1.88,
-     "dps": 0,
-     "div_yield": 0.0,
-     "shares": 7298497
+     "dps": null
     },
     "2026-06": {
      "e": false,
@@ -30249,8 +29537,6 @@
      "op": 48,
      "ni": 31,
      "ni_ctrl": 31,
-     "capex": 16,
-     "fcf": 76,
      "opm": 6.93,
      "npm": 4.55,
      "roe": 3.66,
@@ -30259,18 +29545,14 @@
      "per": 40.47,
      "bps": 54276,
      "pbr": 1.48,
-     "dps": null,
-     "div_yield": null,
-     "shares": 7298497
+     "dps": null
     },
     "2026-09": {
      "e": true,
      "rev": 684,
      "op": 82,
      "ni": 36,
-     "ni_ctrl": 77,
-     "capex": null,
-     "fcf": null,
+     "ni_ctrl": null,
      "opm": 11.98,
      "npm": 5.26,
      "roe": null,
@@ -30279,49 +29561,7 @@
      "per": null,
      "bps": null,
      "pbr": null,
-     "dps": null,
-     "div_yield": null,
-     "shares": null
-    },
-    "2026-12": {
-     "e": true,
-     "rev": 742,
-     "op": 88,
-     "ni": 43,
-     "ni_ctrl": 78,
-     "capex": null,
-     "fcf": null,
-     "opm": 11.79,
-     "npm": 5.79,
-     "roe": null,
-     "debt_ratio": 35.41,
-     "eps": 1069,
-     "per": null,
-     "bps": 67650,
-     "pbr": 0.99,
-     "dps": null,
-     "div_yield": null,
-     "shares": null
-    },
-    "2027-03": {
-     "e": true,
-     "rev": null,
-     "op": null,
-     "ni": null,
-     "ni_ctrl": null,
-     "capex": null,
-     "fcf": null,
-     "opm": null,
-     "npm": null,
-     "roe": null,
-     "debt_ratio": null,
-     "eps": null,
-     "per": null,
-     "bps": null,
-     "pbr": null,
-     "dps": null,
-     "div_yield": null,
-     "shares": null
+     "dps": null
     }
    },
    "prices": [
@@ -35956,11 +35196,11 @@
     "recomm": 3.33,
     "cons_date": "2026-09-22"
    },
-   "fin_src": "wisereport",
+   "fin_src": "naver-mobile",
    "kpi": {
     "price": 67300.0,
     "date": "2026-09-23",
-    "mcap": 4912,
+    "mcap": 4682,
     "r1d": -0.59,
     "r1m": -0.1,
     "r3m": -12.8,
@@ -35968,14 +35208,14 @@
     "ytd": -44.3,
     "last_q": "2026-06",
     "fy1": "2026-12",
-    "fy2": "2027-12",
+    "fy2": null,
     "last_fy": "2025-12",
     "q_rev": 687,
     "q_op": 48,
     "q_opm": 6.93,
     "q_rev_yoy": 11.5,
     "q_op_yoy": -23.8,
-    "per_ttm": 32.1,
+    "per_ttm": 30.6,
     "opm_ttm": 6.9,
     "fy1_rev": 2717,
     "fy1_op": 294,
@@ -35983,16 +35223,8 @@
     "fy1_roe": 5.21,
     "fy1_per": 22.2,
     "fy1_pbr": 0.99,
-    "fy2_rev": 3007,
-    "fy2_op": 386,
-    "fy2_opm": 12.85,
-    "fy2_roe": 6.97,
-    "fy2_per": 15.8,
-    "fy2_pbr": 0.95,
     "fy1_rev_g": 9.9,
-    "fy1_op_g": 72.9,
-    "fy2_op_g": 31.3,
-    "peg": 0.55
+    "fy1_op_g": 72.9
    }
   }
  ],
@@ -41612,7 +40844,7 @@
    ],
    [
     "2026-09-23",
-    7049.26
+    7050.47
    ]
   ],
   "KOSDAQ": [
@@ -47230,7 +46462,7 @@
    ],
    [
     "2026-09-23",
-    842.18
+    841.0
    ]
   ]
  }
