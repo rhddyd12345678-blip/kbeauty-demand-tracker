@@ -129,6 +129,7 @@ details summary{cursor:pointer;color:var(--ink2);font-size:13px}
 
 <script>
 const $=s=>document.querySelector(s);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const fmt=n=>n==null?'–':n.toLocaleString('ko-KR',{maximumFractionDigits:1});
 const css=v=>getComputedStyle(document.documentElement).getPropertyValue(v).trim();
 const S=['--s1','--s2','--s3','--s4','--s5','--s6','--s7','--s8'];
@@ -196,11 +197,11 @@ function renderTrade(){const t=SUM.trade;const sel=$('#hsSel');if(!sel.options.l
 
 // ---------- amazon
 function renderAmazon(){const a=SUM.amazon;if(!a.length)return;const L=a[a.length-1],prev=a.find(x=>x.date<=new Date(new Date(L.date)-365*864e5).toISOString().slice(0,10))||a[0];
-  $('#amzTiles').innerHTML=[['한국생산 비중',L.mik_pct+'%',`${L.made_in_korea}/50 · 1년전 ${prev.mik_pct}%`],['한국브랜드 비중',L.kb_pct+'%',`${L.korean_brand}/50 · 1년전 ${prev.kb_pct}%`],['Top10 내 한국생산',L.top10_mik+'개',L.date+' 스냅샷'],['한국생산 브랜드 수',L.korean_brands.length+'개',L.korean_brands.slice(0,3).join(', ')+(L.korean_brands.length>3?' 외':'')]]
+  $('#amzTiles').innerHTML=[['한국생산 비중',L.mik_pct+'%',`${L.made_in_korea}/50 · 1년전 ${prev.mik_pct}%`],['한국브랜드 비중',L.kb_pct+'%',`${L.korean_brand}/50 · 1년전 ${prev.kb_pct}%`],['Top10 내 한국생산',L.top10_mik+'개',L.date+' 스냅샷'],['한국생산 브랜드 수',L.korean_brands.length+'개',esc(L.korean_brands.slice(0,3).join(', '))+(L.korean_brands.length>3?' 외':'')]]
     .map(t=>`<div class="tile"><div class="k">${t[0]}</div><div class="v">${t[1]}</div><div class="d">${t[2]}</div></div>`).join('');
   lineChart($('#amzChart'),{x:a.map(x=>x.date.slice(2,7)),series:[{name:'한국생산',v:a.map(x=>x.mik_pct)},{name:'한국브랜드',v:a.map(x=>x.kb_pct)}],yMin:0,fmtY:v=>v+'%'});
   const rows=AMZ.filter(r=>r.date===L.date).sort((p,q)=>p.rank-q.rank);$('#amzSnapDate').textContent=L.date+' · '+rows.length+'개';
-  $('#amzTable').innerHTML='<table><tr><th class="num">순위</th><th>브랜드</th><th>제품</th><th>한국생산</th><th>한국브랜드</th></tr>'+rows.map(r=>`<tr><td class="num">${r.rank}</td><td>${r.brand||''}</td><td class="muted">${r.title}</td><td>${r.made_in_korea===1?'●':r.made_in_korea===-1?'?':''}</td><td>${r.korean_brand===1?'●':''}</td></tr>`).join('')+'</table>'}
+  $('#amzTable').innerHTML='<table><tr><th class="num">순위</th><th>브랜드</th><th>제품</th><th>한국생산</th><th>한국브랜드</th></tr>'+rows.map(r=>`<tr><td class="num">${r.rank}</td><td>${esc(r.brand||'')}</td><td class="muted">${esc(r.title)}</td><td>${r.made_in_korea===1?'●':r.made_in_korea===-1?'?':''}</td><td>${r.korean_brand===1?'●':''}</td></tr>`).join('')+'</table>'}
 
 // ---------- naver
 function renderNaver(){const nv=SUM.naver;if(!nv.weeks)return;const keys=Object.keys(nv.series);const ages=[...new Set(keys.map(k=>k.split('|')[0]))],kws=[...new Set(keys.map(k=>k.split('|')[1]))];
@@ -215,7 +216,7 @@ function renderNaver(){const nv=SUM.naver;if(!nv.weeks)return;const keys=Object.
 $('#nvMode').onchange=renderNaver;$('#nvPick').onchange=renderNaver;
 
 // ---------- news
-function newsItem(a){return `<div style="padding:8px 0;border-bottom:1px solid var(--line)"><a href="${a.link}" target="_blank" rel="noopener">${a.title}</a><div class="m">${(a.tags||[]).map(t=>`<span class="tag">${t}</span>`).join('')}${a.source||''} · ${a.published}</div></div>`}
+function newsItem(a){return `<div style="padding:8px 0;border-bottom:1px solid var(--line)"><a href="${esc(a.link)}" target="_blank" rel="noopener">${esc(a.title)}</a><div class="m">${(a.tags||[]).map(t=>`<span class="tag">${esc(t)}</span>`).join('')}${esc(a.source||'')} · ${esc(a.published)}</div></div>`}
 function renderNews(){const tags=[...new Set(NEWS.flatMap(a=>a.tags||[]))];const el=$('#newsTags');if(!el.children.length)chips(el,['전체',...tags],t=>{el.dataset.t=t;renderNews()},'전체');
   const t=el.dataset.t||'전체',q=$('#newsQ').value.trim().toLowerCase();
   const rows=NEWS.filter(a=>(t==='전체'||(a.tags||[]).includes(t))&&(!q||a.title.toLowerCase().includes(q)));

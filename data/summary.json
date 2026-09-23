@@ -1,25 +1,25 @@
 {
- "built": "2026-09-23 12:51",
+ "built": "2026-09-23 13:00",
  "meta": {
   "trade": {
-   "updated": "2026-09-23 12:51",
-   "status": "ok",
-   "note": "raw 엑셀 ingest"
+   "updated": "2026-09-23 12:58",
+   "status": "manual",
+   "note": "API 키 없음, 엑셀 ingest 사용"
   },
   "naver_trend": {
-   "updated": "2026-09-23 12:51",
-   "status": "ok",
-   "note": "raw 엑셀 ingest"
+   "updated": "2026-09-23 12:58",
+   "status": "manual",
+   "note": "API 키 없음, 엑셀 ingest 사용"
   },
   "amazon": {
-   "updated": "2026-09-23 12:51",
+   "updated": "2026-09-23 13:00",
    "status": "ok",
-   "note": "raw 엑셀 ingest"
+   "note": "신규 1개 스냅샷 ['2022-11-11'], 미분류 브랜드 4"
   },
   "news": {
-   "updated": "2026-09-23 12:51",
+   "updated": "2026-09-23 12:59",
    "status": "ok",
-   "note": "신규 0건, 보관 0건"
+   "note": "신규 2177건, 보관 1492건"
   }
  },
  "trade": {
@@ -627,6 +627,21 @@
     "Rael"
    ],
    "unmapped": 0
+  },
+  {
+   "date": "2022-11-11",
+   "n": 50,
+   "made_in_korea": 3,
+   "korean_brand": 1,
+   "mik_pct": 6.0,
+   "kb_pct": 2.0,
+   "top10_mik": 1,
+   "korean_brands": [
+    "Hero Cosmetics (Mighty Patch)",
+    "LANEIGE",
+    "Rael"
+   ],
+   "unmapped": 24
   },
   {
    "date": "2022-12-03",
@@ -17485,5 +17500,5 @@
    ]
   }
  },
- "news_count": 0
+ "news_count": 1492
 }
