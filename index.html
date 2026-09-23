@@ -57,6 +57,20 @@ td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
 .tag{display:inline-block;font-size:11px;padding:1px 7px;border-radius:999px;background:var(--bg);border:1px solid var(--line);color:var(--ink2);margin-right:4px}
 .muted{color:var(--ink3)}
 details summary{cursor:pointer;color:var(--ink2);font-size:13px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+.grid3 h3{font-size:13px;margin:0 0 4px;color:var(--ink2);font-weight:600}
+.tbl{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.tbl table{min-width:760px}
+.tbl th:first-child,.tbl td:first-child{position:sticky;left:0;background:var(--surface);z-index:1}
+th.e,td.e{color:var(--ink3);font-style:italic}
+tr.grp td{background:var(--bg);font-weight:600;color:var(--ink2);font-size:12px}
+.sum{margin:4px 0 0;padding-left:16px;color:var(--ink2);font-size:13px;line-height:1.55}
+.sum li{margin:1px 0}
+.sw{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;vertical-align:-1px}
+.note{font-size:12px;color:var(--ink3);margin-top:8px}
+.guide dt{font-weight:600;margin-top:10px}.guide dd{margin:2px 0 0;color:var(--ink2);font-size:13px}
+td.co{white-space:nowrap;font-weight:600}
+tbody tr.pick{cursor:pointer}tbody tr.pick:hover td{background:var(--bg)}
 @media (max-width:640px){header{gap:8px}main{padding:12px}.tile .v{font-size:22px}}
 </style>
 </head>
@@ -65,6 +79,8 @@ details summary{cursor:pointer;color:var(--ink2);font-size:13px}
   <h1>K뷰티 전방수요 트래커</h1>
   <nav id="nav">
     <button data-t="home" class="on">홈</button>
+    <button data-t="industry">산업 지표</button>
+    <button data-t="companies">기업</button>
     <button data-t="trade">수출</button>
     <button data-t="amazon">아마존 US</button>
     <button data-t="naver">네이버 트렌드</button>
@@ -75,8 +91,73 @@ details summary{cursor:pointer;color:var(--ink2);font-size:13px}
 <main>
   <section id="home" class="on">
     <div class="tiles" id="homeTiles"></div>
+    <div class="card"><h2>커버리지 6개사</h2><div class="sub">ODM 3사 · 메디컬 에스테틱 3사 — 상세는 기업 탭</div><div id="homeCo"></div></div>
     <div class="card"><h2>최신 뉴스</h2><div class="sub">최근 수집 기사 상위 12건</div><div class="news" id="homeNews"></div></div>
     <div class="card"><h2>수집 상태</h2><div id="status"></div></div>
+  </section>
+
+  <section id="industry">
+    <div class="tiles" id="indTiles"></div>
+    <div class="card">
+      <h2>수입시장 내 K뷰티 — 국가별 수입액</h2>
+      <div class="sub" id="impSub"></div>
+      <div class="row"><label>시장 <select id="impSel"></select></label>
+        <label>기준 <select id="impMode"><option value="12">12개월 합계</option><option value="1">월간</option></select></label>
+        <span class="chips" id="impRange"></span></div>
+      <div id="impChart"></div><div class="legend" id="impLegend"></div>
+    </div>
+    <div class="card">
+      <h2>수입시장 점유율 — 한국 vs 프랑스</h2>
+      <div class="sub">% · 해당 시장 전체 수입액 대비 · 12개월 합계 기준(월별 변동 완화)</div>
+      <div id="shareChart"></div>
+      <div class="legend"><span><i style="background:var(--s1)"></i>한국</span><span><i style="background:var(--s2)"></i>프랑스</span></div>
+      <div class="note" id="rankNote"></div>
+    </div>
+    <div class="card">
+      <h2>한국 수출 상대국 비중</h2>
+      <div class="sub">% · 12개월 합계 기준 · UN Comtrade (한국 보고 자료는 수개월 늦게 반영됨)</div>
+      <div class="row"><label>품목 <select id="krSel"></select></label></div>
+      <div id="krChart"></div><div class="legend" id="krLegend"></div>
+    </div>
+    <div class="card">
+      <h2>환율</h2>
+      <div class="sub">원화 기준 · ECB 고시 · 원화 약세(값 상승)는 수출 채산성에 우호적</div>
+      <div class="row"><span class="chips" id="fxRange"></span></div>
+      <div class="grid3"><div><h3>원/달러</h3><div id="fxUsd"></div></div><div><h3>원/위안</h3><div id="fxCny"></div></div><div><h3>원/100엔</h3><div id="fxJpy"></div></div></div>
+    </div>
+    <div class="card guide"><h2>지표 가이드 — 왜 이 숫자를 보나</h2><dl id="guide"></dl></div>
+  </section>
+
+  <section id="companies">
+    <div class="card">
+      <h2>밸류에이션·실적 비교</h2>
+      <div class="sub" id="coSub"></div>
+      <div class="row"><span class="chips" id="coGroup"></span></div>
+      <div class="tbl" id="coTable"></div>
+      <div class="note">PER TTM = 시가총액 ÷ 최근 4분기 지배순이익 · FY1/FY2 = 올해·내년 컨센서스(추정) · PEG = FY1 PER ÷ FY2 EPS 성장률 · 괴리율 = 컨센서스 목표가 대비 · 행을 누르면 아래 상세로 이동</div>
+    </div>
+    <div class="card">
+      <h2>상대 주가 수익률</h2>
+      <div class="sub">기간 시작일 = 100</div>
+      <div class="row"><span class="chips" id="pxRange"></span></div>
+      <div id="pxChart"></div><div class="legend" id="pxLegend"></div>
+    </div>
+    <div class="card">
+      <h2>분기 실적 추이 비교</h2>
+      <div class="sub">추정치(E) 포함 · 흐린 구간은 컨센서스</div>
+      <div class="row"><label>지표 <select id="cmpMetric"><option value="opm">영업이익률 (%)</option><option value="rev_yoy">매출 YoY (%)</option><option value="op_yoy">영업이익 YoY (%)</option></select></label></div>
+      <div id="cmpChart"></div><div class="legend" id="cmpLegend"></div>
+    </div>
+    <div class="card" id="coDetail">
+      <h2>기업 상세</h2>
+      <div class="row"><label>기업 <select id="coSel"></select></label>
+        <label>주기 <select id="coFreq"><option value="Q">분기</option><option value="Y">연간</option></select></label></div>
+      <div class="tiles" id="coTiles"></div>
+      <div class="grid3"><div><h3>매출액 (억원)</h3><div id="cRev"></div></div><div><h3>영업이익 (억원)</h3><div id="cOp"></div></div><div><h3>영업이익률 (%)</h3><div id="cOpm"></div></div></div>
+      <div class="legend"><span><i style="background:var(--s1)"></i>실적</span><span><i style="background:var(--s1);opacity:.4"></i>컨센서스(E)</span></div>
+      <details style="margin-top:12px" open><summary>재무 표</summary><div class="tbl" id="coFin"></div></details>
+      <h3 style="font-size:14px;margin:16px 0 4px">관련 뉴스</h3><div class="news" id="coNews"></div>
+    </div>
   </section>
 
   <section id="trade">
@@ -119,8 +200,8 @@ details summary{cursor:pointer;color:var(--ink2);font-size:13px}
   <section id="news">
     <div class="card">
       <h2>뉴스 피드</h2>
-      <div class="sub">Google News RSS · 최근 120일 · 매일 자동 수집</div>
-      <div class="row"><input type="search" id="newsQ" placeholder="제목 검색"><span class="chips" id="newsTags"></span></div>
+      <div class="sub" id="newsSub">Google News RSS · 최근 120일 · 매일 자동 수집 · 기사별 3줄 요약</div>
+      <div class="row"><input type="search" id="newsQ" placeholder="제목·요약 검색"><label style="font-size:13px;color:var(--ink2)"><input type="checkbox" id="newsSum" checked> 요약 보기</label><span class="chips" id="newsTags"></span></div>
       <div class="news" id="newsList"></div>
     </div>
   </section>
@@ -145,8 +226,8 @@ function chips(el,items,onSel,init){el.innerHTML='';items.forEach(it=>{const b=d
 
 function nice(lo,hi,n=5){const r=hi-lo||1,raw=r/n,p=Math.pow(10,Math.floor(Math.log10(raw))),m=raw/p,st=(m<=1?1:m<=2?2:m<=2.5?2.5:m<=5?5:10)*p;return{lo:Math.floor(lo/st)*st,hi:Math.ceil(hi/st)*st,st}}
 // ---------- SVG line chart (multi-series, hover crosshair)
-function lineChart(el,{x,series,fmtY=fmt,h=300,yMin}){
-  const W=900,H=h,P={l:52,r:14,t:10,b:28};
+function lineChart(el,{x,series,fmtY=fmt,h=300,yMin,shadeFrom,w=900}){
+  const W=w,H=h,P={l:52,r:14,t:10,b:28};
   const n=x.length;if(!n){el.innerHTML='<p class="muted">데이터 없음</p>';return}
   const all=series.flatMap(s=>s.v.filter(v=>v!=null));
   let lo=yMin!=null?yMin:Math.min(...all),hi=Math.max(...all);if(lo===hi){hi=lo+1}
@@ -155,12 +236,13 @@ function lineChart(el,{x,series,fmtY=fmt,h=300,yMin}){
   let g='';for(let v=lo;v<=hi+1e-9;v+=NS.st){const y=Y(v);
     g+=`<line x1="${P.l}" x2="${W-P.r}" y1="${y}" y2="${y}" stroke="${css('--grid')}"/><text x="${P.l-6}" y="${y+4}" font-size="11" text-anchor="end" fill="${css('--ink3')}">${fmtY(Math.round(v*10)/10)}</text>`}
   if(lo<0&&hi>0)g+=`<line x1="${P.l}" x2="${W-P.r}" y1="${Y(0)}" y2="${Y(0)}" stroke="${css('--ink3')}" stroke-width="1"/>`;
-  const step=Math.max(1,Math.ceil(n/8));
+  if(shadeFrom!=null&&shadeFrom<n){const sx=shadeFrom===0?P.l:(X(shadeFrom-1)+X(shadeFrom))/2;g=`<rect x="${sx}" y="${P.t}" width="${W-P.r-sx}" height="${H-P.t-P.b}" fill="${css('--grid')}" opacity=".6"/><text x="${W-P.r-4}" y="${P.t+12}" font-size="11" text-anchor="end" fill="${css('--ink3')}">추정(E)</text>`+g}
+  const step=Math.max(1,Math.ceil(n/(W>600?8:4)));
   for(let i=0;i<n;i+=step)g+=`<text x="${X(i)}" y="${H-8}" font-size="11" text-anchor="${i===0?'start':i>=n-1-step/2?'end':'middle'}" fill="${css('--ink3')}">${x[i]}</text>`;
   if((n-1)%step!==0&&(n-1)%step>step/2)g+=`<text x="${X(n-1)}" y="${H-8}" font-size="11" text-anchor="end" fill="${css('--ink3')}">${x[n-1]}</text>`;
   let paths='';series.forEach((s,k)=>{const c=css(s.color||S[k%8]);let d='',pen=false;
     s.v.forEach((v,i)=>{if(v==null){pen=false;return}d+=(pen?'L':'M')+X(i).toFixed(1)+' '+Y(v).toFixed(1);pen=true});
-    paths+=`<path d="${d}" fill="none" stroke="${c}" stroke-width="2" stroke-linejoin="round"/>`;
+    paths+=`<path d="${d}" fill="none" stroke="${c}" stroke-width="2" stroke-linejoin="round"${s.dash?' stroke-dasharray="5 4"':''}/>`;
     const last=[...s.v].map((v,i)=>[v,i]).filter(a=>a[0]!=null).pop();
     if(last)paths+=`<circle cx="${X(last[1])}" cy="${Y(last[0])}" r="3.5" fill="${c}" stroke="${css('--surface')}" stroke-width="2"/>`});
   el.innerHTML=`<svg viewBox="0 0 ${W} ${H}">${g}${paths}<line id="xh" x1="0" x2="0" y1="${P.t}" y2="${H-P.b}" stroke="${css('--ink3')}" stroke-dasharray="3 3" visibility="hidden"/><rect x="${P.l}" y="${P.t}" width="${W-P.l-P.r}" height="${H-P.t-P.b}" fill="transparent"/></svg>`;
@@ -169,7 +251,7 @@ function lineChart(el,{x,series,fmtY=fmt,h=300,yMin}){
     const i=Math.max(0,Math.min(n-1,Math.round((px-P.l)/(W-P.l-P.r)*(n-1))));
     xh.setAttribute('x1',X(i));xh.setAttribute('x2',X(i));xh.setAttribute('visibility','visible');
     tip.style.display='block';tip.style.left=(e.clientX+12)+'px';tip.style.top=(e.clientY+12)+'px';
-    tip.innerHTML=`<b>${x[i]}</b><br>`+series.map((s,k)=>`<span style="color:${css(s.color||S[k%8])}">●</span> ${s.name}: ${fmtY(s.v[i])}`).join('<br>')});
+    tip.innerHTML=`<b>${x[i]}</b><br>`+series.filter(s=>s.v[i]!=null).map((s,k)=>`<span style="color:${css(s.color||S[series.indexOf(s)%8])}">●</span> ${esc(s.name)}: ${fmtY(s.v[i])}`).join('<br>')});
   svg.addEventListener('mouseleave',()=>{xh.setAttribute('visibility','hidden');tip.style.display='none'});
 }
 function barChart(el,{x,v,h=220}){
@@ -184,6 +266,149 @@ function barChart(el,{x,v,h=220}){
     if(i%step===0)bars+=`<text x="${P.l+i*bw+bw/2}" y="${H-8}" font-size="11" text-anchor="middle" fill="${css('--ink3')}">${x[i]}</text>`});
   el.innerHTML=`<svg viewBox="0 0 ${W} ${H}">${g}${bars}</svg>`;
 }
+
+
+// ---------- column chart (actual vs estimate), single series
+function colChart(el,{x,v,est=[],fmtV=fmt,h=210,color='--s1'}){
+  const W=420,H=h,P={l:44,r:6,t:10,b:24},n=x.length;if(!n||v.every(a=>a==null)){el.innerHTML='<p class="muted">데이터 없음</p>';return}
+  const vals=v.filter(a=>a!=null);const NS=nice(Math.min(0,...vals),Math.max(0,...vals),4);const lo=NS.lo,hi=NS.hi===NS.lo?NS.lo+1:NS.hi;
+  const bw=(W-P.l-P.r)/n,Y=a=>P.t+(1-(a-lo)/(hi-lo))*(H-P.t-P.b);let g='';
+  for(let t=lo;t<=hi+1e-9;t+=NS.st)g+=`<line x1="${P.l}" x2="${W-P.r}" y1="${Y(t)}" y2="${Y(t)}" stroke="${css('--grid')}"/><text x="${P.l-6}" y="${Y(t)+4}" font-size="11" text-anchor="end" fill="${css('--ink3')}">${fmtV(Math.round(t*10)/10)}</text>`;
+  g+=`<line x1="${P.l}" x2="${W-P.r}" y1="${Y(0)}" y2="${Y(0)}" stroke="${css('--ink3')}"/>`;
+  const step=Math.max(1,Math.ceil(n/6));let bars='';const c=css(color);
+  v.forEach((a,i)=>{const cx=P.l+i*bw;if(i%step===0||i===n-1&&n<=8)bars+=`<text x="${cx+bw/2}" y="${H-8}" font-size="11" text-anchor="middle" fill="${css(est[i]?'--ink3':'--ink2')}">${x[i]}</text>`;
+    if(a==null)return;const y0=Y(0),y1=Y(a),w=Math.max(2,Math.min(38,bw-2)),bx=cx+(bw-w)/2,top=Math.min(y0,y1),hh=Math.max(1,Math.abs(y0-y1));
+    bars+=`<rect x="${bx.toFixed(1)}" y="${top.toFixed(1)}" width="${w.toFixed(1)}" height="${hh.toFixed(1)}" fill="${a<0?css('--bad'):c}" opacity="${est[i]?.4:1}" rx="3"/>`});
+  el.innerHTML=`<svg viewBox="0 0 ${W} ${H}">${g}${bars}<rect x="${P.l}" y="${P.t}" width="${W-P.l-P.r}" height="${H-P.t-P.b}" fill="transparent"/></svg>`;
+  const svg=el.firstChild,tip=$('#tip');
+  svg.addEventListener('mousemove',e=>{const r=svg.getBoundingClientRect();const i=Math.floor(((e.clientX-r.left)/r.width*W-P.l)/bw);
+    if(i<0||i>=n){tip.style.display='none';return}tip.style.display='block';tip.style.left=(e.clientX+12)+'px';tip.style.top=(e.clientY+12)+'px';
+    tip.innerHTML=`<b>${x[i]}${est[i]?' (E)':''}</b><br>${fmtV(v[i])}`});
+  svg.addEventListener('mouseleave',()=>tip.style.display='none');
+}
+const roll=(a,n)=>a.map((_,i)=>{if(i<n-1)return null;let t=0;for(let j=i-n+1;j<=i;j++){if(a[j]==null)return null;t+=a[j]}return t});
+const pct=(a,b)=>a!=null&&b?Math.round(a/b*1000)/10:null;
+const sgn=v=>v==null?'–':(v>0?'+':'')+fmt(v);
+const cls=v=>v>0?'up':v<0?'down':'';
+const tile=(k,v,d)=>`<div class="tile"><div class="k">${k}</div><div class="v">${v}</div><div class="d">${d||''}</div></div>`;
+
+// ---------- industry
+const PC={'410':'--s1','251':'--s2','842':'--s3','392':'--s4','156':'--s5','124':'--s6','380':'--s7'};
+const IMP=[['842|M|3304','미국 화장품(HS 3304) 수입'],['392|M|3304','일본 화장품(HS 3304) 수입'],['842|M|300249','미국 보툴리눔 톡신 등(HS 3002.49) 수입']];
+const KRX=[['410|X|3304','화장품(HS 3304)'],['410|X|300249','보툴리눔 톡신 등(HS 3002.49)']];
+let FX=null;
+function rangeCut(x,r){const k={'1년':12,'3년':36,'5년':60}[r];return k?Math.max(0,x.length-k):0}
+function renderIndustry(){const CT=SUM.comtrade||{};const t=[];
+  const lastOf=d=>{const i=d.periods.length-1;return i};
+  const us=CT['842|M|3304'],jp=CT['392|M|3304'],tx=CT['842|M|300249'];
+  if(us){const i=lastOf(us),kr=us.series['410']||[],s12=pct(roll(kr,12)[i],roll(us.total,12)[i]),s12p=pct(roll(kr,12)[i-12],roll(us.total,12)[i-12]);
+    t.push(tile(`미국 화장품 수입 중 한국 (12M)`,s12+'%',`${us.kr_rank[i]}위 (${us.periods[i]} 월간) · 1년전 ${s12p??'–'}%`));
+    const yoy=kr[i-12]?Math.round((kr[i]/kr[i-12]-1)*1000)/10:null;t.push(tile(`미국의 한국산 화장품 수입 (${us.periods[i]})`,fmt(kr[i]/1e6)+' M$',`<span class="${cls(yoy)}">YoY ${sgn(yoy)}%</span>`))}
+  if(jp){const i=lastOf(jp),kr=jp.series['410']||[],s12=pct(roll(kr,12)[i],roll(jp.total,12)[i]);t.push(tile('일본 화장품 수입 중 한국 (12M)',s12+'%',`${jp.kr_rank[i]}위 (${jp.periods[i]} 월간)`))}
+  if(tx){const i=lastOf(tx),kr=tx.series['410']||[],yoy=kr[i-12]?Math.round((kr[i]/kr[i-12]-1)*1000)/10:null;t.push(tile(`미국의 한국산 톡신 등 수입 (${tx.periods[i]})`,fmt(kr[i]/1e6)+' M$',`<span class="${cls(yoy)}">YoY ${sgn(yoy)}%</span> · 점유율 ${tx.kr_share[i]??'–'}%`))}
+  if(FX){const n=FX.dates.length-1,j=FX.dates.findIndex(d=>d>=new Date(Date.parse(FX.dates[n])-365*864e5).toISOString().slice(0,10));const ch=Math.round((FX.usdkrw[n]/FX.usdkrw[j]-1)*1000)/10;
+    t.push(tile(`원/달러 (${FX.dates[n].slice(5)})`,fmt(FX.usdkrw[n]),`1년 ${sgn(ch)}% · 100엔 ${fmt(FX.jpykrw[n])}원`))}
+  $('#indTiles').innerHTML=t.join('');
+  // import market
+  const sel=$('#impSel');if(!sel.options.length){IMP.filter(a=>CT[a[0]]).forEach(a=>sel.add(new Option(a[1],a[0])));sel.onchange=renderImport;$('#impMode').onchange=renderImport;
+    chips($('#impRange'),['3년','5년','전체'],r=>{$('#impRange').dataset.r=r;renderImport()},'5년');
+    const ks=$('#krSel');KRX.filter(a=>CT[a[0]]).forEach(a=>ks.add(new Option(a[1],a[0])));ks.onchange=renderKrExport;
+    chips($('#fxRange'),['1년','3년','전체'],r=>{$('#fxRange').dataset.r=r;renderFx()},'3년')}
+  renderImport();renderKrExport();renderFx();renderGuide()}
+function renderImport(){const d=(SUM.comtrade||{})[$('#impSel').value];if(!d)return;const m=+$('#impMode').value;
+  const from=rangeCut(d.periods,$('#impRange').dataset.r||'5년')+(m===12?0:0);
+  const codes=d.order||Object.keys(d.series);let top=codes.slice(0,5);if(!top.includes('410')&&codes.includes('410'))top=[...top.slice(0,4),'410'];
+  let spare=['--s8','--s7','--s6'].filter(c=>!top.some(k=>PC[k]===c));
+  const col=k=>PC[k]||spare.shift()||'--ink3';
+  const tr=v=>m===12?roll(v,12):v;const x=d.periods.slice(from);
+  const other=d.total.map((t,i)=>t==null?null:t-top.reduce((a,k)=>a+(d.series[k][i]||0),0));
+  const series=top.map(k=>({name:d.partners[k],color:col(k),v:tr(d.series[k]).slice(from).map(v=>v==null?null:v/1e6)}));
+  series.push({name:'기타',color:'--ink3',dash:1,v:tr(other).slice(from).map(v=>v==null?null:v/1e6)});
+  lineChart($('#impChart'),{x,series,yMin:0,fmtY:v=>v==null?'–':fmt(v)});
+  $('#impLegend').innerHTML=series.map(s=>`<span><i style="background:var(${s.color})"></i>${esc(s.name)}</span>`).join('');
+  $('#impSub').textContent=`백만 달러 · ${m===12?'12개월 합계':'월간'} · 상위 5개국 + 기타 · UN Comtrade (${d.periods[d.periods.length-1]}까지)`;
+  const kr=d.series['410']||d.total.map(()=>null),fr=d.series['251']||d.total.map(()=>null);
+  const krs=roll(kr,12).map((v,i)=>pct(v,roll(d.total,12)[i])),frs=roll(fr,12).map((v,i)=>pct(v,roll(d.total,12)[i]));
+  lineChart($('#shareChart'),{x,series:[{name:'한국',color:'--s1',v:krs.slice(from)},{name:'프랑스',color:'--s2',v:frs.slice(from)}],yMin:0,fmtY:v=>v==null?'–':v+'%'});
+  const i=d.periods.length-1;$('#rankNote').innerHTML=`최근월(${d.periods[i]}) 한국 순위 <b>${d.kr_rank[i]??'–'}위</b> · 월간 점유율 한국 ${d.kr_share[i]??'–'}% / 프랑스 ${d.fr_share[i]??'–'}%`}
+function renderKrExport(){const d=(SUM.comtrade||{})[$('#krSel').value];if(!d)return;const tot=roll(d.total,12);
+  const codes=(d.order||Object.keys(d.series)).slice(0,6);let spare=['--s8','--s7','--s6','--s5'].filter(c=>!codes.some(k=>PC[k]===c));
+  const series=codes.map(k=>({name:d.partners[k],color:PC[k]||spare.shift()||'--ink3',v:roll(d.series[k],12).map((v,i)=>pct(v,tot[i]))}));
+  const from=Math.max(0,d.periods.length-72);
+  lineChart($('#krChart'),{x:d.periods.slice(from),series:series.map(s=>({...s,v:s.v.slice(from)})),yMin:0,fmtY:v=>v==null?'–':v+'%'});
+  $('#krLegend').innerHTML=series.map(s=>`<span><i style="background:var(${s.color})"></i>${esc(s.name)}</span>`).join('')+`<span class="muted">· ${d.periods[d.periods.length-1]}까지</span>`}
+function renderFx(){if(!FX)return;const r=$('#fxRange').dataset.r||'3년';const days={'1년':365,'3년':1095}[r];
+  const cut=days?new Date(Date.parse(FX.dates[FX.dates.length-1])-days*864e5).toISOString().slice(0,10):'';const from=Math.max(0,FX.dates.findIndex(d=>d>=cut));
+  const x=FX.dates.slice(from).map(d=>d.slice(2));
+  [['#fxUsd','usdkrw','--s1'],['#fxCny','cnykrw','--s5'],['#fxJpy','jpykrw','--s4']].forEach(([el,k,c])=>lineChart($(el),{x,series:[{name:el==='#fxJpy'?'원/100엔':el==='#fxCny'?'원/위안':'원/달러',color:c,v:FX[k].slice(from)}],h:260,w:420}))}
+function renderGuide(){const G=[
+  ['미국 화장품 수입 중 한국 점유율·순위','K뷰티 수출의 최대 성장 시장. 2023년 이후 한국이 프랑스를 제치고 미국 화장품(HS 3304) 수입 1위로 올라섰는지가 구조적 성장의 핵심 증거. 월간 수치는 선적 시점에 따라 출렁이므로 12개월 합계 점유율로 추세를 본다. ODM(코스맥스·한국콜마·코스메카)의 인디 브랜드 수주와 직결.'],
+  ['일본 화장품 수입 중 한국 점유율','일본은 2022년부터 한국산이 프랑스를 넘어 1위. 점유율 정체/하락 여부로 성숙 시장에서의 지속력을 확인.'],
+  ['미국 보툴리눔 톡신 등(HS 3002.49) 수입 — 한국산','휴젤(레티보)·대웅(주보) 등 한국 톡신의 미국 판매 대리지표. 백신 외 면역제품이 섞여 있어 절대값보다 방향성과 YoY로 해석.'],
+  ['한국 화장품·톡신 수출 상대국 비중','중국 의존도 하락과 미국·일본·동남아·중동·유럽 다변화 확인. Comtrade의 한국 월간 자료는 반영이 늦으므로, 최신 월간 수출은 관세청 API(DATA_GO_KR_KEY 등록 시 수출 탭 자동 갱신)로 본다.'],
+  ['환율 (원/달러·원/위안·원/엔)','원화 약세는 달러 표시 수출의 원화 환산 매출·마진에 우호적. 엔화 약세는 일본 시장 가격경쟁력과 방한 일본인 관광객 수요에 영향.'],
+  ['기업 탭: OPM·PER·PEG·컨센서스 괴리율','ODM은 가동률·믹스에 따른 OPM 레버리지(8→10%+)가, 메디컬 에스테틱은 40% 안팎 고마진 유지와 해외 매출 비중이 밸류에이션을 좌우. FY1/FY2 PER과 이익 성장률(PEG)로 성장 대비 가격을 비교.'],
+  ['기존 탭: 아마존 Top50 한국 비중·네이버 검색량·수출 통계','소비자 단의 선행 수요(검색·랭킹)와 통관 수출(실제 선적)을 함께 보며 기업 실적 추정의 방향을 확인.']];
+  $('#guide').innerHTML=G.map(g=>`<dt>${g[0]}</dt><dd>${g[1]}</dd>`).join('')}
+
+// ---------- companies
+let CO=null;
+const CO_S=['--s1','--s2','--s3','--s4','--s5','--s7'];  // 초록 두 개(s3·s6)가 겹치지 않게 s6 제외
+const coColor=code=>CO_S[CO.companies.findIndex(c=>c.code===code)%6];
+const qLabel=p=>{const [y,m]=p.split('-');return `${y.slice(2)}.${Math.ceil(+m/3)}Q`};
+const yLabel=p=>p.slice(0,4);
+function coList(){const g=$('#coGroup').dataset.g||'전체';return CO.companies.filter(c=>g==='전체'||c.group===g)}
+function yoyOf(obj,p,k){const [y,m]=p.split('-');const pr=obj[`${+y-1}-${m}`];const a=obj[p]?.[k],b=pr?.[k];return a!=null&&b>0?Math.round((a/b-1)*1000)/10:null}
+function renderCompanies(){if(!CO)return;const el=$('#coGroup');if(!el.children.length){chips(el,['전체','ODM','메디컬 에스테틱'],g=>{el.dataset.g=g;renderCompanies()},'전체');
+    chips($('#pxRange'),['3개월','6개월','YTD','1년','3년'],r=>{$('#pxRange').dataset.r=r;renderPx()},'1년');
+    CO.companies.forEach(c=>$('#coSel').add(new Option(`${c.name} (${c.group})`,c.code)));$('#coSel').onchange=renderCoDetail;$('#coFreq').onchange=renderCoDetail;$('#cmpMetric').onchange=renderCmp}
+  const list=coList();const k0=list[0]?.kpi||{};
+  $('#coSub').textContent=`주가 ${k0.date||''} 종가 · 재무 단위 억원 · 최근 분기 ${k0.last_q?qLabel(k0.last_q):''} · FY1=${(k0.fy1||'').slice(0,4)}E, FY2=${(k0.fy2||'').slice(0,4)}E · 출처 네이버증권/FnGuide 컨센서스`;
+  const cols=[['주가','price',v=>fmt(v)],['1D%','r1d',sgn,1],['1M%','r1m',sgn,1],['YTD%','ytd',sgn,1],['시총(억)','mcap',v=>fmt(v)],
+    ['PER TTM','per_ttm',fmt],['PER FY1','fy1_per',fmt],['PER FY2','fy2_per',fmt],['PBR FY1','fy1_pbr',fmt],['PEG','peg',fmt],
+    ['OPM 최근Q','q_opm',fmt],['OPM FY1','fy1_opm',fmt],['ROE FY1','fy1_roe',fmt],['매출 YoY(Q)','q_rev_yoy',sgn,1],['영업익 YoY(Q)','q_op_yoy',sgn,1],['영업익 성장 FY1','fy1_op_g',sgn,1],['목표가 괴리','upside',sgn,1]];
+  const med=a=>{a=a.filter(v=>v!=null).sort((x,y)=>x-y);if(!a.length)return null;const m=a.length>>1;return a.length%2?a[m]:Math.round((a[m-1]+a[m])/2*100)/100};
+  const rows=[];const groups=[...new Set(list.map(c=>c.group))];
+  groups.forEach(g=>{const cs=list.filter(c=>c.group===g);rows.push(`<tr class="grp"><td colspan="${cols.length+1}">${g}</td></tr>`);
+    cs.forEach(c=>{const k={...c.kpi,upside:c.info.target_price&&c.kpi.price?Math.round((c.info.target_price/c.kpi.price-1)*1000)/10:null};
+      rows.push(`<tr class="pick" data-code="${c.code}"><td class="co"><span class="sw" style="background:var(${coColor(c.code)})"></span>${esc(c.name)}</td>`+cols.map(([_,key,f,col])=>`<td class="num ${col?cls(k[key]):''}">${f(k[key])}</td>`).join('')+'</tr>')});
+    if(cs.length>1)rows.push(`<tr><td class="muted">중앙값</td>`+cols.map(([_,key,f,col])=>{const skip=['price','mcap'].includes(key);const v=skip?null:med(cs.map(c=>key==='upside'?(c.info.target_price&&c.kpi.price?(c.info.target_price/c.kpi.price-1)*100:null):c.kpi[key]));return `<td class="num muted">${skip?'':f(v==null?null:Math.round(v*10)/10)}</td>`}).join('')+'</tr>')});
+  $('#coTable').innerHTML=`<table><thead><tr><th>기업</th>${cols.map(c=>`<th class="num">${c[0]}</th>`).join('')}</tr></thead><tbody>${rows.join('')}</tbody></table>`;
+  $('#coTable').querySelectorAll('tr.pick').forEach(tr=>tr.onclick=()=>{$('#coSel').value=tr.dataset.code;renderCoDetail();$('#coDetail').scrollIntoView({behavior:'smooth'})});
+  renderPx();renderCmp();renderCoDetail()}
+function renderPx(){const list=coList();if(!list.length)return;const r=$('#pxRange').dataset.r||'1년';const last=list[0].prices[list[0].prices.length-1][0];
+  const cut=r==='YTD'?last.slice(0,4)+'-01-01':new Date(Date.parse(last)-({'3개월':91,'6개월':182,'1년':365,'3년':1095}[r])*864e5).toISOString().slice(0,10);
+  const dates=list[0].prices.map(p=>p[0]).filter(d=>d>=cut);
+  const reb=px=>{const m=new Map(px);let base=null;return dates.map(d=>{const v=m.get(d);if(v==null)return null;if(base==null)base=v;return Math.round(v/base*1000)/10})};
+  const series=list.map(c=>({name:c.name,color:coColor(c.code),v:reb(c.prices)}));
+  [['KOSPI','--ink2'],['KOSDAQ','--ink3']].forEach(([k,c])=>{if(CO.indices[k])series.push({name:k,color:c,dash:1,v:reb(CO.indices[k])})});
+  lineChart($('#pxChart'),{x:dates.map(d=>d.slice(2)),series,fmtY:v=>v==null?'–':fmt(v)});
+  $('#pxLegend').innerHTML=series.map(s=>`<span><i style="background:var(${s.color})"></i>${esc(s.name)} ${s.v.length?`<span class="${cls(s.v[s.v.length-1]-100)}">${sgn(s.v[s.v.length-1]==null?null:Math.round((s.v[s.v.length-1]-100)*10)/10)}%</span>`:''}</span>`).join('')}
+function renderCmp(){const list=coList();const m=$('#cmpMetric').value;
+  const ps=[...new Set(list.flatMap(c=>Object.keys(c.quarter)))].sort().slice(-14);
+  const est=ps.findIndex(p=>list.some(c=>c.quarter[p]?.e));
+  const series=list.map(c=>({name:c.name,color:coColor(c.code),v:ps.map(p=>{const q=c.quarter[p];if(!q)return null;
+    if(m==='opm')return q.opm??(q.rev&&q.op!=null?Math.round(q.op/q.rev*1000)/10:null);return yoyOf(c.quarter,p,m==='rev_yoy'?'rev':'op')})}));
+  lineChart($('#cmpChart'),{x:ps.map(qLabel),series,shadeFrom:est<0?null:est,fmtY:v=>v==null?'–':fmt(v)+'%'});
+  $('#cmpLegend').innerHTML=series.map(s=>`<span><i style="background:var(${s.color})"></i>${esc(s.name)}</span>`).join('')}
+function renderCoDetail(){const c=CO.companies.find(x=>x.code===$('#coSel').value)||CO.companies[0];const k=c.kpi,inf=c.info||{};const fq=$('#coFreq').value;
+  const up=inf.target_price&&k.price?Math.round((inf.target_price/k.price-1)*1000)/10:null;
+  $('#coTiles').innerHTML=[tile(`주가 (${k.date||''})`,fmt(k.price)+'원',`<span class="${cls(k.r1d)}">${sgn(k.r1d)}%</span> · 52주 ${fmt(inf.low52)}~${fmt(inf.high52)}`),
+    tile('시가총액',fmt(k.mcap)+'억',`외국인 소진율 ${fmt(inf.foreign_rate)}%`),
+    tile(`PER FY1 / FY2`,`${fmt(k.fy1_per)} / ${fmt(k.fy2_per)}배`,`TTM ${fmt(k.per_ttm)}배 · PBR FY1 ${fmt(k.fy1_pbr)}배`),
+    tile(`OPM ${k.last_q?qLabel(k.last_q):''}`,fmt(k.q_opm)+'%',`FY1E ${fmt(k.fy1_opm)}% · TTM ${fmt(k.opm_ttm)}%`),
+    tile(`매출 / 영업익 YoY (${k.last_q?qLabel(k.last_q):''})`,`<span class="${cls(k.q_rev_yoy)}">${sgn(k.q_rev_yoy)}</span> / <span class="${cls(k.q_op_yoy)}">${sgn(k.q_op_yoy)}</span>%`,`매출 ${fmt(k.q_rev)}억 · 영업익 ${fmt(k.q_op)}억`),
+    tile('컨센서스 목표가',inf.target_price?fmt(inf.target_price)+'원':'–',`괴리율 <span class="${cls(up)}">${sgn(up)}%</span> · 투자의견 ${inf.recomm??'–'}/5`)].join('');
+  const obj=fq==='Q'?c.quarter:c.annual;let ps=Object.keys(obj).sort();ps=ps.slice(fq==='Q'?-12:-8);const lab=fq==='Q'?qLabel:yLabel;const est=ps.map(p=>!!obj[p].e);const x=ps.map(lab);
+  const col=coColor(c.code);
+  colChart($('#cRev'),{x,v:ps.map(p=>obj[p].rev),est,color:col});
+  colChart($('#cOp'),{x,v:ps.map(p=>obj[p].op),est,color:col});
+  colChart($('#cOpm'),{x,v:ps.map(p=>obj[p].opm??(obj[p].rev&&obj[p].op!=null?Math.round(obj[p].op/obj[p].rev*1000)/10:null)),est,color:col,fmtV:v=>v==null?'–':fmt(v)});
+  const R=[['매출액','rev'],['매출 YoY %','rev',1],['영업이익','op'],['영업이익 YoY %','op',1],['영업이익률 %','opm'],['지배순이익','ni_ctrl'],['EPS (원)','eps'],['PER (배)','per'],['BPS (원)','bps'],['PBR (배)','pbr'],['ROE %','roe'],['부채비율 %','debt_ratio'],['DPS (원)','dps'],['FCF','fcf']];
+  $('#coFin').innerHTML=`<table><thead><tr><th>${fq==='Q'?'분기':'연간'} (억원)</th>${ps.map((p,i)=>`<th class="num ${est[i]?'e':''}">${lab(p)}${est[i]?'E':''}</th>`).join('')}</tr></thead><tbody>`+
+    R.map(([n,key,yy])=>`<tr><td>${n}</td>${ps.map((p,i)=>{const v=yy?yoyOf(obj,p,key):obj[p][key];return `<td class="num ${est[i]?'e':''} ${yy?cls(v):''}">${yy?sgn(v):fmt(v)}</td>`}).join('')}</tr>`).join('')+'</tbody></table>';
+  const rel=NEWS.filter(a=>a.title.includes(c.name)).slice(0,8);
+  $('#coNews').innerHTML=rel.length?rel.map(newsItem).join(''):'<p class="muted">최근 120일 관련 기사 없음</p>'}
 
 // ---------- trade
 function renderTrade(){const t=SUM.trade;const sel=$('#hsSel');if(!sel.options.length){Object.keys(t).forEach(hs=>{const o=document.createElement('option');o.value=hs;o.textContent=`${hs} ${t[hs].item}`;sel.appendChild(o)});sel.onchange=renderTrade}
@@ -216,30 +441,36 @@ function renderNaver(){const nv=SUM.naver;if(!nv.weeks)return;const keys=Object.
 $('#nvMode').onchange=renderNaver;$('#nvPick').onchange=renderNaver;
 
 // ---------- news
-function newsItem(a){return `<div style="padding:8px 0;border-bottom:1px solid var(--line)"><a href="${esc(a.link)}" target="_blank" rel="noopener">${esc(a.title)}</a><div class="m">${(a.tags||[]).map(t=>`<span class="tag">${esc(t)}</span>`).join('')}${esc(a.source||'')} · ${esc(a.published)}</div></div>`}
+function newsItem(a){const showSum=!$('#newsSum')||$('#newsSum').checked;const href=/^https?:\/\//.test(a.url||'')?a.url:a.link;
+  return `<div style="padding:9px 0;border-bottom:1px solid var(--line)"><a href="${esc(href)}" target="_blank" rel="noopener">${esc(a.title)}</a><div class="m">${(a.tags||[]).map(t=>`<span class="tag">${esc(t)}</span>`).join('')}${esc(a.source||'')} · ${esc(a.published)}${a.summary_method==='claude'?' · AI 요약':''}</div>${showSum&&a.summary&&a.summary.length?`<ul class="sum">${a.summary.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>`:''}</div>`}
 function renderNews(){const tags=[...new Set(NEWS.flatMap(a=>a.tags||[]))];const el=$('#newsTags');if(!el.children.length)chips(el,['전체',...tags],t=>{el.dataset.t=t;renderNews()},'전체');
   const t=el.dataset.t||'전체',q=$('#newsQ').value.trim().toLowerCase();
-  const rows=NEWS.filter(a=>(t==='전체'||(a.tags||[]).includes(t))&&(!q||a.title.toLowerCase().includes(q)));
+  const rows=NEWS.filter(a=>(t==='전체'||(a.tags||[]).includes(t))&&(!q||a.title.toLowerCase().includes(q)||(a.summary||[]).join(' ').toLowerCase().includes(q)));
   $('#newsList').innerHTML=rows.length?rows.slice(0,300).map(newsItem).join(''):'<p class="muted">아직 수집된 기사가 없습니다. GitHub Actions 첫 실행 후 표시됩니다.</p>'}
-$('#newsQ').oninput=renderNews;
+$('#newsQ').oninput=renderNews;$('#newsSum').onchange=()=>{renderNews();renderHome()};
 
 // ---------- home
 function renderHome(){const t=SUM.trade,tiles=[];const hsPri=t['3304']||t[Object.keys(t)[0]];
   if(hsPri){const L=hsPri.latest;tiles.push([`${hsPri.item} 수출 (${L.period})`,fmt(L.export/1000)+' M$',`<span class="${L.yoy>0?'up':'down'}">YoY ${L.yoy>0?'+':''}${fmt(L.yoy)}%</span>`])}
   const a=SUM.amazon;if(a.length){const L=a[a.length-1];tiles.push(['아마존 Top50 한국생산 비중',L.mik_pct+'%',L.date])}
   const nv=SUM.naver;if(nv.weeks){const k=Object.keys(nv.series).find(x=>x.endsWith('|스킨부스터')&&x.startsWith('25'));if(k){const s=nv.series[k],L=s[s.length-1],Y=s[s.length-53];tiles.push(['스킨부스터 검색 (25~29, 주간)',fmt(L),Y?`1년전 ${fmt(Y)}`:''])}}
-  tiles.push(['수집 기사',SUM.news_count+'건','최근 120일']);
+  const us=(SUM.comtrade||{})['842|M|3304'];if(us){const i=us.periods.length-1,kr=us.series['410']||[];tiles.push(['미국 화장품 수입 중 한국 (12M)',pct(roll(kr,12)[i],roll(us.total,12)[i])+'%',`${us.periods[i]} 월간 ${us.kr_rank[i]}위`])}
+  tiles.push(['수집 기사',SUM.news_count+'건',`요약 ${SUM.news_summarized||0}건 · 최근 120일`]);
   $('#homeTiles').innerHTML=tiles.map(t=>`<div class="tile"><div class="k">${t[0]}</div><div class="v">${t[1]}</div><div class="d">${t[2]}</div></div>`).join('');
   $('#homeNews').innerHTML=NEWS.slice(0,12).map(newsItem).join('')||'<p class="muted">아직 기사 없음</p>';
-  const m=SUM.meta||{};const names={trade:'관세청 수출',amazon:'아마존 Top50',naver_trend:'네이버 트렌드',news:'뉴스'};
-  $('#status').innerHTML='<table><tr><th>소스</th><th>상태</th><th>갱신</th><th>비고</th></tr>'+Object.entries(names).map(([k,n])=>{const s=m[k]||{};return `<tr><td>${n}</td><td>${s.status==='ok'?'<span class="up">●</span> 정상':s.status==='manual'?'○ 수동':s.status?'<span class="down">●</span> '+s.status:'–'}</td><td>${s.updated||'–'}</td><td class="muted">${s.note||''}</td></tr>`}).join('')+'</table>'}
+  const cs=SUM.companies||[];$('#homeCo').innerHTML=cs.length?'<div class="tbl"><table style="min-width:560px"><thead><tr><th>기업</th><th class="num">주가</th><th class="num">1D%</th><th class="num">1M%</th><th class="num">PER FY1</th><th class="num">OPM 최근Q</th><th class="num">영업익 YoY(Q)</th></tr></thead><tbody>'+
+    cs.map(c=>`<tr><td class="co">${esc(c.name)} <span class="muted" style="font-weight:400">${esc(c.group)}</span></td><td class="num">${fmt(c.price)}</td><td class="num ${cls(c.r1d)}">${sgn(c.r1d)}</td><td class="num ${cls(c.r1m)}">${sgn(c.r1m)}</td><td class="num">${fmt(c.fy1_per)}</td><td class="num">${fmt(c.q_opm)}</td><td class="num ${cls(c.q_op_yoy)}">${sgn(c.q_op_yoy)}</td></tr>`).join('')+'</tbody></table></div>':'<p class="muted">기업 데이터 없음</p>';
+  const m=SUM.meta||{};const names={trade:'관세청 수출',amazon:'아마존 Top50',naver_trend:'네이버 트렌드',news:'뉴스',news_summary:'뉴스 요약',companies:'기업 실적·주가',comtrade:'UN Comtrade',fx:'환율'};
+  $('#status').innerHTML='<table><tr><th>소스</th><th>상태</th><th>갱신</th><th>비고</th></tr>'+Object.entries(names).map(([k,n])=>{const s=m[k]||{};return `<tr><td>${n}</td><td>${s.status==='ok'?'<span class="up">●</span> 정상':s.status==='manual'?'○ 수동':s.status==='partial'?'<span class="down">◐</span> 일부 실패':s.status?'<span class="down">●</span> '+s.status:'–'}</td><td>${s.updated||'–'}</td><td class="muted">${s.note||''}</td></tr>`}).join('')+'</table>'}
 
 // ---------- boot
-(async()=>{const [s,n,a]=await Promise.all([fetch('data/summary.json').then(r=>r.json()),fetch('data/news.json').then(r=>r.ok?r.json():[]).catch(()=>[]),fetch('data/amazon_top50.json').then(r=>r.ok?r.json():[]).catch(()=>[])]);
-  SUM=s;NEWS=n;AMZ=a;$('#upd').textContent='빌드 '+s.built;
-  renderHome();renderTrade();renderAmazon();renderNaver();renderNews();
+(async()=>{const opt=(u,d)=>fetch(u).then(r=>r.ok?r.json():d).catch(()=>d);
+  const [s,n,a,co,fx]=await Promise.all([fetch('data/summary.json').then(r=>r.json()),opt('data/news.json',[]),opt('data/amazon_top50.json',[]),opt('data/companies.json',null),opt('data/fx.json',null)]);
+  SUM=s;NEWS=n;AMZ=a;CO=co&&co.companies&&co.companies.length?co:null;FX=fx&&fx.dates?fx:null;$('#upd').textContent='빌드 '+s.built;
+  const safe=f=>{try{f()}catch(e){console.error(e)}};
+  [renderHome,renderTrade,renderAmazon,renderNaver,renderNews,renderIndustry,renderCompanies].forEach(safe);
   const h=location.hash.slice(1);if(h){const b=document.querySelector(`#nav button[data-t="${h}"]`);b&&b.click()}
-  matchMedia('(prefers-color-scheme: dark)').addEventListener('change',()=>{renderTrade();renderAmazon();renderNaver()});
+  matchMedia('(prefers-color-scheme: dark)').addEventListener('change',()=>[renderTrade,renderAmazon,renderNaver,renderIndustry,renderCompanies].forEach(safe));
 })();
 </script>
 </body>
