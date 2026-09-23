@@ -22,7 +22,7 @@ from common import load_json, save_json, update_meta, KST
 KEYWORDS: dict[str, list[str]] = {
     "수출·전방수요": ["화장품 수출", "K뷰티 수출", "화장품 수출액 관세청", "K-beauty exports"],
     "ODM": ["코스맥스", "한국콜마", "코스메카코리아", "화장품 ODM 증설"],
-    "메디컬 에스테틱": ["스킨부스터", "리쥬란", "파마리서치", "클래시스", "보툴리눔 톡신 수출", "PDRN 화장품"],
+    "메디컬 에스테틱": ["스킨부스터", "리쥬란", "파마리서치", "휴젤", "메디톡스", "클래시스", "보툴리눔 톡신 수출", "PDRN 화장품"],
     "브랜드·채널": ["아마존 K뷰티", "올리브영 매출", "에이피알", "달바글로벌", "K뷰티 브랜드 미국"],
     "규제·정책": ["화장품 관세", "MoCRA 화장품", "중국 화장품 규제", "화장품법 개정"],
     "해외": ["K-beauty Amazon", "Korean skincare US market", "K-beauty Japan", "K-beauty Europe"],

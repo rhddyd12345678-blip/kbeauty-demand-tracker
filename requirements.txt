@@ -2,3 +2,6 @@ requests>=2.31
 openpyxl>=3.1
 beautifulsoup4>=4.12
 lxml>=5
+trafilatura>=1.12
+lxml_html_clean>=0.4
+anthropic>=0.70
