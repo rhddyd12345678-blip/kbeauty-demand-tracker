@@ -136,7 +136,8 @@ def replace_word(s: str, wrong: str, right: str) -> str:
                 break
         return right + part
 
-    return re.sub(re.escape(wrong) + r"(으로|이|가|은|는|을|를|과|와|로)?(?![가-힣])", fix, s)
+    s = re.sub(re.escape(wrong) + r"(으로|이|가|은|는|을|를|과|와|로)?(?![가-힣])", fix, s)
+    return s.replace(wrong, right)  # 그 밖의 조사(에, 의, 에서 등)는 받침과 무관하므로 그대로
 
 
 POLITE_SEUB = re.compile(r"([가-힣]+)(습)니다")
