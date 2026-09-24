@@ -3,13 +3,14 @@
 무료 번역기(구글/MyMemory)의 직역투를 줄이기 위한 규칙 모음.
  - 전처리: 오역이 잦은 관용구를 쉬운 영어로 바꾸고, 회사·브랜드명과 금액은 미리 한국어로 치환
  - 후처리: K뷰티 등 표기 통일, 금액·기호 정리, 존댓말(~습니다) → 기사 제목체(~한다), 끝 마침표 제거
-규칙을 바꾸면 VERSION 을 올릴 것 → 다음 수집 때 기존 번역도 새 규칙으로 다시 번역됨.
+번역기 원본은 title_ko_raw 로 저장되어, 후처리(post) 규칙만 바꾸면 다음 수집 때 번역 API 호출 없이 재적용됨.
+전처리(pre)·관용구 규칙을 바꿨을 때만 VERSION 을 올릴 것 → 기존 번역도 다시 번역됨(무료 한도 소모).
 """
 from __future__ import annotations
 
 import re
 
-VERSION = 2
+VERSION = 3
 
 # 회사·브랜드·고유명사 (영문 → 국내 언론 표기). 긴 것부터 치환.
 NAMES = {
@@ -87,6 +88,9 @@ def pre(title: str) -> str:
     return s
 
 
+K_WORDS = {"fashion": "패션", "pop": "팝", "food": "푸드", "culture": "컬처", "content": "콘텐츠",
+           "drama": "드라마", "botox": "보톡스"}
+
 # ---------- 후처리
 _BASE, _JONG_B, _JONG_N, _JONG_SS = 0xAC00, 17, 4, 20
 
@@ -112,6 +116,29 @@ def _plain(m: re.Match) -> str:
     return stem + "는다"
 
 
+# 받침 유무에 따른 조사 짝 (받침 없음, 받침 있음)
+PARTICLES = [("가", "이"), ("는", "은"), ("를", "을"), ("와", "과"), ("로", "으로")]
+
+
+def replace_word(s: str, wrong: str, right: str) -> str:
+    """단어를 바꾸면서 바로 뒤 조사를 새 단어의 받침에 맞춤. (시프트가 → 전환이)"""
+    j = _jong(right[-1])
+    has_final = j > 0
+
+    def fix(m: re.Match) -> str:
+        part = m.group(1) or ""
+        for no, yes in PARTICLES:
+            if part in (no, yes):
+                if no == "로":  # ㄹ 받침 뒤는 '로'
+                    part = "으로" if has_final and j != 8 else "로"
+                else:
+                    part = yes if has_final else no
+                break
+        return right + part
+
+    return re.sub(re.escape(wrong) + r"(으로|이|가|은|는|을|를|과|와|로)?(?![가-힣])", fix, s)
+
+
 POLITE_SEUB = re.compile(r"([가-힣]+)(습)니다")
 
 
@@ -121,12 +148,14 @@ def post(ko: str) -> str:
     # K뷰티 계열 표기 통일
     s = re.sub(r"([KkCcJj])\s?-\s?(?:뷰티|Beauty|BEAUTY|beauty)", lambda m: m.group(1).upper() + "뷰티", s)
     s = re.sub(r"([Kk])\s?-\s?(패션|팝|푸드|컬처|보톡스|드라마|콘텐츠)", lambda m: "K" + m.group(2), s)
+    s = re.sub(r"\b[Kk]\s?-\s?(Fashion|Pop|POP|Food|Culture|Content|Drama|Botox)(?![A-Za-z])",
+               lambda m: "K" + K_WORDS[m.group(1).lower()], s)
     # 회사·브랜드명: 번역 후 남은 영문 + 번역기가 틀리게 옮긴 표기
     s = re.sub(r"APR\s?(?:Corp\.?|코퍼레이션|코프|코퍼레이트|주식회사)?(?:'s)?", "에이피알", s)
     for en in sorted(NAMES, key=len, reverse=True):
         s = re.sub(r"(?<![A-Za-z])" + re.escape(en) + r"(?:'s)?(?![A-Za-z])", NAMES[en], s)
     for wrong, right in KO_FIX.items():
-        s = s.replace(wrong, right)
+        s = replace_word(s, wrong, right)
     s = QUARTER.sub(lambda m: f"{m.group(2)}년 {m.group(1)}분기", s)
     s = re.sub(r"\b(20\d\d)년?\s?Q([1-4])\b", r"\1년 \2분기", s)
     # 남은 금액 표기
