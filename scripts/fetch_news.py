@@ -88,7 +88,7 @@ def translate_titles(rows: list[dict], limit: int = TRANSLATE_LIMIT) -> tuple[in
     # 정리: 영문이 아닌데 번역이 붙은 기사(중국어 제목 등)는 번역 제거
     for a in rows:
         if a.get("title_ko") and not is_english(a.get("title", "")):
-            for k in ("title_ko", "title_ko_src", "title_ko_ver", "title_ko_tries"):
+            for k in ("title_ko", "title_ko_raw", "title_ko_src", "title_ko_ver", "title_ko_tries"):
                 a.pop(k, None)
     en = [a for a in rows if is_english(a.get("title", "")) and a.get("title_ko_tries", 0) < TRANSLATE_MAX_TRIES]
     new = [(a, "all") for a in en if not a.get("title_ko")]
@@ -98,8 +98,12 @@ def translate_titles(rows: list[dict], limit: int = TRANSLATE_LIMIT) -> tuple[in
     todo = (new + stale + upgrade)[:limit]
     if not todo:
         return 0, 0
+    # 후처리 규칙만 바뀐 경우: 저장된 번역기 원본(title_ko_raw)에 다시 적용 (번역 API 호출 없음)
+    for a in rows:
+        if a.get("title_ko_raw"):
+            a["title_ko"] = TK.post(a["title_ko_raw"])
     for a, _ in stale:  # 재번역이 실패해도 새 후처리 규칙은 적용해 둠
-        a["title_ko"] = TK.post(a["title_ko"])
+        a["title_ko"] = TK.post(a.get("title_ko_raw") or a["title_ko"])
     try:
         from deep_translator import GoogleTranslator, MyMemoryTranslator
         engines = [("google", GoogleTranslator(source="en", target="ko")),
@@ -122,7 +126,8 @@ def translate_titles(rows: list[dict], limit: int = TRANSLATE_LIMIT) -> tuple[in
                 # MyMemory는 한도 초과 시 오류 대신 경고문을 결과로 돌려줌
                 if not raw or "MYMEMORY WARNING" in raw.upper() or not re.search(r"[가-힣]", raw):
                     raise ValueError(f"번역 결과 이상: {raw[:40]}")
-                a["title_ko"], a["title_ko_src"], a["title_ko_ver"] = TK.post(raw), name, TK.VERSION
+                a["title_ko"], a["title_ko_raw"] = TK.post(raw), raw
+                a["title_ko_src"], a["title_ko_ver"] = name, TK.VERSION
                 used[name] += 1
                 last_err = None
                 break
