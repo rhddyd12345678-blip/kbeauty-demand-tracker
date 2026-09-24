@@ -1,50 +1,50 @@
 {
- "built": "2026-09-24 07:18",
+ "built": "2026-09-25 01:00",
  "meta": {
   "trade": {
-   "updated": "2026-09-24 07:18",
+   "updated": "2026-09-25 00:59",
    "status": "ok",
    "note": "API 184행, ~2026-08"
   },
   "naver_trend": {
-   "updated": "2026-09-24 07:18",
+   "updated": "2026-09-25 00:59",
    "status": "manual",
    "note": "API 키 없음, 엑셀 ingest 사용"
   },
   "amazon": {
-   "updated": "2026-09-24 07:18",
+   "updated": "2026-09-25 01:00",
    "status": "ok",
    "note": "신규 0개 스냅샷 [], 미분류 브랜드 4"
   },
   "news": {
-   "updated": "2026-09-24 07:14",
+   "updated": "2026-09-25 00:46",
    "status": "ok",
-   "note": "신규 842건, 보관 1935건"
+   "note": "신규 811건, 보관 2061건"
   },
   "news_summary": {
-   "updated": "2026-09-24 07:15",
+   "updated": "2026-09-25 00:47",
    "status": "ok",
-   "note": "추출 요약 +142, 실패 9, 누적 1890/1935"
+   "note": "추출 요약 +118, 실패 21, 누적 2004/2061"
   },
   "companies": {
-   "updated": "2026-09-24 07:17",
+   "updated": "2026-09-25 00:47",
    "status": "ok",
    "note": "6개사 갱신"
   },
   "comtrade": {
-   "updated": "2026-09-24 07:18",
+   "updated": "2026-09-25 00:59",
    "status": "ok",
    "note": "미국 수입 ~2026-07, 일본 수입 ~2026-07, 한국 수출 ~2025-12"
   },
   "fx": {
-   "updated": "2026-09-24 07:18",
+   "updated": "2026-09-25 00:59",
    "status": "ok",
-   "note": "~2026-09-23"
+   "note": "~2026-09-24"
   },
   "news_translate": {
-   "updated": "2026-09-24 07:14",
+   "updated": "2026-09-25 00:46",
    "status": "ok",
-   "note": "번역 +1, 실패 1, 영문 54/55"
+   "note": "번역 +57, 실패 0, 영문 57/57"
   }
  },
  "trade": {
@@ -22117,8 +22117,8 @@
    ]
   }
  },
- "news_count": 1935,
- "news_summarized": 1890,
+ "news_count": 2061,
+ "news_summarized": 2004,
  "comtrade": {
   "842|M|300249": {
    "reporter": "842",
@@ -26914,23 +26914,23 @@
    "q_op_yoy": -1.2,
    "per_ttm": 14.5,
    "opm_ttm": 43.5,
-   "fy1_rev": 5290,
-   "fy1_op": 2092,
-   "fy1_opm": 39.54,
-   "fy1_roe": 16.06,
-   "fy1_per": 13.9,
-   "fy1_pbr": 1.83,
-   "fy2_rev": 6565,
-   "fy2_op": 2761,
-   "fy2_opm": 42.06,
-   "fy2_roe": 17.62,
-   "fy2_per": 10.8,
-   "fy2_pbr": 1.53,
-   "fy1_rev_g": 24.4,
-   "fy1_op_g": 4.1,
-   "fy2_op_g": 32.0,
+   "fy1_rev": 5278,
+   "fy1_op": 2071,
+   "fy1_opm": 39.23,
+   "fy1_roe": 15.89,
+   "fy1_per": 14.1,
+   "fy1_pbr": 1.84,
+   "fy2_rev": 6569,
+   "fy2_op": 2741,
+   "fy2_opm": 41.72,
+   "fy2_roe": 17.53,
+   "fy2_per": 10.9,
+   "fy2_pbr": 1.54,
+   "fy1_rev_g": 24.2,
+   "fy1_op_g": 3.1,
+   "fy2_op_g": 32.4,
    "peg": 0.47,
-   "target_price": 372000
+   "target_price": 368000
   },
   {
    "code": "214450",
