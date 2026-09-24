@@ -96,14 +96,15 @@
   ],
   "title_ko": "C뷰티, 한국 수출 급증으로 K뷰티 홈 마켓 점유율 93%",
   "title_ko_src": "mymemory",
-  "title_ko_ver": 2,
+  "title_ko_ver": 3,
   "url": "https://www.thebk.co.kr/news/articleView.html?idxno=311860",
   "summary": [
    "As K-Beauty expands its footprint across the United States, Japan and Europe, C-Beauty is making notable inroads into South Korea, the birthplace of K-Beauty itself.",
    "Exports of Chinese cosmetics to South Korea surged to 121.1 million yuan, representing a 93.4% year-on-year increase.",
    "With total cosmetics exports rising more than 23% and shipments to South Korea nearly doubling, C-Beauty's global ambitions are becoming harder to ignore."
   ],
-  "summary_method": "extract"
+  "summary_method": "extract",
+  "title_ko_raw": "C-뷰티, 한국 수출 급증으로 K-뷰티 홈 마켓 점유율 93%"
  },
  {
   "title": "외교무대 오른 K-뷰티... 미국 이어 멕시코 공략 나선다",
@@ -181,7 +182,7 @@
   "tags": [
    "수출·전방수요"
   ],
-  "summary_tries": 1
+  "summary_tries": 2
  },
  {
   "title": "알쏭달쏭 화장품 성분명···‘전문용어 마케팅’에 소비자 ‘갸우뚱’",
@@ -555,7 +556,8 @@
   "summary_method": "extract",
   "title_ko": "K뷰티 메이크업 수출 신호 가격 상승에 따른 시장 동향 변화",
   "title_ko_src": "mymemory",
-  "title_ko_ver": 2
+  "title_ko_ver": 3,
+  "title_ko_raw": "K-뷰티 메이크업 수출 신호 가격 상승에 따른 시장 동향 변화"
  },
  {
   "title": "에이피알, ‘KCON LA 2026 X 포토그레이’ 한정판 포토프레임 출시",
@@ -592,7 +594,8 @@
   "summary_method": "extract",
   "title_ko": "중국의 미용 수입 시장 변화: 영국 급증 및 한국 점유율 하락",
   "title_ko_src": "mymemory",
-  "title_ko_ver": 2
+  "title_ko_ver": 3,
+  "title_ko_raw": "중국의 미용 수입 시장 변화: 영국 급증 및 한국 점유율 하락"
  },
  {
   "title": "K-Beauty’s Global Playbook Evolves: Premiumization in the U.S., Recovery in China, Mainstream Adoption in Japan",
@@ -613,7 +616,8 @@
   "summary_method": "extract",
   "title_ko": "K뷰티의 글로벌 전략 진화: 미국의 프리미엄화, 중국의 회복, 일본의 주류 채택",
   "title_ko_src": "mymemory",
-  "title_ko_ver": 2
+  "title_ko_ver": 3,
+  "title_ko_raw": "K-뷰티의 글로벌 전략 진화: 미국의 프리미엄화, 중국의 회복, 일본의 주류 채택"
  },
  {
   "title": "에이피알 포토그레이, ‘KCON LA 2026’ 아티스트 협업 프레임 출시",
@@ -1311,6 +1315,23 @@
    "휴젤(145020)이 미국 보툴리눔 톡신 판매 방식을 바꾸면서 올 3분기 일시적인 실적 부담을 겪을 것으로 전망된다.",
    "다만 고객을 직접 관리하고 유통 마진을 확보하는 직판 체계가 자리 잡으면 중장기 이익 성장으로 이어질 수 있다는 분석이 나온다.",
    "판매 방식 전환 과정에서 베네브의 재고를 다시 사들이는 금액이 매출에서 차감돼 3분기 미국 매출은 마이너스를 기록할 전망이다."
+  ],
+  "summary_method": "extract"
+ },
+ {
+  "title": "한투證 \"달바글로벌, 3분기 실적 기대치 웃돌 것…주가 매력↑\"",
+  "link": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE1WcDBBeUFrNVQ5U1lVRWQtWFVsQ044MHNKTzdzdTFQVlMzV2dNZkFqTDFObHczZC1HQlNfdm5NaEtDWUYxTzFpeEhKTHNJMkR1WXJiNDl6M3Bpdw?oc=5",
+  "source": "파이낸셜뉴스",
+  "published": "2026-09-23 08:32",
+  "query": "달바글로벌",
+  "tags": [
+   "브랜드·채널"
+  ],
+  "url": "https://www.fnnews.com/news/202609230832359238",
+  "summary": [
+   "전날 종가는 전장보다 2.13% 내린 17만9천200원이다.",
+   "김명주 연구원은 \"3분기 연결 기준 달바글로벌의 영업이익은 337억원으로 작년 동기 대비 102% 증가해 시장 기대치를 3% 상회할 전망\"이라며 \"1∼2분기에 보여준 효율적인 마케팅비 집행이 3분기에도 이어지면서 회사의 3분기 가이던스보다 양호한 실적을 기록할 것\"이라고 짚었다.",
+   "김 연구원은 \"2분기에 회사가 양호한 실적을 기록했음에도 주가는 실적 발표를 기점으로 지속적으로 하락했다\"며 \"회사의 방향성은 변한 건 없는데, 주가만 빠져 현재 달바글로벌은 12개월 선행 PER(주가수익비율) 13.7배 수준에 거래되고 있다\"고 분석했다."
   ],
   "summary_method": "extract"
  },
@@ -2317,7 +2338,8 @@
   "summary_method": "extract",
   "title_ko": "K뷰티는 스킨케어 수요가 급증함에 따라 일본에서 다른 성장 경로를 찾는다",
   "title_ko_src": "mymemory",
-  "title_ko_ver": 2
+  "title_ko_ver": 3,
+  "title_ko_raw": "K-뷰티는 스킨케어 수요가 급증함에 따라 일본에서 다른 성장 경로를 찾습니다."
  },
  {
   "title": "Korean Skincare Export Prices Surge as K-Beauty Strengthens Global Pricing Power",
@@ -2338,7 +2360,8 @@
   "summary_method": "extract",
   "title_ko": "K뷰티가 글로벌 가격 파워를 강화함에 따라 한국 스킨케어 수출 가격 급등",
   "title_ko_src": "mymemory",
-  "title_ko_ver": 2
+  "title_ko_ver": 3,
+  "title_ko_raw": "K-뷰티가 글로벌 가격 파워를 강화함에 따라 한국 스킨케어 수출 가격 급등"
  },
  {
   "title": "아이소브(ISOV), ‘더마 매트릭스 엑소-피엔 스킨 부스터’ 출시… PDRN·NAD+와 HD 에토좀 기술 적용",
@@ -3854,7 +3877,13 @@
   "tags": [
    "수출·전방수요"
   ],
-  "summary_tries": 1
+  "url": "https://m.ekn.kr/view.php?key=20260921029077414",
+  "summary": [
+   "[진격의 K-뷰티①] 화장품이 제2의 반도체?",
+   "[진격의 K-뷰티②] 한류 열풍에 트렌디한 마케팅까지…'인기몰이' 이유 있었다",
+   "[진격의 K-뷰티⑥] 韓 넘어 세계로···CJ올리브영 '질주' 무섭다"
+  ],
+  "summary_method": "extract"
  },
  {
   "title": "K-Beauty強勢攻佔美國市場！Target通路大開，肌膚科學成致勝關鍵！",
@@ -5064,7 +5093,7 @@
   "tags": [
    "메디컬 에스테틱"
   ],
-  "summary_tries": 1
+  "summary_tries": 2
  },
  {
   "title": "파마리서치, 中 화장품그룹 CCM과 전략적 협력",
@@ -5570,14 +5599,15 @@
   ],
   "title_ko": "Tmall 뷰티 트렌드: 중국 뷰티 시장, 효능 중심 소비의 시대로 진입",
   "title_ko_src": "mymemory",
-  "title_ko_ver": 2,
+  "title_ko_ver": 3,
   "url": "https://www.thebk.co.kr/news/articleView.html?idxno=311397",
   "summary": [
    "China’s beauty market is undergoing a fundamental transformation as consumers increasingly prioritize efficacy-driven skincare over traditional beauty claims.",
    "One of the clearest findings from the 2026 data is the continued rise of China’s domestic beauty industry.",
    "Despite a sharp decline in overall Tmall cushion sales, Korean cushion products continued to grow, underscoring the enduring strength of K-Beauty in complexion makeup."
   ],
-  "summary_method": "extract"
+  "summary_method": "extract",
+  "title_ko_raw": "Tmall 뷰티 트렌드: 중국 뷰티 시장, 효능 중심 소비의 시대로 진입"
  },
  {
   "title": "보건복지부, K-뷰티 '세계 1위 도약' 마스터 플랜 연내 발표... 정은경 장관, 화장품 청년기업인과 현장 간담회",
@@ -5979,6 +6009,23 @@
    "ODM"
   ],
   "url": "https://www.mt.co.kr/index.php/living/2026/09/21/2026092110341464027",
+  "summary": [
+   "코스맥스(272,000원 ▲2,000 +0.74%)그룹이 하반기 신입사원 공개채용에 나선다.",
+   "코스맥스그룹은 오는 30일 오후 4시까지 채용 홈페이지를 통해 2026년 하반기 신입사원 지원서를 접수한다고 21일 밝혔다.",
+   "코스맥스그룹은 올해 상반기 채용부터 AI 활용 역량 우대 기조를 도입했다."
+  ],
+  "summary_method": "extract"
+ },
+ {
+  "title": "코스맥스그룹, 하반기 신입 공개채용…AI 활용 역량 인재 우대 - 머니투데이",
+  "link": "https://news.google.com/rss/articles/CBMiakFVX3lxTE9LVE9zVjltWnJkUlBYeTlzZFc2dVZoX2plQnR6WVRvWkVKUUYtTTdRZ0I0MHBSZVJCMHR3ZkRWODJFcDJwQWRBZGc3UzBkSGtYZkkzeW8yeVVFVXg5YWVXRW5Gb0J2VXgtTmfSAW9BVV95cUxNc09vOHlJZldHRGNPMmtuTmZvalRZX1pYWGFWWDhzLTgxa2lxUXloenJoZUIwbzdfMkdfa3FPMEZnMnFhdUktRnM4Ykl1bHh4TDB5dDdlWEkwYTRjV2huczlFNi1kQk9lMTBybzkySW8?oc=5",
+  "source": "mt.co.kr",
+  "published": "2026-09-21 10:38",
+  "query": "코스맥스",
+  "tags": [
+   "ODM"
+  ],
+  "url": "https://www.mt.co.kr/living/2026/09/21/2026092110341464027",
   "summary": [
    "코스맥스(272,000원 ▲2,000 +0.74%)그룹이 하반기 신입사원 공개채용에 나선다.",
    "코스맥스그룹은 오는 30일 오후 4시까지 채용 홈페이지를 통해 2026년 하반기 신입사원 지원서를 접수한다고 21일 밝혔다.",
@@ -6404,6 +6451,23 @@
   "summary_method": "extract"
  },
  {
+  "title": "휴젤, 대만 의료진 초청 학술 프로그램…톡신 점유율 35% 목표",
+  "link": "https://news.google.com/rss/articles/CBMiS0FVX3lxTE5VLXYyNGluTTRJbEstTk9JVExGaENld1pWZ2pmaW5oMTJDQ3RmYmJWZExxUmpndThFUE9FUmRBSzFtdzFmYzRUSk90OA?oc=5",
+  "source": "v.daum.net",
+  "published": "2026-09-21 10:00",
+  "query": "휴젤",
+  "tags": [
+   "메디컬 에스테틱"
+  ],
+  "url": "https://v.daum.net/v/YOvrDhDgHn?f=p",
+  "summary": [
+   "휴젤(145020)이 대만 의료진을 국내로 초청해 제품 교육과 생산시설 견학을 진행하며 현지 에스테틱 시장 공략을 강화한다.",
+   "휴젤은 지난 16일부터 나흘간 대만 미용의료 전문가 25명을 대상으로 글로벌 학술 프로그램 'L.E.A.D.'(Letybo Experience & Discovery)를 진행했다고 밝혔다.",
+   "2027년까지 대만 톡신 시장 점유율을 35%로 높이고, 지난해 상반기 판매를 시작한 HA 필러 제품군도 확대할 예정이다."
+  ],
+  "summary_method": "extract"
+ },
+ {
   "title": "코스맥스그룹, 2026년 하반기 신입사원 공채…“AI 역량 우수 인재 우대”",
   "link": "https://news.google.com/rss/articles/CBMickFVX3lxTFBXQVhTYU1lTXQzSEFpWXhhU1BnMzBaTWJGSE1aamUydWlvYTIwMnhxdlo5Q21HUm9VcWxrQUVoaElHTm84b2RfaW1fdGZKRGFWMFZzd0RBQlA3aE9rTi1SZFNLd2VwREJWbS1KWVRmLXVwUQ?oc=5",
   "source": "인더스트리뉴스",
@@ -6545,7 +6609,7 @@
   "tags": [
    "메디컬 에스테틱"
   ],
-  "summary_tries": 1
+  "summary_tries": 2
  },
  {
   "title": "[똑똑한케어] 코스맥스그룹, 센녹, 이미인, 아모레퍼시픽, 더블유케어 단아로",
@@ -7191,6 +7255,23 @@
   "summary_method": "extract"
  },
  {
+  "title": "코스맥스그룹, 하반기 대졸 신입 공채…30일까지 접수",
+  "link": "https://news.google.com/rss/articles/CBMiWkFVX3lxTFBHUVB2Qi1GRkU0NW5uT21ySXdmY3Q3dEU5bTJjV2lFVHBodURfR0FDRldHSmNqeG5RNTFOU2tLenVMSEVvNjNLUjZZbjNDU3BGNC1NU0wwazR0UdIBVEFVX3lxTE5mSkNSSnJrN2t4VGQtdmMxWkhLQVo5Q2p3RlRkQml5RllJN2tJbjJQd0hTRVNJay1nWkQzZXFpUlJWcFNXSElYWi1Yd0hQQmd4cUZ4MA?oc=5",
+  "source": "더팩트",
+  "published": "2026-09-21 08:24",
+  "query": "코스맥스",
+  "tags": [
+   "ODM"
+  ],
+  "url": "https://news.tf.co.kr/read/economy/2368137.htm",
+  "summary": [
+   "지원서는 그룹 채용 홈페이지에서 오는 30일 오후 4시까지 접수한다.",
+   "모집 직무는 연구혁신(R&I)을 필두로 국내외 영업, 전략마케팅, 디자인, 품질관리(QA/QC) 등 전 분야에 걸쳐 있다.지원 대상은 4년제 정규대학(원) 졸업자 및 2027년 2월 졸업 예정자다.",
+   "코스맥스그룹 관계자는 \"K뷰티가 글로벌 화장품 산업의 새 기준을 세우고 있는 시점\"이라며 \"혁신을 함께 이끌어갈 도전적인 인재들의 지원을 기대한다\"고 말했다."
+  ],
+  "summary_method": "extract"
+ },
+ {
   "title": "코스맥스, 하반기 신입사원 공채…‘AI 활용 역량’ 우대",
   "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE9FaFdPdDJjRXNNSnhLZGRPd0hKTzNCaTlqYU5sY0RHSUMzV1JTRmdsUV9sMDhyOEoyZ2JYMHRNTkI4SHFlUGlOQUtScWRyY2RoWFROaTdR?oc=5",
   "source": "헤럴드경제",
@@ -7761,7 +7842,8 @@
   "summary_method": "extract",
   "title_ko": "뷰티 시장 반등에 따라 K뷰티가 중국의 볼륨에서 가치로 전환",
   "title_ko_src": "mymemory",
-  "title_ko_ver": 2
+  "title_ko_ver": 3,
+  "title_ko_raw": "뷰티 시장 반등에 따라 K-뷰티가 중국의 볼륨에서 가치로 전환"
  },
  {
   "title": "[진격의 K-뷰티⑥] 韓 넘어 세계로···CJ올리브영 ‘질주’ 무섭다",
@@ -8139,7 +8221,8 @@
   "summary_method": "extract",
   "title_ko": "K뷰티의 미국 성장 전략 변화: 스킨케어가 주류가 되고, 모발 관리가 프리미엄이 됨",
   "title_ko_src": "mymemory",
-  "title_ko_ver": 2
+  "title_ko_ver": 3,
+  "title_ko_raw": "K-뷰티의 미국 성장 전략 변화: 스킨케어가 주류가 되고, 모발 관리가 프리미엄이 됨"
  },
  {
   "title": "정부, 연내 ‘K뷰티 세계 1위’ 전략 발표…2028년 대규모 R&D 추진",
@@ -10455,7 +10538,8 @@
   "summary_method": "extract",
   "title_ko": "당신이 사랑하는 글로벌 뷰티 제품? 'Made in Korea' 가 될 수도 있다! K뷰티의 숨겨진 힘",
   "title_ko_src": "mymemory",
-  "title_ko_ver": 2
+  "title_ko_ver": 3,
+  "title_ko_raw": "당신이 사랑하는 글로벌 뷰티 제품? 'Made in Korea' 가 될 수도 있습니다! K-뷰티의 숨겨진 힘"
  },
  {
   "title": "[경력채용] 휴젤, 리가켐바이오, SK케미칼, 차바이오텍, 한화제약",
@@ -10972,9 +11056,10 @@
    "The MUSINSA Osaka Pop-Up Store 2026 will run for 17 days at VS. in Grand Green Osaka, Umeda."
   ],
   "summary_method": "extract",
-  "title_ko": "무신사, 일본 진출 확대에 따라 K-Fashion을 오사카로 확대",
+  "title_ko": "무신사, 일본 진출 확대에 따라 K패션을 오사카로 확대",
   "title_ko_src": "mymemory",
-  "title_ko_ver": 2
+  "title_ko_ver": 3,
+  "title_ko_raw": "MUSINSA, 일본 진출 확대에 따라 K-Fashion을 오사카로 확대"
  },
  {
   "title": "일본 진출 고민하는 K-뷰티 한자리에…우즈스튜디오, ‘The K-Beauty Code Vol.6’ 개최",
@@ -12874,7 +12959,7 @@
   "tags": [
    "브랜드·채널"
   ],
-  "summary_tries": 1
+  "summary_tries": 2
  },
  {
   "title": "코스맥스, 바쿠치올 스틱형 주름개선 기능성 허가",
@@ -13358,7 +13443,7 @@
   "tags": [
    "브랜드·채널"
   ],
-  "summary_tries": 1
+  "summary_tries": 2
  },
  {
   "title": "에이피알, 메디큐브 에이지알 ‘부스터 글로우 헬로키티 에디션’ 출시",
@@ -14210,7 +14295,13 @@
   "tags": [
    "브랜드·채널"
   ],
-  "summary_tries": 1
+  "url": "https://m.ekn.kr/view.php?key=20260910026272998",
+  "summary": [
+   "글로벌 뷰티 기업 에이피알이 미국에서 유럽까지 메디큐브 릴레이 팝업 스토어 운영에 나선다.",
+   "무신사 뷰티가 오는 11일 첫 단독 오프라인 매장인 '무신사 뷰티 홍대'를 개장한다.",
+   "무신사 뷰티는 홍대점을 기점으로 △패션·뷰티 간 상호 송객 △파머시 뷰티를 통한 전문성 강화 △온·오프라인을 연계한 브랜드 인큐베이팅 역량을 3대 핵심 경쟁력으로 추진한다는 방침이다."
+  ],
+  "summary_method": "extract"
  },
  {
   "title": "에이피알 메디큐브, 뉴욕부터 파리까지…'부스터 프로 X2' 릴레이 팝업",
@@ -14311,6 +14402,23 @@
    "에이피알은 이달부터 10월까지 미국과 유럽 주요 도시에서 메디큐브 팝업 스토어를 순차적으로 운영한다고 10일 밝혔다.",
    "팝업 스토어는 메디큐브가 지향하는 '롱제비티의 대중화'를 고객이 직접 경험할 수 있도록 공간을 구성하고 최근 미국과 유럽에 출시한 뷰티 디바이스 신제품 부스터 프로 X2를 집중적으로 소개한다.",
    "제품 체험 이후에는 건강 음료와 스무디를 제공해 뷰티 케어를 넘어 일상 속 웰니스 루틴까지 경험할 수 있도록 했다."
+  ],
+  "summary_method": "extract"
+ },
+ {
+  "title": "허민호 코스맥스비티아이 대표 사임",
+  "link": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE4zQndhdW16SzVuWDVCWXJ0VGNsSG44MU1YWnNzajRaSWJOMElrTS1nTWhlZFZNRE5xYkR1Zm1EaTFSRkUtTFdYTG4zY2ZNRWpkTnJfYw?oc=5",
+  "source": "v.daum.net",
+  "published": "2026-09-10 16:00",
+  "query": "코스맥스",
+  "tags": [
+   "ODM"
+  ],
+  "url": "https://v.daum.net/v/20260910171350007?f=p",
+  "summary": [
+   "허민호 코스맥스비티아이 대표(62·사진)가 10일 사임했다.",
+   "허민호 코스맥스비티아이 대표(62·사진)가 10일 사임했다.",
+   "코스맥스비아이티는 이날 허 대표의 사임에 따라 기존 허민호·이병주 각자대표 체제에서 이 대표 단독 체제로 변경됐다고 공시했다."
   ],
   "summary_method": "extract"
  },
@@ -16929,7 +17037,7 @@
   "tags": [
    "수출·전방수요"
   ],
-  "summary_tries": 1
+  "summary_tries": 2
  },
  {
   "title": "K-뷰티 수출 확대 돕는다…식약처, 화장품 규제협의체 최초 발족",
@@ -16957,7 +17065,7 @@
   "tags": [
    "수출·전방수요"
   ],
-  "summary_tries": 1
+  "summary_tries": 2
  },
  {
   "title": "“세계 2위 K-뷰티, 이제는 1위로”…화장품의 날 맞아 ‘글로벌 도약’ 선언",
@@ -17911,6 +18019,23 @@
   "summary_method": "extract"
  },
  {
+  "title": "메디톡스의 자신감? 10배 뛴 청구액…항소심 기간도 길어지나",
+  "link": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE5rNEkzeEZuZTlKUmdzZjRpYUkxWlRNTkl5SEhNNWpfVHlJQzFZUEE4VlhKZHl0YVpTODNJWVhtb3N4R2VPTjJ3WE9EUmJ5V3lXbEpwbQ?oc=5",
+  "source": "v.daum.net",
+  "published": "2026-09-04 16:00",
+  "query": "메디톡스",
+  "tags": [
+   "메디컬 에스테틱"
+  ],
+  "url": "https://v.daum.net/v/20260904160809127?f=p",
+  "summary": [
+   "메디톡스와 대웅제약의 보툴리눔 톡신 균주 관련 영업비밀 침해 소송이 장기화되고 있는 가운데 10배 이상 뛴 손해배상 청구액이 새로운 쟁점으로 떠오르고 있다.",
+   "4일 업계에 따르면 지난 2일 대웅제약은 영업비밀 침해금지 등 청구에 대한 메디톡스의 손해배상 청구액 확대에 대해 공시했다.",
+   "손해배상 청구액 확대로 이번 항소심 기간이 더 길어질 가능성도 있다."
+  ],
+  "summary_method": "extract"
+ },
+ {
   "title": "한국콜마, ‘프리미에르 비죵 파리’ 초청…K뷰티 색조 기술력 알렸다",
   "link": "https://news.google.com/rss/articles/CBMic0FVX3lxTE9FanhiSTZpTjk0N0d5cVVUaF9JSjBQSURST3VzVUxvRnM0clNKUTRpbHAta3hRb2J3TEl4VmNyVG1vY3phTnpSS2xqekFKRml0c0IzUHB0Ymg3N3VGNURMZk9zUlFTVFFsZk5Wd0xldERuRXfSAXdBVV95cUxQYlZCYy1nRlFhR25samthNno0ZVFaSU5aRG9XMkhFNGE0R005V0k5ODB2bm5xQXlRYkVQUmFOWFk4NVFDT2NlWVlWeEwxaU1JT0hxa3FHc3V3Y0Y3cFJuTGtKaGNoekthQTY5eDdEUVY1eFpYOHJyaw?oc=5",
   "source": "스트레이트뉴스",
@@ -18729,7 +18854,7 @@
   "tags": [
    "브랜드·채널"
   ],
-  "summary_tries": 1
+  "summary_tries": 2
  },
  {
   "title": "에이피알, 메디큐브 수단레드 보도 반박…\"공식 시험서 불검출\"",
@@ -19242,7 +19367,8 @@
   "summary_method": "extract",
   "title_ko": "현지 브랜드가 그립을 강화하면서 중국에서 K뷰티에 대한 압박이 커지고 있다",
   "title_ko_src": "mymemory",
-  "title_ko_ver": 2
+  "title_ko_ver": 3,
+  "title_ko_raw": "현지 브랜드가 그립을 강화하면서 중국에서 K-뷰티에 대한 압박이 커지고 있습니다."
  },
  {
   "title": "파마리서치, 부산학술대회서 리쥬란·리쥬비엘 등 에스테틱 라인업 선봬",
@@ -19795,6 +19921,23 @@
   "summary_method": "extract"
  },
  {
+  "title": "휴엠앤씨, 에이텍과 화장품 수출 확대 '맞손'",
+  "link": "https://news.google.com/rss/articles/CBMib0FVX3lxTE8tcGJzSmJZSDNCeVNYRVpwbVE2dW1lUDZoRmh5YzV2UF8wQlQtdFVqTFFzdzhpTVdXUzhIOUpQTFlGcWZQUENuOHd2N0hIUmNfR3A1Ni01NEdwWm5XRzhhOHYyVmVSTG5sQmdPbDV6RdIBc0FVX3lxTE52LWFVdWs0UDNGRlhwNDBaTDdnN3lPUUt4ZmM0SnMxbTVITEJ6bU8zbGhNRUVtSVM4X3VfRDZ3Q0VrakVoWEVmYVJFZC11b3VhX19LcjE4dWE4dm1XS1VBQUUwODNScHRaNVZ4V2xOWTRPMlE?oc=5",
+  "source": "데일리한국",
+  "published": "2026-09-02 16:00",
+  "query": "화장품 수출",
+  "tags": [
+   "수출·전방수요"
+  ],
+  "url": "https://daily.hankooki.com/news/articleView.html?idxno=1401971",
+  "summary": [
+   "협약에 따라 양사는 화장품 기획, 부자재 수급, 내용물 개발·생산, 수출·물류 지원을 연계한 원스톱 솔루션 구축에 나선다.",
+   "휴엠앤씨는 글로벌 시장 트렌드 분석을 기반으로 제품 기획을 비롯해 특화 용기, 부자재 수급, 납기 일정 관리, 거래처 소통, 수출·물류 지원 등을 맡는다.",
+   "이충모 휴엠앤씨 대표는 \"양사 간 전문성을 기반으로 글로벌 바이어의 요구에 신속하게 대응할 수 있는 체계를 구축해 화장품 사업 경쟁력을 강화해 나갈 것\"이라고 말했다."
+  ],
+  "summary_method": "extract"
+ },
+ {
   "title": "휴엠앤씨, 에이텍과 화장품 수출 확대 맞손",
   "link": "https://news.google.com/rss/articles/CBMibkFVX3lxTE9TSG82clVtWEVZNmh1a095VlB1UlVjLXhzSW1FTEVKX3RFbkg5RTVVbjlodDVNLVJmV0RwR1VZQldKanRuYVRPRm1HLW9PTTFDc2xMdlFzcHNGeTJKcVJXTjZpUDJoM2Y4Rkg5eXV3?oc=5",
   "source": "메드월드뉴스",
@@ -20293,7 +20436,24 @@
   "tags": [
    "메디컬 에스테틱"
   ],
-  "summary_tries": 1
+  "summary_tries": 2
+ },
+ {
+  "title": "반도체 수출 467억달러 '사상 최대'…8월 수출 983억달러",
+  "link": "https://news.google.com/rss/articles/CBMiT0FVX3lxTFBlQVgwSzVoalFNR2hIVG1uYjV2bFVhY2p6Qk1xSVF2SFVWakc2VmRuM2tINVJ6QWx6cG5NQXZObTVYMmJURnNpN2YwTVVqVzA?oc=5",
+  "source": "v.daum.net",
+  "published": "2026-09-01 16:00",
+  "query": "화장품 수출",
+  "tags": [
+   "수출·전방수요"
+  ],
+  "url": "https://v.daum.net/v/20260901091609843",
+  "summary": [
+   "인공지능(AI) 인프라 투자 확대에 힘입어 지난달 반도체 수출이 467억달러(약 63조 9229억원)로 사상 최대를 기록했다.",
+   "반도체뿐 아니라 컴퓨터와 석유제품, 화장품 등 주요 품목의 수출이 큰 폭으로 늘면서 전체 수출도 983억달러(약 134조 6120억원)에 육박했다.",
+   "2월 251억달러에서 3월 328억달러, 5월 372억달러, 6월 448억달러로 늘어난 뒤 8월 467억달러까지 올라섰다."
+  ],
+  "summary_method": "extract"
  },
  {
   "title": "올리브영 \"웰니스 매출 증가…K뷰티 넘어 K라이프스타일\"",
@@ -21548,6 +21708,23 @@
   "summary_method": "extract"
  },
  {
+  "title": "CJ올리브영, 외국인 매출 1조원 돌파…달성 시점 3개월 단축",
+  "link": "https://news.google.com/rss/articles/CBMicEFVX3lxTE9ROTdaR1VBSmxUc2VkY0F5SGxEVVlXd0FqenlLa0pkYXAyYkxBTUtJS2FXM2xXc2ZuLU00YXA3YkpuY0NkME1xM1pVTEdERXVfVllmdXJONkFFT3lEZEdPeGJyVzlwN1hybmZJeFczVDE?oc=5",
+  "source": "글로벌이코노믹",
+  "published": "2026-08-31 16:00",
+  "query": "올리브영 매출",
+  "tags": [
+   "브랜드·채널"
+  ],
+  "url": "http://m.g-enews.com/view.php?ud=202608310949105759056c162803_1",
+  "summary": [
+   "올리브영은 올해 8월 기준 국내 오프라인 매장의 외국인 누적 구매액이 1조원을 돌파했다고 31일 밝혔다.",
+   "1~8월 누적 결제 건수는 1101만 건으로, 매장 영업시간으로 환산하면 대략 0.9초당 1건꼴로 외국인 구매가 이뤄진 셈이다.",
+   "외국인 고객 수와 매출 비중 등 지표를 다각적으로 분석해 외국인이 밀집한 상권을 ‘올리브영 글로벌관광상권’으로 설정하고, 해당 매장에는 외국어가 가능한 직원을 우선 배치하고 다국어 안내문을 비치하는 등 쇼핑 편의성을 강화해왔다."
+  ],
+  "summary_method": "extract"
+ },
+ {
   "title": "제조 넘어 인재·유통까지…'K뷰티' 주역된 한국콜마·코스맥스",
   "link": "https://news.google.com/rss/articles/CBMiT0FVX3lxTE1sZTYxeU8yVENZVnZzaGpTV0hic3JISjdTUEk3MGdXVWxKOVV0TUpLRDN6b0tlNDF1QmNydzFTVU1VOEd5RFZwdDVRcFJvZEU?oc=5",
   "source": "v.daum.net",
@@ -22513,7 +22690,8 @@
   "summary_method": "extract",
   "title_ko": "K뷰티 아이콘에서 글로벌 스킨케어 에센셜까지: 한국 시트 마스크의 진화하는 이야기",
   "title_ko_src": "mymemory",
-  "title_ko_ver": 2
+  "title_ko_ver": 3,
+  "title_ko_raw": "K-뷰티 아이콘에서 글로벌 스킨케어 에센셜까지: 한국 시트 마스크의 진화하는 이야기"
  },
  {
   "title": "“K-뷰티, 수출 넘어 공동투자로”…사우디 바이어 20개사 한국서 '러브콜'",
@@ -22870,7 +23048,8 @@
   "summary_method": "extract",
   "title_ko": "기록적인 수출! K뷰티 트렌드의 모든 것 | KOREAZ OFF ROAD Season2 EP.04",
   "title_ko_src": "mymemory",
-  "title_ko_ver": 2
+  "title_ko_ver": 3,
+  "title_ko_raw": "기록적인 수출! K-뷰티 트렌드의 모든 것 | KOREAZ OFF ROAD Season2 EP.04"
  },
  {
   "title": "미·캐나다 관세 갈등, 화장품으로 확산…K-뷰티도 대응책 점검",
@@ -23414,7 +23593,8 @@
   "summary_method": "extract",
   "title_ko": "한국, 중국에서 K뷰티 부활을 위한 정부 주도 이니셔티브 시작",
   "title_ko_src": "mymemory",
-  "title_ko_ver": 2
+  "title_ko_ver": 3,
+  "title_ko_raw": "한국, 중국에서 K-뷰티 부활을 위한 정부 주도 이니셔티브 시작"
  },
  {
   "title": "경주·제주, K-뷰티 수출거점으로…관광객 경험 수출로 연결 : 네이버 블로그",
@@ -23462,7 +23642,8 @@
   "summary_method": "extract",
   "title_ko": "아마존에서 K뷰티 브랜드를 성공으로 이끄는 요인은 무엇인가? 고객 통찰력, 혁신 및 실행",
   "title_ko_src": "mymemory",
-  "title_ko_ver": 2
+  "title_ko_ver": 3,
+  "title_ko_raw": "아마존에서 K-뷰티 브랜드를 성공으로 이끄는 요인은 무엇인가요? 고객 통찰력, 혁신 및 실행"
  },
  {
   "title": "휴젤, 임시주주총회 개최… 자기주식 보유 및 처분 등 3개 안건 가결",
@@ -24234,7 +24415,8 @@
   "summary_method": "extract",
   "title_ko": "[NC 트렌드] K뷰티, 올리브영에게 미국 오프닝 선사. 이제 수익 테스트가 시작된다",
   "title_ko_src": "mymemory",
-  "title_ko_ver": 2
+  "title_ko_ver": 3,
+  "title_ko_raw": "[NC 트렌드] K-뷰티, 올리브영에게 미국 오프닝 선사. 이제 수익 테스트가 시작됩니다"
  },
  {
   "title": "\"주가 46% 뛰었는데 더 간다\"…증권가가 꽂힌 이 종목",
@@ -24972,6 +25154,23 @@
    "미래에셋증권에서 클래시스(214150)에 대해 '2Q26 매출 1,055억원(27% YoY), 영업이익 439억원(2% YoY, OPM 41.6%) 모두 시장기대치 하회.",
    "목표가 하향조정, 80,000원 -> 64,000원(-20.0%)",
    "미래에셋증권 김충현 애널리스트가 이 종목에 대하여 제시한 목표가 64,000원은 2026년 05월 14일 발행된 미래에셋증권의 직전 목표가인 80,000원 대비 -20.0% 감소한 가격이다."
+  ],
+  "summary_method": "extract"
+ },
+ {
+  "title": "\"레티보 다음은 스킨케어\"…휴젤, 내년 美 스킨케어 2종 출시",
+  "link": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE9GQm9hYS1OVngtTlRnbUVxQjJoVkdfMDZrTzk1S0lXenRvbXBCS25nUVA0Zjc0RE9ZU3ZhY1Z3Z09UNWpPZkNMQTZIZmdualFReWNTbXVvNF9MX1Fz?oc=5",
+  "source": "뉴스핌",
+  "published": "2026-08-14 16:00",
+  "query": "휴젤",
+  "tags": [
+   "메디컬 에스테틱"
+  ],
+  "url": "https://www.newspim.com/news/view/20260814000595",
+  "summary": [
+   "휴젤이 14일 미국서 오퓰럭스V와 바이리즌BR 출시를 예고했다",
+   "특히 레티보 직접판매를 위해 구축한 현지 영업·마케팅 기반을 스킨케어 사업에도 활용할 수 있다는 점이 주목된다.",
+   "14일 휴젤에 따르면 미국 법인 휴젤 아메리카는 내년 스킨케어 제품 '오퓰럭스V'와 '바이리즌BR' 출시를 목표로 하고 있다."
   ],
   "summary_method": "extract"
  },
@@ -26297,7 +26496,8 @@
   "summary_method": "extract",
   "title_ko": "[K뷰티] 한국콜마, 미국 자외선 차단제 시장 변화에 베팅",
   "title_ko_src": "mymemory",
-  "title_ko_ver": 2
+  "title_ko_ver": 3,
+  "title_ko_raw": "[K- BEAUTY] 콜마코리아, 미국 자외선 차단제 시장 변화에 베팅"
  },
  {
   "title": "코스메카코리아, 2Q 영업이익 39%↑…더마 스킨케어가 견인 - 머니투데이",
@@ -26667,14 +26867,15 @@
   ],
   "title_ko": "아마존, 글로벌 K뷰티 성장의 다음 단계를 주도하는 5가지 트렌드 파악",
   "title_ko_src": "mymemory",
-  "title_ko_ver": 2,
+  "title_ko_ver": 3,
   "url": "https://www.thebk.co.kr/news/articleView.html?idxno=310932",
   "summary": [
    "Shinhwa Sook Shin, Country Leader of Amazon Global Selling Korea, said Korean beauty brands are increasingly leading innovation in the global beauty industry.",
    "According to Amazon, newly launched products were among the strongest performers during the 2026 Prime Day event.",
    "2. Growth Expands Beyond the U.S."
   ],
-  "summary_method": "extract"
+  "summary_method": "extract",
+  "title_ko_raw": "아마존, 글로벌 K-뷰티 성장의 다음 단계를 주도하는 5가지 트렌드 파악"
  },
  {
   "title": "“새로워야 산다” 아마존 K-뷰티 4新전략 발표",
@@ -26897,7 +27098,8 @@
   "summary_method": "extract",
   "title_ko": "프리미엄 전환: K뷰티가 중국 전략을 다시 작성하는 방법",
   "title_ko_src": "mymemory",
-  "title_ko_ver": 2
+  "title_ko_ver": 3,
+  "title_ko_raw": "프리미엄 전환: K-뷰티가 중국 전략을 다시 작성하는 방법"
  },
  {
   "title": "[단독] '나보타' 키운 대웅, 필러·스킨부스터로 영토 확장",
@@ -27481,7 +27683,8 @@
   "summary_method": "extract",
   "title_ko": "K뷰티는 대통령에게 스포트라이트를 받지만, K보톡스는 16년간의 규제 걸림돌에 직면해 있다",
   "title_ko_src": "mymemory",
-  "title_ko_ver": 2
+  "title_ko_ver": 3,
+  "title_ko_raw": "K-뷰티는 대통령에게 스포트라이트를 받지만, K-보톡스는 16년간의 규제 걸림돌에 직면해 있습니다."
  },
  {
   "title": "롯데쇼핑·한국콜마 … 2분기 실적 기대株",
@@ -27864,7 +28067,8 @@
   "summary_method": "extract",
   "title_ko": "K뷰티 글로벌 변혁 보고서 ⑤: KISSRING, 중국을 넘어 확장하다",
   "title_ko_src": "mymemory",
-  "title_ko_ver": 2
+  "title_ko_ver": 3,
+  "title_ko_raw": "K-뷰티 글로벌 변혁 보고서 ⑤: KISSRING, 중국을 넘어 확장하다"
  },
  {
   "title": "ECM 스킨부스터 회색지대? 법률 전문가 \"현행법 위반 소지 다분\"",
@@ -28142,7 +28346,8 @@
   "summary_method": "extract",
   "title_ko": "K뷰티, 세계 3위 화장품 시장 브라질 공략",
   "title_ko_src": "mymemory",
-  "title_ko_ver": 2
+  "title_ko_ver": 3,
+  "title_ko_raw": "K-뷰티, 세계 3위 화장품 시장 브라질 공략"
  },
  {
   "title": "\"임상도 없다\"…인체조직 활용 스킨부스터 안전은?",
@@ -28281,6 +28486,21 @@
   "summary_method": "extract"
  },
  {
+  "title": "중기부, K뷰티 브라질 진출 지원…“아마존 천연원료 공동연구, 현지 플랫폼 연계” - 조선비즈",
+  "link": "https://news.google.com/rss/articles/CBMikAFBVV95cUxNcnphUW82dGgxOFdDbVlnYWo5dEF3YnhzSU9WajZaNGlKVnQ5ZVNORnhENlBtRUtpbE5ESzkyeGJPLTRpMXF6X0VPYlBTWWNCaVVXSnpJWnRsWlI3SEQ4ME11aDA2cXhxN202QzhpUFRRb0lVb0NteWQ4TEhqZGx5WWlydmhENWFnV0plOU9vQ0zSAaQBQVVfeXFMT0hOOUpoNkIzRndNcV94YVE0ZjVNd1dsNTY2UWVsUlZUS0ZxRGJucEk5YkhCeWtuNU5JNnNOM3RjN3ZrSGl1aEpCTUs0bE1Cc0hEa2lMeUZkQkxaMlBzYUJkWEZPZFh3S0tBdmhrQ1hSdFBtYzJsOTFUZzY2cDVKYlVNMjFqN2VHRXF3TWoyWW04elNNQVdGUkJfNXdHWmZaXzRIQ2c?oc=5",
+  "source": "Chosunbiz",
+  "published": "2026-07-28 16:00",
+  "query": "아마존 K뷰티",
+  "tags": [
+   "브랜드·채널"
+  ],
+  "url": "https://biz.chosun.com/industry/business-venture/2026/07/28/OYY37GWMAFH35GLJ3EUQN6XMJY/",
+  "summary": [
+   "중기부, K뷰티 브라질 진출 지원아마존 천연원료 공동연구, 현지 플랫폼 연계"
+  ],
+  "summary_method": "extract"
+ },
+ {
   "title": "아마존 타고 날아오른 K뷰티…수출 신기록 이어 실적 전망도 ‘청신호’",
   "link": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE9aN2I4ZDVEcTZzM3Ffb0NzamxEeDFuYmp4WU1QdEtxMEVKVGM2VWVtRnk1dE5BRWtwNjZqaTNBdl9SYXJ0c2lMNGVhUG05RElfaDZEaEIxdjhxaXZpZzRobmZnMA?oc=5",
   "source": "쿠키뉴스",
@@ -28306,7 +28526,13 @@
   "tags": [
    "브랜드·채널"
   ],
-  "summary_tries": 1
+  "url": "https://m.thinkpool.com/compDiscuss/cont/1028019",
+  "summary": [
+   "달바글로벌이 상장 후 처음으로 자사주를 소각하고 이사회 산하 ESG위원회 등을 신설하는 등 주주환원과 지배구조 개선에 나선다.",
+   "7월24일 달바글로벌은 자기주식취득 신탁계약을 통해 확보한 자사주 8만3364주 가운데 임직원 주식보상(RSU) 활용 예정 물량 2만주를 제외한 6만3364주를 연내 소각할 계획이라고 밝혔다.",
+   "KB증권은 7월24일 달바글로벌(483650)에 대해 북미와 유럽이 성장을 이끌고 있어 매우 긍정적인 시점이라며 투자의견 '매수'를 유지했다.목표주가는 올해 연간 예상 영업이익을 5.5% 올리며 기존 23만원에서 27만원으로 상향 조정했다."
+  ],
+  "summary_method": "extract"
  },
  {
   "title": "화장품 유럽 수출액, 美 첫 추월",
@@ -28581,7 +28807,8 @@
   "summary_method": "extract",
   "title_ko": "K뷰티 스페셜 시리즈 ② 중국은 K뷰티로 끝나지 않았다-재창조되고 있다",
   "title_ko_src": "mymemory",
-  "title_ko_ver": 2
+  "title_ko_ver": 3,
+  "title_ko_raw": "K-뷰티 스페셜 시리즈 ② 중국은 K-뷰티로 끝나지 않았다-재창조되고 있다"
  },
  {
   "title": "한국콜마 2분기 영업익 955억 전망…선케어 비중 26%",
@@ -28802,7 +29029,8 @@
   "summary_method": "extract",
   "title_ko": "K뷰티 스페셜 시리즈 ① 미국이 K뷰티의 최대 수출 시장이 된 방법",
   "title_ko_src": "mymemory",
-  "title_ko_ver": 2
+  "title_ko_ver": 3,
+  "title_ko_raw": "K-뷰티 스페셜 시리즈 ① 미국이 K-뷰티의 최대 수출 시장이 된 방법"
  },
  {
   "title": "ECM 스킨부스터 판도 흔드는 톡신 거인 ‘휴젤’",
@@ -28976,7 +29204,8 @@
   "summary_method": "extract",
   "title_ko": "[K뷰티] 아모레퍼시픽의 글로벌 피부과학 이니셔티브",
   "title_ko_src": "mymemory",
-  "title_ko_ver": 2
+  "title_ko_ver": 3,
+  "title_ko_raw": "[k-뷰티] 아모레퍼시픽의 글로벌 피부과학 이니셔티브"
  },
  {
   "title": "‘K-뷰티 수출구조’ 닮은 한국콜마…역대 최대 실적 보인다[중기+]",
@@ -29477,7 +29706,8 @@
   "summary_method": "extract",
   "title_ko": "스킨케어가 성장을 주도하면서 K뷰티의 미국 수출은 20.8% 증가",
   "title_ko_src": "mymemory",
-  "title_ko_ver": 2
+  "title_ko_ver": 3,
+  "title_ko_raw": "스킨케어가 성장을 주도하면서 K-뷰티의 미국 수출은 20.8% 증가"
  },
  {
   "title": "[에이피알] 에이피알, 아마존 글로벌 물류 운영 사장단에 제조·물류 통합 체계 공개",
@@ -30028,7 +30258,8 @@
   "summary_method": "extract",
   "title_ko": "코스맥스, AI 기반 맞춤형 뷰티 벤처 일본 론칭",
   "title_ko_src": "mymemory",
-  "title_ko_ver": 2
+  "title_ko_ver": 3,
+  "title_ko_raw": "코스맥스, AI 기반 맞춤형 뷰티 벤처 일본 론칭"
  },
  {
   "title": "‘피크아웃’ 우려 넘어선 K-뷰티…수출·ODM 실적·ETF '3대 호재'",
@@ -30413,7 +30644,8 @@
   "summary_method": "extract",
   "title_ko": "베라모어, 라쿠텐 캐피탈 최초의 K뷰티 파트너 브랜드로 선정",
   "title_ko_src": "mymemory",
-  "title_ko_ver": 2
+  "title_ko_ver": 3,
+  "title_ko_raw": "베라모어, 라쿠텐 캐피탈 최초의 K-뷰티 파트너 브랜드로 선정"
  },
  {
   "title": "First K-Beauty Brand Chosen by Japan's Rakuten… Veramore Secures Pre-A Investment",
@@ -30433,7 +30665,8 @@
   "summary_method": "extract",
   "title_ko": "일본 라쿠텐 최초 K뷰티 브랜드 선정… 베라모어, Pre-A 투자 유치",
   "title_ko_src": "mymemory",
-  "title_ko_ver": 2
+  "title_ko_ver": 3,
+  "title_ko_raw": "일본 라쿠텐 최초 K-뷰티 브랜드 선정… 베라모어, Pre-A 투자 유치"
  },
  {
   "title": "Veramore Secures Rakuten Capital Investment as its First K-Beauty Portfolio Company",
@@ -30453,7 +30686,8 @@
   "summary_method": "extract",
   "title_ko": "Veramore, 최초의 K뷰티 포트폴리오 회사로 라쿠텐 캐피탈 투자 확보",
   "title_ko_src": "mymemory",
-  "title_ko_ver": 2
+  "title_ko_ver": 3,
+  "title_ko_raw": "Veramore, 최초의 K-뷰티 포트폴리오 회사로 라쿠텐 캐피탈 투자 확보"
  },
  {
   "title": "K뷰티 이끄는 한국콜마 목표주가 줄상향…국민연금도 한몫",
@@ -30845,7 +31079,8 @@
   "summary_method": "extract",
   "title_ko": "K뷰티, 중남미로 성장 전환에 따라 미국을 넘어 확장",
   "title_ko_src": "mymemory",
-  "title_ko_ver": 2
+  "title_ko_ver": 3,
+  "title_ko_raw": "K-뷰티, 중남미로 성장 전환에 따라 미국을 넘어 확장"
  },
  {
   "title": "휴젤은 시간을, 한스는 영업망을 샀다...스킨부스터 협업 진짜 배경",
@@ -31148,7 +31383,8 @@
   "summary_method": "extract",
   "title_ko": "KHIDI 관계자는 생명공학 및 패션과의 융합을 통해 글로벌 성장을 주도하는 K뷰티 [문대현의 메디뷰]",
   "title_ko_src": "mymemory",
-  "title_ko_ver": 2
+  "title_ko_ver": 3,
+  "title_ko_raw": "KHIDI 관계자는 생명공학 및 패션과의 융합을 통해 글로벌 성장을 주도하는 K-뷰티 [문대현의 메디뷰]"
  },
  {
   "title": "밀크바오밥, 일본 도쿄 'K-Beauty Glow Up' 팝업 전시 참가",
@@ -31425,9 +31661,10 @@
    "The company achieved record-breaking sales at Amazon Prime Day 2026, its best performance yet in the event's history."
   ],
   "summary_method": "extract",
-  "title_ko": "아모레퍼시픽, 2026년 아마존 프라임데이에 역대 최고 매출 달성",
+  "title_ko": "아모레퍼시픽, 2026년 아마존 프라임 데이에 역대 최고 매출 달성",
   "title_ko_src": "mymemory",
-  "title_ko_ver": 2
+  "title_ko_ver": 3,
+  "title_ko_raw": "아모레퍼시픽, 2026년 아마존 프라임 데이에 역대 최고 매출 달성"
  },
  {
   "title": "올 상반기 화장품 수출 70억 달러…'역대 최대' 달성",
@@ -31465,7 +31702,8 @@
   "summary_method": "extract",
   "title_ko": "미국, 중국에 대한 의존이 사라지면서 K뷰티 성장의 새로운 엔진이 됨",
   "title_ko_src": "mymemory",
-  "title_ko_ver": 2
+  "title_ko_ver": 3,
+  "title_ko_raw": "미국, 중국에 대한 의존이 사라지면서 K-뷰티 성장의 새로운 엔진이 됨"
  },
  {
   "title": "[HIT 포커스] 수출로 돈 버는 대웅제약 '나보타'는 성장중",
@@ -31769,7 +32007,8 @@
   "summary_method": "extract",
   "title_ko": "에이피알의 메디큐브가 미국 아마존 프라임데이 검색 순위에서 1위를 차지했다",
   "title_ko_src": "mymemory",
-  "title_ko_ver": 2
+  "title_ko_ver": 3,
+  "title_ko_raw": "APR Corp의 메디큐브가 미국 아마존 프라임 데이 검색 순위에서 1위를 차지했습니다."
  },
  {
   "title": "아마존 프라임데이 1위 찍은 'K뷰티' 에이피알…美·유럽 존재감↑",
@@ -31943,7 +32182,8 @@
   "summary_method": "extract",
   "title_ko": "K뷰티 수출, 미국과 유럽 성장 견인하며 상반기 70억 달러 기록",
   "title_ko_src": "mymemory",
-  "title_ko_ver": 2
+  "title_ko_ver": 3,
+  "title_ko_raw": "K-뷰티 수출, 미국과 유럽 성장 견인하며 상반기 70억 $ 기록"
  },
  {
   "title": "'피부 전문가'가 'AI'도 만든다…한국콜마의 자신감",
@@ -32096,7 +32336,8 @@
   "summary_method": "extract",
   "title_ko": "'K뷰티 하우스', 수출 플랫폼으로 오는 9월 로스앤젤레스에 오픈 예정",
   "title_ko_src": "mymemory",
-  "title_ko_ver": 2
+  "title_ko_ver": 3,
+  "title_ko_raw": "'K-뷰티 하우스', 수출 플랫폼으로 오는 9월 로스앤젤레스에 오픈 예정"
  },
  {
   "title": "유럽 최대 음악축제서 K-컬처 알린다… ‘인스파이어 미 코리아 2026’ 개막 : 유럽|아프리카 한인뉴스",
@@ -32218,7 +32459,8 @@
   "summary_method": "extract",
   "title_ko": "중국의 화장품 변화: C뷰티가 전 세계적으로 확대됨에 따라 수출 급증",
   "title_ko_src": "mymemory",
-  "title_ko_ver": 2
+  "title_ko_ver": 3,
+  "title_ko_raw": "중국의 화장품 변화: C-뷰티가 전 세계적으로 확대됨에 따라 수출 급증"
  },
  {
   "title": "‘미국 및 글로벌 수출 화장품기업을 위한 제재·수출통제·거래처 리스크 관리 실무 웨비나‘... 7월 23일 개최",
@@ -32290,7 +32532,8 @@
   "summary_method": "extract",
   "title_ko": "[K뷰티 수출지도] ⑤ 시장 위축에 따른 페이스파우더 수출 감소",
   "title_ko_src": "mymemory",
-  "title_ko_ver": 2
+  "title_ko_ver": 3,
+  "title_ko_raw": "[K-뷰티 수출지도] ⑤ 시장 위축에 따른 페이스파우더 수출 감소"
  },
  {
   "title": "[코스메카코리아] ODM도 고객사 다변화가 핵심, 코스메카코리아 성장 스토리 본격화 (2026_1Q)",
@@ -32610,9 +32853,10 @@
    "Export price analysis across the top 10 markets indicates that the Netherlands ($40,133 per ton) and Hong Kong ($39,109) command the highest values, followed by Russia ($33,275), China ($31,781), and the United States ($31,230)."
   ],
   "summary_method": "extract",
-  "title_ko": "[K뷰티 수출지도] ① 프리미엄 전환가 모멘텀을 얻음에 따라 스킨케어 수출이 5억 달러 초과",
+  "title_ko": "[K뷰티 수출지도] ① 프리미엄 전환이 모멘텀을 얻음에 따라 스킨케어 수출이 5억 달러 초과",
   "title_ko_src": "mymemory",
-  "title_ko_ver": 2
+  "title_ko_ver": 3,
+  "title_ko_raw": "[K-뷰티 수출지도] ① 프리미엄 시프트가 모멘텀을 얻음에 따라 스킨케어 수출이 $ 500M 초과"
  },
  {
   "title": "틱톡이 낳고 아마존이 키웠다… 서구권으로 향한 K-뷰티",
@@ -32812,7 +33056,8 @@
   "summary_method": "extract",
   "title_ko": "[K뷰티 중국 리포트 ①] 소비자가 한류에서 성과로 전환하면서 K뷰티, 중국 점유율 하락",
   "title_ko_src": "mymemory",
-  "title_ko_ver": 2
+  "title_ko_ver": 3,
+  "title_ko_raw": "[K-뷰티 중국 리포트 ①] 소비자가 한류에서 성과로 전환하면서 K-뷰티, 중국 점유율 하락"
  },
  {
   "title": "클래시스, ‘임직원 사칭·피싱 사이트’ 주의보",
@@ -33037,7 +33282,8 @@
   "summary_method": "extract",
   "title_ko": "Gudai Global, K뷰티 강국으로 IPO 추진, 100억 달러 밸류에이션 기대",
   "title_ko_src": "mymemory",
-  "title_ko_ver": 2
+  "title_ko_ver": 3,
+  "title_ko_raw": "Gudai Global, K-뷰티 강국으로 IPO 추진, $ 100억 밸류에이션 기대"
  },
  {
   "title": "[줌인] ‘K-건기식’ 영토 넓히는 코스맥스그룹…‘혁신 제형·CAPA 증설’로 글로벌 웰니스 시장 공략",
@@ -33211,7 +33457,8 @@
   "summary_method": "extract",
   "title_ko": "모든 카테고리가 축소됨에 따라 일본의 K뷰티 감소",
   "title_ko_src": "mymemory",
-  "title_ko_ver": 2
+  "title_ko_ver": 3,
+  "title_ko_raw": "모든 카테고리가 축소됨에 따라 일본의 K-뷰티 감소"
  },
  {
   "title": "화장품, 미국 수출 22억 불 시대...트럼프, 내부고발 포상제 걸고 ‘관세 폭탄’ 조준",
@@ -33248,7 +33495,8 @@
   "summary_method": "extract",
   "title_ko": "K뷰티는 중국에서 안정화되지만 현지 브랜드가 메이크업을 지배한다",
   "title_ko_src": "mymemory",
-  "title_ko_ver": 2
+  "title_ko_ver": 3,
+  "title_ko_raw": "K-뷰티는 중국에서 안정화되지만 현지 브랜드가 메이크업을 지배합니다."
  },
  {
   "title": "How K-Beauty Brands Are Competing on Amazon Prime Day 2026",
@@ -33266,9 +33514,10 @@
    "Ultimately, Prime Day 2026 is less about who sells the most and more about which strategy proves sustainable."
   ],
   "summary_method": "extract",
-  "title_ko": "2026년 아마존 프라임데이에 K뷰티 브랜드가 경쟁하는 방식",
+  "title_ko": "2026년 아마존 프라임 데이에 K뷰티 브랜드가 경쟁하는 방식",
   "title_ko_src": "mymemory",
-  "title_ko_ver": 2
+  "title_ko_ver": 3,
+  "title_ko_raw": "2026년 아마존 프라임 데이에 K-뷰티 브랜드가 경쟁하는 방식"
  },
  {
   "title": "K-Beauty Tops $100M in U.S. Monthly Exports, Led by Skincare Shift",
@@ -33287,9 +33536,10 @@
    "High-performance segments are driving the expansion."
   ],
   "summary_method": "extract",
-  "title_ko": "K뷰티, 스킨케어 전환가 이끄는 미국 월간 수출 1억 달러 돌파",
+  "title_ko": "K뷰티, 스킨케어 전환이 이끄는 미국 월간 수출 1억 달러 돌파",
   "title_ko_src": "mymemory",
-  "title_ko_ver": 2
+  "title_ko_ver": 3,
+  "title_ko_raw": "K-뷰티, 스킨케어 시프트가 이끄는 미국 월간 수출 1억 $ 돌파"
  },
  {
   "title": "파마리서치 ‘리쥬란’, 험난한 중국 규제 앞 곤혹",
@@ -33425,9 +33675,10 @@
    "The company plans to offer discounts of up to 50%, alongside Amazon Best Deals, Prime Exclusive Discounts, and coupons."
   ],
   "summary_method": "extract",
-  "title_ko": "2026년 아마존 프라임데이에 K뷰티 브랜드가 경쟁하는 방식",
+  "title_ko": "2026년 아마존 프라임 데이에 K뷰티 브랜드가 경쟁하는 방식",
   "title_ko_src": "mymemory",
-  "title_ko_ver": 2
+  "title_ko_ver": 3,
+  "title_ko_raw": "2026년 아마존 프라임 데이에 K-뷰티 브랜드가 경쟁하는 방식"
  },
  {
   "title": "일본서 K-뷰티 아직 낯설다…하지만 써본 소비자는 ‘가성비·효과’에 반응",
@@ -33464,7 +33715,8 @@
    "Selected creators are provided with various benefits, including invitations to VIP events, stays at 5-star hotels, airport concierge services, and exclusive booths."
   ],
   "summary_method": "extract",
-  "title_ko_ver": 2
+  "title_ko_ver": 3,
+  "title_ko_raw": "VidCon이 선정한 K-뷰티… 5명의 Dimil 크리에이터가 한국 최초의 추천 크리에이터로 선정"
  },
  {
   "title": "엘앤씨바이오, ECM 스킨부스터 탈모 치료 가능성…“모발 아닌 두피 환경 재생”",
@@ -34012,7 +34264,8 @@
   "summary_method": "extract",
   "title_ko": "일본 Z세대가 K뷰티로 눈을 돌리는 이유 — 가격, 트렌드, 빠른 결과 ①",
   "title_ko_src": "mymemory",
-  "title_ko_ver": 2
+  "title_ko_ver": 3,
+  "title_ko_raw": "일본 Z세대가 K-뷰티로 눈을 돌리는 이유 — 가격, 트렌드, 빠른 결과 ①"
  },
  {
   "title": "인천시, 스페인 K-뷰티 박람회서 유럽시장 공략…도시브랜드도 세일즈",
@@ -34304,7 +34557,8 @@
   "summary_method": "extract",
   "title_ko": "브라질이 K뷰티의 차세대 주요 성장 시장으로 부상하는 이유",
   "title_ko_src": "mymemory",
-  "title_ko_ver": 2
+  "title_ko_ver": 3,
+  "title_ko_raw": "브라질이 K-뷰티의 차세대 주요 성장 시장으로 부상하는 이유"
  },
  {
   "title": "K-Beauty Supply Chains Shift as Korea Prepares Mandatory Safety Data Regulations",
@@ -34324,7 +34578,8 @@
   "summary_method": "extract",
   "title_ko": "한국이 의무적인 안전 데이터 규정을 마련함에 따라 K뷰티 공급망 변화",
   "title_ko_src": "mymemory",
-  "title_ko_ver": 2
+  "title_ko_ver": 3,
+  "title_ko_raw": "한국이 의무적인 안전 데이터 규정을 마련함에 따라 K-뷰티 공급망 변화"
  },
  {
   "title": "수익은 '게걸음'…메디톡스, 보톡스 전쟁에 날아든 2800억 '비용 청구서'",
@@ -34362,7 +34617,8 @@
   "summary_method": "extract",
   "title_ko": "2026년 4월 K뷰티 수출 급증, 유럽 점유율 상승에 따라 미국이 최고의 시장이 됨",
   "title_ko_src": "mymemory",
-  "title_ko_ver": 2
+  "title_ko_ver": 3,
+  "title_ko_raw": "2026년 4월 K-뷰티 수출 급증, 유럽 점유율 상승에 따라 미국이 최고의 시장이 됨"
  },
  {
   "title": "“필러·수출 반토막”…휴메딕스, 영업이익 22% 급감에 ‘충격’",
@@ -34434,7 +34690,8 @@
   "summary_method": "extract",
   "title_ko": "한국 뷰티 트레이드 모니터: 안정적인 지역 수요 속에서 K뷰티 키즈 화장품 수출은 전년 대비 4.1% 증가",
   "title_ko_src": "mymemory",
-  "title_ko_ver": 2
+  "title_ko_ver": 3,
+  "title_ko_raw": "한국 뷰티 트레이드 모니터: 안정적인 지역 수요 속에서 K-뷰티 키즈 화장품 수출은 전년 대비 4.1% 증가"
  },
  {
   "title": "경기도, 체코·오스트리아 ‘K-뷰티 수출상담회’ 성료… “340만불 계약 성사”",
@@ -34464,14 +34721,15 @@
   ],
   "title_ko": "코스맥스: 전 세계 20개 이상의 뷰티 브랜드 중 18개 브랜드의 뒤를 잇는 K뷰티 강국",
   "title_ko_src": "mymemory",
-  "title_ko_ver": 2,
+  "title_ko_ver": 3,
   "url": "https://www.k-health.com/news/articleView.html?idxno=92803",
   "summary": [
    "SEOUL, SOUTH KOREA— Korea's rise in the global beauty industry is no accident.",
    "Cosmax is the world's largest cosmetics ODM company — it researches, develops, and manufactures beauty products for brands, including 18 of the global Top 20 beauty companies.",
    "Brands bring their concepts; Cosmax brings the science, formulation, and production at scale."
   ],
-  "summary_method": "extract"
+  "summary_method": "extract",
+  "title_ko_raw": "코스맥스: 전 세계 20개 이상의 뷰티 브랜드 중 18개 브랜드의 뒤를 잇는 K-뷰티 강국"
  },
  {
   "title": "한국 화장품의 글로벌 진출 ② 유럽편 — 어느 유통이 나에게 맞을까",
@@ -34627,7 +34885,8 @@
   "summary_method": "extract",
   "title_ko": "K뷰티 수출 114억 달러 돌파, 글로벌 퍼스트 산업으로의 변화",
   "title_ko_src": "mymemory",
-  "title_ko_ver": 2
+  "title_ko_ver": 3,
+  "title_ko_raw": "K-뷰티 수출 114억 $ 돌파, 글로벌 퍼스트 산업으로의 변화"
  },
  {
   "title": "K-Beauty Exports Hit Record High in Q1 2026 as Korea Trade Body Expands Global Support",
@@ -34648,7 +34907,8 @@
   "summary_method": "extract",
   "title_ko": "한국무역기구의 글로벌 지원 확대에 따라 2026년 1분기 K뷰티 수출 사상 최고치 기록",
   "title_ko_src": "mymemory",
-  "title_ko_ver": 2
+  "title_ko_ver": 3,
+  "title_ko_raw": "한국무역기구의 글로벌 지원 확대에 따라 2026년 1분기 K-뷰티 수출 사상 최고치 기록"
  },
  {
   "title": "'늘리기보다 키운다'…올리브영, 대형화·글로벌 성장 가속",
