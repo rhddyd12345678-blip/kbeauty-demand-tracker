@@ -1,45 +1,261 @@
-# K뷰티 전방수요 트래커
+# K뷰티 트래커 — 전방수요 모니터 + 리레이팅·밸류체인 분석
 
-화장품 전방 수요 지표(수출·아마존 US 침투율·네이버 검색 트렌드)와 관련 뉴스를 매일 자동 수집해
-GitHub Pages 정적 대시보드로 보여준다. `macro-econ-tracker`와 같은 구조.
+2026-09-30 기존 **kbeauty-demand-tracker**(전방수요 트래커)를 이 저장소로 합쳤다. 기존 저장소는 삭제하지 않고 그대로 둔다.
+사이트는 두 영역으로 나뉜다.
+
+| 영역 | 탭 | 목적 |
+|---|---|---|
+| 전방수요 모니터 (기존에서 옴) | 수출·수입시장 · 아마존 · 검색·인지도 · 기업·주가 · 뉴스 | K뷰티 수요가 지금 어느 방향인지 매일 확인 |
+| 리레이팅·밸류체인 분석 (**NEW**) | 리레이팅 조건 · 밸류체인 · 개별 지표 · 데이터 한계 · 부록 | 멀티플이 오를 조건과 밸류체인 흐름을 숫자로 검증 |
+
+개요 탭은 두 영역 공통(맨 위에 두 영역의 목적, 전방수요 요약 수치, 리레이팅 체크리스트, 밸류체인 5단계, 지표 가이드).
+한 지표를 두 영역이 같이 쓰면(예: 관세청 수출, 지역별 비중, 아마존, 환율) 데이터는 `data/obs/*.csv` 하나이고 차트 명세도 하나를 양쪽이 참조한다.
+
+### 기능별 출처
+
+| 기능 | 출처 | 합치면서 바뀐 점 |
+|---|---|---|
+| 관세청 월별 화장품 수출·YoY, 품목별 수출 | 기존 | 소스를 품목·국가별 API 하나로 통일(겹치는 68개월 값 일치 확인), 2019-01부터 백필 |
+| 보툴리눔 톡신(3002.49)·기타 의약품(3004.90) 수출 | 기존 | 같은 관세청 API에 코드 추가 |
+| 의료기기(9018) 수출 | 기존·신규 | 신규(국가별)로 통일, 2019-01부터 |
+| 미국·일본 화장품 수입시장 점유율(한국 대 프랑스), 국가별 수입, 미국 3002.49 수입 | 기존 | UN Comtrade 수집기 이관(`collect/comtrade.py`), 과거분 이관. 한국 수출 상대국 시리즈는 관세청과 중복이라 제거 |
+| 아마존 US 스킨케어 Top50 한국 비중, 최신 스냅샷 목록 | 기존 | 직접 수집으로 통일(뷰티 전체·선케어 추가), 2022-11-11 Wayback 스냅샷 이관 |
+| 네이버 검색 트렌드 | 기존 | 엑셀 수동 입력 유지(기존에도 API 키 없었음) |
+| Google News 피드, 영문 제목 번역 후처리 규칙 | 기존 | 기사 2,699건 이관(추출 요약 제외), 번역 규칙(`lib/title_ko.py`) 이관, 키워드 합침 |
+| 환율 | 기존·신규 | 한국은행 ECOS로 통일, 2019-01부터. 기존 ECB 환율은 보조로 이관 |
+| 기업 실적·주가·밸류에이션 비교·기업 상세·분기 실적 비교 | 기존 | WiseReport·네이버 → DART·금융위 API로 통일, 6개사 → 20개사(메디톡스 이관) |
+| 컨센서스 추정치 | 기존 | 현재값만 1회 `manual/consensus_eps.csv`로 이관, 이후 수동 입력 |
+| KOSPI·KOSDAQ 상대 주가 수익률 | 기존 | 금융위 지수시세 API로 전환(활용신청 전까지 이관분 2021~ 사용) |
+| 지표 가이드 | 기존 | 개요 탭으로 이동 |
+| 리레이팅 조건 체크리스트, ODM 레버리지·계절성, PER 비교·주가 분해, 주문 가시성 | **신규** | |
+| 밸류체인 5단계(원부자재→ODM→브랜드사→유통→채널), 인접 단계 시차 | **신규** | |
+| 개별 지표(수출단가·스킨부스터·방한 외국인·마진 구조 등), 데이터 한계, 부록(발표 질문 17개) | **신규** | |
+| 위키 조회수, 채널별 입점 기사 수, DART 직원 수 | **신규** | |
+
+기존 저장소에서 가져온 과거 데이터는 `scripts/migrate_legacy.py`로 한 번 옮겼다(기존 저장소는 `git show`로 읽기만 함).
+컨센서스는 기존 저장소 git 이력의 날짜별 스냅샷(2026-09-23~30, 연간 추정 EPS·목표주가)을 `data/obs/consensus_hist.csv`로 옮겼다 — 이후 자동 갱신은 없다.
+
+화장품 산업 인뎁스(ODM + 메디컬 에스테틱)용 추적 사이트. 세 가지를 데이터로 계속 확인한다.
+
+1. **리레이팅 조건** — ODM·K뷰티 멀티플이 오를 조건(성장의 분산·지속성, 이익의 질, 시장 반영)이 갖춰지고 있는가
+2. **플라이휠** — 온라인 → 인지도 → 오프라인 → 수출 → ODM 발주 → 재투자가 실제로 돌고 반복되는가
+3. **개별 지표** — 발표(260929)에서 질문받은 항목을 숫자로 답할 수 있는가
+
+데이터가 말해주는 것과 말해주지 못하는 것을 구분하는 게 핵심이다. 모든 카드에 신뢰 등급이 붙는다.
+
+| 등급 | 뜻 |
+|---|---|
+| 자동 수집 | 공식 API·공개 페이지에서 매일/매주 자동으로 받는 값 |
+| 수동 입력 | `manual/*.csv`에 사람이 넣는 값 (컨센서스 EPS, CAPA 등) |
+| 대용 지표 | 알고 싶은 것을 직접 재지 못해 비슷한 것을 대신 잰 값 (위키 조회수 = 인지도 등) |
+| 데이터 없음 | 공개 데이터로는 답할 수 없음 — IR·전화 확인 영역 |
+
+수집이 안 되는 값은 만들어 넣지 않는다. 카드에 **수집 불가 + 사유**가 뜨고, 개요 탭 하단 '수집기 상태'에 실패 이유가 남는다.
+
+---
+
+## 구조
 
 ```
-raw/        ← 수동 엑셀 (관세청_*.xlsx, 네이버트렌드_*.xlsx, 아마존_*.xlsx, brand_master.xlsx)
-scripts/    ← 수집기 (아래 순서로 실행)
-data/       ← 결과 JSON (커밋됨, 사이트가 직접 읽음)
-index.html  ← 대시보드 (의존성 없음)
-.github/workflows/update.yml ← 매일 07:00 KST 수집 → 커밋 → Pages 배포
+config/tracker.yml        종목·HS 코드·국가 묶음·키워드 (여기만 고치면 됨)
+config/brand_master.csv   아마존 K브랜드 판별표 (brand, made_in_korea, is_korean_brand, aliases)
+manual/*.csv              수동 입력 (아래 '수동 입력')
+raw/                      사용자 엑셀 (아마존 과거 스냅샷, 네이버 데이터랩 다운로드) — 로컬 전용, git 제외
+docs/                     발표 피드백·미팅 노트 원문 — 로컬 전용(비공개 자료), git 제외
+scripts/collect/*.py      수집기 (서로 독립적으로 실패)
+scripts/collect_all.py    주기가 된 수집기만 실행
+scripts/import_excel.py   raw/ 엑셀 → 관측값
+scripts/build.py          관측값 → site/data/site.json
+data/obs/*.csv            누적 관측값 (긴 형식, 커밋됨)
+site/                     정적 사이트 (GitHub Pages로 배포)
 ```
+
+**저장 형식** (`data/obs/*.csv`): `기준일 | 축 | 지표 | 구분 | 값 | 단위 | 출처 | 수집일`.
+과거 값을 덮어쓰지 않는다. 같은 (기준일, 지표, 구분, 출처)의 값이 바뀌면(예: 관세청 잠정치 → 확정치) 새 수집일로 한 줄을 더 쌓고, 사이트는 최신 수집일 값을 쓴다.
 
 ## 로컬 실행 (macOS)
+
 ```bash
+cd ~/kbeauty/kbeauty-rerating-tracker
 python3 -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
-python scripts/ingest_excel.py       # raw/ 엑셀 → data/
-python scripts/fetch_news.py         # Google News RSS (키 불필요)
-python scripts/summarize_news.py     # 기사 원문 추출 → 3줄 요약 (ANTHROPIC_API_KEY 있으면 Claude, 없으면 추출 요약)
-python scripts/fetch_companies.py    # ODM 3사·메디컬 에스테틱 3사 실적·컨센서스·주가 (네이버증권, 키 불필요)
-python scripts/fetch_industry.py     # UN Comtrade 미·일 화장품 수입 국가별, 한국 수출, 환율 (키 불필요, 첫 실행 백필 10분+)
-python scripts/fetch_trade.py        # 관세청 API (DATA_GO_KR_KEY 있을 때만)
-python scripts/fetch_naver_trend.py  # 데이터랩 API (NAVER_CLIENT_ID/SECRET 있을 때만)
-python scripts/fetch_amazon.py       # Wayback 스냅샷 파싱
-python scripts/build_summary.py      # 대시보드용 집계
-python3 -m http.server 8000          # http://localhost:8000
+cp .env.example .env          # 키를 채운다 (아래 '키 발급')
+python scripts/import_excel.py        # raw/ 엑셀 가져오기 (처음 한 번, 엑셀을 바꿨을 때)
+python scripts/collect_all.py --force # 전부 수집 (첫 실행은 백필로 10~15분)
+python scripts/build.py
+cd site && python3 -m http.server 8000   # http://localhost:8000
 ```
 
-## 소스별 갱신 방식
-| 소스 | 자동 | 수동 폴백 |
-|---|---|---|
-| 뉴스 | Google News RSS, 키워드는 `scripts/fetch_news.py`의 `KEYWORDS` | – |
-| 관세청 수출 (HS 3304, 9018 등) | 공공데이터포털 `DATA_GO_KR_KEY` 시크릿 등록 시 | unipass.customs.go.kr → 수출입실적(품목별) 엑셀 → `raw/관세청_이름.xlsx` |
-| 네이버 트렌드 | `NAVER_CLIENT_ID/SECRET` 등록 시 (API 값은 `api:` 접두로 별도 저장) | 데이터랩에서 다운로드 → `raw/네이버트렌드_이름.xlsx` |
-| 뉴스 요약 | 원문 추출 후 요약. `ANTHROPIC_API_KEY` 시크릿 등록 시 Claude(`claude-opus-5`, `NEWS_SUMMARY_MODEL`로 변경 가능) 3줄 요약, 미등록 시 리드문·핵심문장 추출 요약 | – |
-| 기업 6사 | WiseReport(연 5년+추정 3년, 분기 5+추정 3) → 실패 시 네이버 모바일 API. 과거 기간은 누적 보관 | 종목은 `scripts/fetch_companies.py`의 `COMPANIES` |
-| 산업 지표 | UN Comtrade 공개 API: 미국·일본 HS 3304 수입 국가별, 미국 HS 3002.49 수입, 한국 수출 상대국별 / 환율 frankfurter(ECB) | 조합은 `scripts/fetch_industry.py`의 `SERIES` |
-| 아마존 Top50 | Wayback Machine 스냅샷 파싱. 미분류 브랜드는 `data/amazon_unmapped.json` → `raw/brand_master.xlsx`에 추가 | – |
+수집기 하나만: `python scripts/collect_all.py --only dart` (이름: fx, stocks, news, amazon, wiki, customs, tourism, dart)
 
-## GitHub 설정
-1. 저장소 생성 후 push (`main`)
-2. Settings → Pages → Source: **GitHub Actions**
-3. Settings → Secrets → Actions: `DATA_GO_KR_KEY`, `NAVER_CLIENT_ID`, `NAVER_CLIENT_SECRET`, `ANTHROPIC_API_KEY` (모두 선택)
-4. Actions 탭에서 `update-data` 수동 실행 (workflow_dispatch)
+## 키 발급 (모두 무료)
+
+| 환경변수 | 발급처 | 절차 | 한도 |
+|---|---|---|---|
+| `DATA_GO_KR_KEY` | [공공데이터포털](https://www.data.go.kr) | 로그인 → 아래 3개 API를 검색해 각각 [활용신청] (자동승인, 반영까지 1~2시간) → 마이페이지 → 인증키(일반 인증키 Decoding) 복사 | 개발계정 API별 일 1,000~10,000건 |
+| | | ① 관세청_품목별 국가별 수출입실적(GW) ② 금융위원회_주식시세정보(V2) ③ 한국문화관광연구원_출입국관광통계서비스(_GW 또는 원래 버전) ④ 금융위원회_지수시세정보(V2, KOSPI·KOSDAQ) | |
+| `DART_KEY` | [OpenDART](https://opendart.fss.or.kr) | 인증키 신청/관리 → 이메일 인증 → 즉시 발급 | 일 20,000건 |
+| `ECOS_KEY` | [한국은행 ECOS](https://ecos.bok.or.kr/api) | 인증키 신청 → 로그인 후 즉시 발급 (없으면 ECB 환율로 폴백) | 넉넉함 |
+
+네이버 검색어트렌드는 키 없이 수동 입력으로 운영한다(네이버 개발자센터 신규 신청이 2026-07-31 종료 — 아래 '네이버 검색 트렌드').
+
+키는 `.env`(로컬, 커밋 안 됨)와 GitHub Secrets에만 둔다. 코드·커밋·채팅에 붙여넣지 않는다.
+
+## GitHub 저장소·Secrets·Pages (macOS 터미널)
+
+```bash
+cd ~/kbeauty/kbeauty-rerating-tracker
+gh repo create kbeauty-rerating-tracker --public --source . --push   # 저장소 생성 + 첫 push
+# Secrets 등록: 명령 실행 후 값을 붙여넣고 Enter (화면에 안 보임)
+gh secret set DATA_GO_KR_KEY
+gh secret set DART_KEY
+gh secret set ECOS_KEY
+# Pages: 소스를 GitHub Actions로
+gh api -X POST repos/{owner}/kbeauty-rerating-tracker/pages -f build_type=workflow
+# 첫 실행 (전부 수집)
+gh workflow run update -f force=true
+gh run watch
+```
+
+웹에서 하려면: 저장소 → Settings → Secrets and variables → Actions → New repository secret / Settings → Pages → Source: GitHub Actions / Actions 탭 → update → Run workflow.
+
+## 갱신 주기
+
+`.github/workflows/update.yml`이 매일 07:00 KST에 돌고, 각 수집기는 마지막 성공 후 아래 간격이 지났을 때만 실행된다. 월·분기 자료는 공표일이 들쭉날쭉해 주 1회 확인한다.
+
+| 수집기 | 주기 | 소스 |
+|---|---|---|
+| fx | 매일 | 한국은행 ECOS 731Y001 (폴백: ECB frankfurter) |
+| stocks | 매일 | 금융위원회 주식시세정보 (T+1) |
+| news | 매일 | Google News RSS + 번역(Google 웹 → MyMemory) |
+| amazon, wiki | 매주 | 아마존 US 베스트셀러 / Wikimedia Pageviews |
+| 네이버 검색 트렌드 | 월 1회 (수동) | datalab.naver.com 엑셀 → `raw/` → 로컬에서 `import_excel.py` → `data/obs/naver_excel.csv` 커밋 |
+| customs, tourism, comtrade | 매주 확인 (월 자료) | 관세청 품목·국가별 수출 / 출입국관광통계 / UN Comtrade 미·일 수입 |
+| index | 매일 | 금융위 지수시세(KOSPI·KOSDAQ) |
+| dart | 매주 확인 (분기 자료) | OpenDART 정기보고서 |
+
+`manual/`, `config/`, `data/obs/`를 커밋하면 수집 없이 재빌드·재배포된다. `raw/`는 git에 올리지 않으므로 엑셀 변환은 로컬에서 하고 결과 CSV만 커밋한다.
+
+## 지표 정의·계산식
+
+### 축 1. 리레이팅 조건
+| 지표 | 계산 | 출처 | 등급 |
+|---|---|---|---|
+| 지역별 수출 비중 | 최근 12개월 HS 3304 수출액 합계 기준 국가 묶음 비중. 주요 시장(중국·미국·일본·홍콩·유럽)과 신흥 시장(동남아·러시아·CIS·중동·중남미·기타) 두 그래프. 기타가 10%를 넘으면 상위 국가 표 | 관세청 | 자동 |
+| HHI | Σ(국가별 12개월 비중 %)². 0~10,000, 낮을수록 분산 | 관세청 | 자동 |
+| 상위 3개국 비중 | 12개월 누적 비중 상위 3개국 합 | 관세청 | 자동 |
+| 분기 매출·영업이익률 | 연결(없으면 별도). 4Q 단독 = 사업보고서 연간 − 1~3Q | DART | 자동 |
+| 인당 매출 | 별도 TTM 매출 ÷ 별도 직원 수 (직원 현황이 별도 기준이라 분자도 별도) | DART | 자동 |
+| 매출 대 인력 증가율 | 별도 TTM 매출 YoY, 별도 직원 수 YoY | DART | 자동 |
+| 계절성 | 4Q 단독 매출 ÷ 3Q 매출 (연도별). 개요 탭은 3사 평균의 연도별 추이 | DART | 자동 |
+| 그룹 시가총액 | 그룹별 합 (주간, 금요일 종가 기준) | 금융위 | 자동 |
+| 후행 PER | 시가총액 ÷ 최근 4개 분기 지배주주순이익. 분기 실적은 법정 제출기한 이후부터 반영(1Q 5/15, 2Q 8/14, 3Q 11/14, 4Q 다음해 3/31) | 금융위 + DART | 자동 |
+| 그룹 PER | 흑자 기업의 시총 합 ÷ 순이익 합 (적자 기업 제외) | 〃 | 자동 |
+| ODM ÷ 브랜드 PER | 두 그룹 PER의 비율. 상승 = ODM 할인 축소 | 〃 | 자동 |
+| 주가 분해 | ln(P₁/P₀) = ln(EPS₁/EPS₀) + ln(PER₁/PER₀), 선행 PER = 월말 종가 ÷ 12개월 선행 EPS | 수동 EPS + 금융위 | 수동 |
+| 재고자산·매출채권 회전일수 | 기말 잔액 ÷ TTM 매출 × 365 | DART | 대용 |
+| 계약부채 ÷ 매출 | 기말 계약부채 ÷ TTM 매출 | DART | 대용 |
+| 주문 가시성 | 없음 — IR 확인(비공개 자료) | – | 데이터 없음 |
+
+### 축 2. 플라이휠 — 밸류체인 5단계
+
+물건은 원/부자재 → ODM → 브랜드사 → 유통 → 채널로 흐르고, 수요 신호(주문·판매)는 반대로 전해진다. 구성은 `config/tracker.yml`의 `companies[].stage`와 `unlisted`.
+
+| 단계 | 구성 (재무 기준) | 등급 |
+|---|---|---|
+| 원/부자재 | 펌텍코리아(연결), 선진뷰티사이언스(연결), 엔에프씨(별도 — 연결재무제표 없음), 연우(DART ~2024Q4 + 이후 수동 입력) | 자동·수동 |
+| ODM | 코스맥스, 한국콜마, 코스메카코리아, 씨앤씨인터내셔널 (연결) | 자동 |
+| 브랜드사 | 에이피알, 아모레퍼시픽, 달바글로벌, 브이티, 클리오 (연결). 구다이글로벌은 비상장 | 자동 / 데이터 없음 |
+| 유통 | 실리콘투, 청담글로벌 (연결) + 관세청 화장품 수출(분기 합) | 자동 |
+| 채널 | 아마존 Top50 K 비중(자동), CJ올리브영 분기 실적(수동 입력), 세포라·울타·코스트코·틱톡샵 입점 기사 건수(대용). 틱톡샵 매출은 비공개 | 자동·수동·대용·없음 |
+
+단계마다 같은 지표: **매출 YoY(분기)**, **영업이익률**, **재고자산 회전일수**, **매출채권 회전일수**.
+단계 값은 **매출 가중(합산)** — 매출 YoY = 단계 합산 매출 ÷ 1년 전 합산 − 1(두 시점 모두 값이 있는 회사만, 상장·상장폐지로 구성이 바뀌어도 왜곡되지 않게),
+영업이익률 = 합산 영업이익 ÷ 합산 매출, 회전일수 = 합산 기말 잔액 ÷ 합산 TTM 매출 × 365. 단순 평균은 쓰지 않는다.
+
+| 화면 | 내용 |
+|---|---|
+| 단계 그림 | 5단계 상자에 최근 분기 매출 YoY(직전 분기 대비 방향), 영업이익률·재고일수(1년 전 같은 분기 대비 방향) |
+| 단계 비교 | 단계별 매출 YoY 겹쳐 보기(+ 관세청 수출 점선), 영업이익률, 재고일수, 채권일수 |
+| 인접 단계 시차 | 채널→유통, 수출→브랜드사, 유통→브랜드사, 브랜드사→ODM, ODM→원부자재(+ 역방향), 기존 고리(아마존→수출, 인지도→수출). **전부 분기로 맞춰 계산**(수출·위키는 분기 합, 아마존은 분기 평균). 0~3분기 시차의 교차상관, 분기 표본 12개 미만은 '참고용' |
+| 단계별 상세 | 단계를 누르면 펼침. 기업별 최근 분기 표·매출 그래프 + 기존 플라이휠 고리 지표를 해당 단계로 이동: 인지도(위키·Google Trends)→브랜드사, 수출·재고 쌓기 대 실수요→유통, 아마존 Top50·입점 기사·이벤트 로그(온라인·오프라인)→채널, 직원 수·CAPA(재투자)→ODM |
+
+### 축 3. 개별 지표
+| 항목 | 계산 | 등급 |
+|---|---|---|
+| 3-1 수출단가 | 12개월 누적 수출액 ÷ 중량 (달러/kg), 국가 묶음·HS 10단위별 | 자동 |
+| 3-2 유럽·신흥국 수출 | 영·독·프·네·폴·스·이 / UAE·사우디·브라질·멕시코 월 수출액 | 자동 |
+| 3-3 선케어 | 아마존 선케어 Top50 K 비중 + UV 필터 승인 기준선(`amazon.uv_filter_date`) | 자동 |
+| 3-4 스킨부스터 | 네이버 데이터랩에서 내려받은 엑셀(조회 안의 최댓값=100, 일간은 주간 평균). 제품명(`naver_manual.booster_products`)이 든 조회는 제품별 그래프로, 나머지는 '기타 조회'로. 상승 시점 = 8주 평균이 최고치의 25%에 처음 도달한 주 | 수동 |
+| 3-5 방한 외국인·의료기기 수출 | 국적별 월 입국자, HS 9018 지역별 수출 | 자동·대용 |
+| 3-6 환율 | 매매기준율 일별, 2021년 첫 값=100 지수 | 자동 |
+| 3-7 조건부 | HS 3005.10(여드름 패치 대용), 'Medical spa' 위키 조회수, 시군구 수출(불가) | 대용·없음 |
+| 3-8 마진 구조 | 메디컬 매출총이익률, 브랜드사 판관비율 | 자동 |
+
+## 수동 입력
+
+`manual/`의 CSV를 엑셀이나 텍스트 편집기로 열어 행을 추가하고 커밋하면 다음 빌드에 반영된다. 첫 줄(머리글)은 그대로 둔다. 엑셀에서 저장할 때는 'CSV UTF-8' 형식.
+
+| 파일 | 열 | 주기 | 예시 |
+|---|---|---|---|
+| `consensus_eps.csv` | 기업, 기준월(YYYY-MM), 선행12개월EPS, 출처, 메모 | 월 1회 (월말) | `한국콜마,2026-10,(값),(출처),` — 2026-09 행 6개는 기존 트래커의 WiseReport 값을 합칠 때 1회 옮긴 것(출처 칸에 표시). 그 뒤로 새 기준월 행을 **아래에 이어 붙인다**(기존 행은 지우지 않음) |
+| `reinvest.csv` | 기업, 기준일(YYYY 또는 2025Q4), 항목(CAPA·가동률·연구개발비), 값, 단위, 출처, 메모 | 반기·연간 (사업보고서 'II. 사업의 내용') | `코스맥스,2025,가동률,78.5,%,2025 사업보고서,국내 법인` |
+| `global_peers.csv` | 기업, 국가, 기준일, 항목(종가·시가총액·후행PER·선행PER), 값, 단위, 출처, 메모 | 월 1회 | `Intercos,IT,2026-09-30,후행PER,21.3,배,Borsa Italiana,` |
+| `company_quarterly.csv` | 기업, 분기(2025Q1), 항목(매출액·영업이익), 값, 단위(억원), 출처, 메모 | 분기 1회 | `연우,2025Q1,매출액,(값),억원,(출처),` — 상장폐지 등으로 DART 정기보고서가 끊긴 회사(`dart_until` 이후 분기만 쓰임)와 비상장 채널(`CJ올리브영`)용 |
+| `store_events.csv` | 날짜, 브랜드, 채널, 국가, 내용, 출처URL | 수시 | `2026-09-10,브랜드명,Sephora,미국,미국 매장 입점 발표,https://기사URL` (공개 기사·공시로 확인한 것만) |
+| `google_trends.csv` | 기준월(YYYY-MM), 키워드, 지역, 값, 출처, 메모 | 월 1회 | `2026-09,K beauty,US,78,trends.google.com,` |
+| `raw/*.xlsx` (네이버) | 데이터랩 다운로드 엑셀 그대로 | 월 1회 | 아래 '네이버 검색 트렌드' |
+
+같은 기업·항목의 단위는 통일한다(예: CAPA는 '백만 개' 또는 '톤' 중 하나). 숫자는 쉼표 없이.
+
+## 네이버 검색 트렌드 (월 1회 수동)
+
+네이버 개발자센터 신규 신청이 2026-07-31 종료돼 데이터랩 API 키를 받을 수 없다. 매달 초에 한 번 아래처럼 내려받아 넣는다.
+
+1. [datalab.naver.com](https://datalab.naver.com) → **검색어트렌드**
+2. 주제어를 한 칸에 하나씩 입력 (한 번에 최대 5개). 예: `리쥬란` / `쥬베룩` / `리투오` / `셀르디엠` / `스킨부스터`
+   - 제품이 5개를 넘으면 두 번 조회하되, **두 조회 모두에 `리쥬란`을 넣는다** — 값이 조회마다 '최댓값=100'으로 따로 매겨져서 공통 키워드가 있어야 두 조회를 이어 볼 수 있다.
+3. 기간 **2021-01-01 ~ 오늘**, 단위는 **주간**(일간도 됨 — 가져올 때 주간 평균으로 줄인다), 범위 **전체**, 성별·연령 조건은 필요할 때만
+4. **조회하기** → 그래프 오른쪽 위 **다운로드(엑셀)** 버튼
+5. 받은 파일을 `raw/`에 넣는다. 이름은 자유(예: `raw/네이버_스킨부스터_2026-10.xlsx`) — 파일 이름이 아니라 내용(앞부분 '기간' 행과 '날짜' 머리글)으로 알아본다.
+6. 변환·확인: `python scripts/import_excel.py && python scripts/build.py` → 개별 지표 탭 3-4
+7. `raw/`는 git에 올리지 않는다. 변환 결과 CSV만 커밋·푸시하면 워크플로가 재빌드한다.
+   ```bash
+   git add data/obs/naver_excel.csv && git commit -m "data: 네이버 검색 트렌드 2026-10" && git push
+   ```
+
+- 같은 주제어·조건으로 새 파일을 넣으면 예전 파일의 행도 CSV에 그대로 남고, 사이트는 **기간 끝이 가장 늦은 파일**을 그린다. 예전 파일은 지워도 되고 남겨도 된다.
+- 새 제품을 조회했다면 `config/tracker.yml`의 `naver_manual.booster_products`에 이름을 추가해야 제품별 그래프로 들어간다.
+- 기존 `raw/네이버트렌드_로우데이터.xlsx`(연령대별 카테고리 조회 7개 시트)도 같은 스크립트로 읽혀 '기타 조회' 그래프로 나온다.
+- 한계: 값은 조회 안에서만 비교 가능하다. 다른 파일·시트끼리, 연령대끼리 숫자를 직접 비교하지 않는다.
+
+## 아마존 지표 — 세 가지 비중과 판별 기준
+
+| 지표 | 정의 (Top50 한 스냅샷 기준) | 배치 |
+|---|---|---|
+| **한국생산 비중** | `made_in_korea=1`인 제품 수 ÷ 순위 수. 브랜드 국적과 무관하게 **한국에서 만든 제품** (예: 미국 브랜드 Mighty Patch) | 밸류체인 **ODM** 단계 (K-ODM 물량이 미국 온라인에서 팔리는지) |
+| **K브랜드 비중** | `is_korean_brand=1`인 제품 수 ÷ 순위 수. 생산지와 무관하게 **한국 브랜드** 제품 | 밸류체인 **채널** 단계 (소비자가 K브랜드를 고르는지) |
+| **한국생산 중 외국 브랜드 비중** | `made_in_korea=1`이고 `is_korean_brand=0`인 제품 수 ÷ 한국생산 제품 수 | **ODM** 단계 (글로벌 브랜드의 K-ODM 사용 신호) |
+
+판별 기준 (`config/brand_master.csv`, 브랜드 단위 수동 판정):
+- `is_korean_brand` — **브랜드 국적**: 브랜드 소유 회사의 본사가 한국이면 1. 해외 기업에 인수된 한국 출신 브랜드는 현재 소유 기준으로 적는다.
+- `made_in_korea` — **생산지**: 제품 포장·상품 설명의 원산지 표기(Made in Korea)나 한국 ODM 생산이 확인되면 1. 같은 브랜드라도 제품마다 생산지가 다를 수 있어 브랜드 단위 판정은 근사다.
+- 기존 엑셀(2022~2026)의 판정 근거는 파일에 기록되어 있지 않다(수정이력 시트에 '사용자 확인'만 있음). 새로 추가하는 행은 `memo` 열에 근거(예: "포장 Made in Korea", "코스맥스 생산 기사")를 적는다.
+- 수집기는 상품 페이지에 'Country of Origin'이 있으면 `data/amazon_titles.csv`의 `origin` 열에 저장해 판정과 대조할 수 있게 한다. 다만 **아마존 US 뷰티 상품 페이지는 대부분 원산지를 보여주지 않아**(2026-09 확인: 시험한 7개 제품 모두 없음) 자동 판정 근거로는 쓰지 않는다.
+- 미분류(brand_master에 없는 브랜드) 제품은 세 비중 모두의 분자에서 빠지므로 과소 추정 방향. 미분류 표는 채널 단계 상세와 아마존 탭.
+- 여드름 패치: 전용 베스트셀러 카테고리가 없어 'Facial Treatments & Masks'(페이셜 트리트먼트) Top50에서 제품명(`amazon.patch_pattern`)으로 골라 센다.
+
+## 아마존 — 브랜드 판별과 수동 저장
+
+- **미분류 브랜드**: 플라이휠 탭 '미분류 브랜드' 표에 뜬다. `config/brand_master.csv`에 `brand, made_in_korea, is_korean_brand`를 추가하고 커밋하면 과거 스냅샷까지 다시 분류된다. 기존 항목 중 제품명이 섞인 것(예: `d'alba Piedmont Italian`)은 `aliases` 열에 짧은 브랜드명(`d'alba`)을 넣어야 새 제품 제목과 매칭된다.
+- **여드름 패치 카테고리**: 노드 번호를 아직 확인하지 못했다. 아마존에서 패치 베스트셀러 URL(`.../zgbs/beauty/숫자`)을 찾아 `config/tracker.yml`의 `amazon.categories`에 한 줄 추가.
+- **수동 저장 (Actions에서 차단될 때)**: 개요 탭 수집기 상태에 amazon '실패 — 차단 추정'이 뜨면 우회하지 않고 Mac에서 주 1회 실행한다.
+  ```bash
+  cd ~/kbeauty/kbeauty-rerating-tracker && source .venv/bin/activate
+  git pull && python scripts/collect_all.py --only amazon && git add data && git commit -m "data: 아마존 수동 저장" && git push
+  ```
+- 과거 스냅샷: `raw/아마존_*.xlsx`('low data' 시트)를 로컬에서 `import_excel.py`로 변환해 `data/obs/amazon.csv`·`data/amazon_titles.csv`를 커밋한다(엑셀 자체는 git 제외).
+
+## 데이터 한계
+
+사이트의 '데이터 한계' 탭에 정리했다. 요약: ODM 출고단가, 주문 가시성, 채널 수수료, 브랜드의 단가 인하 요구, 수출단가 상승 원인, 메드스파 증가 원인은 숫자로 답하지 않는다. 관세청 수출은 **출하 기준**이라 현지 실판매와 다르다.

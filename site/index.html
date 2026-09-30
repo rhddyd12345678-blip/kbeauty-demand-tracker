@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>K뷰티 트래커</title>
+<link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js" defer></script>
+<script src="app.js" defer></script>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <h1>K뷰티 트래커</h1>
+    <p class="sub">전방수요 모니터 + 리레이팅·밸류체인 분석 — 데이터가 말하는 것과 말하지 못하는 것을 구분해서</p>
+    <p class="meta" id="meta">불러오는 중…</p>
+  </div>
+  <nav class="tabs wrap" id="tabs" role="tablist" aria-label="탭"></nav>
+</header>
+<main class="wrap" id="main"></main>
+<footer class="wrap foot">
+  <p>원자료: <a href="data/obs/index.html">data/obs/*.csv</a> (긴 형식, 과거 값 보존) · 신뢰 등급:
+    <span class="grade g-auto">자동 수집</span> <span class="grade g-manual">수동 입력</span>
+    <span class="grade g-proxy">대용 지표</span> <span class="grade g-none">데이터 없음</span></p>
+</footer>
+</body>
+</html>

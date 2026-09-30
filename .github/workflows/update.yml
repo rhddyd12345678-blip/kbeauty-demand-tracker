@@ -1,54 +1,57 @@
-name: update-data
+name: update
 on:
   schedule:
-    - cron: "0 22 * * *"   # 매일 07:00 KST
+    - cron: "0 22 * * *"      # 매일 07:00 KST — 수집기별 주기(일·주)는 scripts/collect_all.py INTERVAL
   workflow_dispatch:
+    inputs:
+      force:
+        description: "주기와 상관없이 전부 수집"
+        type: boolean
+        default: false
   push:
     branches: [main]
+    paths: ["manual/**", "config/**", "site/**", "scripts/**", "data/obs/**"]   # 수동 입력·설정·로컬 엑셀 변환 결과 커밋 → 수집 없이 재빌드
 permissions:
   contents: write
   pages: write
   id-token: write
-concurrency: { group: pages, cancel-in-progress: false }
+concurrency: { group: update, cancel-in-progress: false }
 jobs:
-  collect:
+  build:
     runs-on: ubuntu-latest
     timeout-minutes: 60
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
-        with: { python-version: "3.12" }
+        with: { python-version: "3.12", cache: pip }
       - run: pip install -r requirements.txt
-      - name: 수집
+      - name: 수집 (수집기마다 독립 실패, 한 번도 성공 못 한 소스는 매일 재시도)
+        if: github.event_name != 'push'
+        continue-on-error: true   # 수집이 통째로 죽어도 빌드·배포는 진행
         env:
           DATA_GO_KR_KEY: ${{ secrets.DATA_GO_KR_KEY }}
-          NAVER_CLIENT_ID: ${{ secrets.NAVER_CLIENT_ID }}
-          NAVER_CLIENT_SECRET: ${{ secrets.NAVER_CLIENT_SECRET }}
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-        run: |
-          python scripts/ingest_excel.py
-          python scripts/fetch_news.py
-          python scripts/summarize_news.py --limit 400 || echo "summary failed (continue)"
-          python scripts/fetch_companies.py || echo "companies failed (continue)"
-          python scripts/fetch_industry.py || echo "industry failed (continue)"
-          python scripts/fetch_trade.py
-          python scripts/fetch_naver_trend.py
-          python scripts/fetch_amazon.py || echo "amazon failed (continue)"
-          python scripts/build_summary.py
-      - name: 커밋
+          DART_KEY: ${{ secrets.DART_KEY }}
+          ECOS_KEY: ${{ secrets.ECOS_KEY }}
+        run: python scripts/collect_all.py ${{ inputs.force && '--force' || '' }}
+      - name: 빌드
+        run: python scripts/build.py
+      - name: 데이터 커밋
         run: |
           git config user.name "tracker-bot"
-          git config user.email "bot@users.noreply.github.com"
+          git config user.email "tracker-bot@users.noreply.github.com"
           git add data
-          git diff --cached --quiet || git commit -m "data: $(date -u +%Y-%m-%d) 자동 갱신"
-          git push
+          if ! git diff --cached --quiet; then
+            git commit -m "data: $(TZ=Asia/Seoul date +%F) 자동 갱신"
+            git pull --rebase origin main   # 충돌 시 실패로 표시 — 조용히 덮어쓰지 않는다
+            git push
+          fi
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
-        with: { path: "." }
+        with: { path: site }
   deploy:
-    needs: collect
+    needs: build
     runs-on: ubuntu-latest
-    environment: { name: github-pages, url: "${{ steps.deployment.outputs.page_url }}" }
+    environment: { name: github-pages, url: "${{ steps.d.outputs.page_url }}" }
     steps:
-      - id: deployment
+      - id: d
         uses: actions/deploy-pages@v4

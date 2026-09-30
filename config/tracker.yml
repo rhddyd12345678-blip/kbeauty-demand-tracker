@@ -1,0 +1,149 @@
+# K뷰티 트래커 설정. 종목·코드·키워드는 여기서만 바꾼다. 바꾼 뒤 커밋하면 다음 빌드에 반영.
+
+backfill_start: "202101"        # 5개년 백필 시작 월 (DART·주가·위키 등)
+long_backfill_start: "201901"   # 관세청·환율은 기존 트래커와 같은 2019-01부터 (합치기 전 기존 쪽 기간이 더 길었음)
+
+# ── 기업 ─────────────────────────────────────────────────────────
+# group: 리레이팅 탭의 PER·시총 비교 묶음 (ODM / 원부자재 / 브랜드 / 유통 / 메디컬)
+# stage: 플라이휠 탭의 밸류체인 단계 (원부자재 → ODM → 브랜드사 → 유통 → 채널). 비우면 밸류체인에서 제외.
+# fs: 재무 기준 (연결 우선, 연결재무제표가 없는 회사는 별도) — 수집기가 자동으로 고르고 화면에 표시
+companies:
+  # 원/부자재
+  - {code: "251970", name: 펌텍코리아, group: 원부자재, stage: 원부자재}
+  - {code: "086710", name: 선진뷰티사이언스, group: 원부자재, stage: 원부자재}
+  - {code: "265740", name: 엔에프씨, group: 원부자재, stage: 원부자재}      # 연결재무제표 없음 → 별도
+  # 연우: 2023-10-19 한국콜마와 포괄적 주식교환 결정 → 2024-02-05 거래정지 → 2024-02-14 교환 완료(상장폐지, 한국콜마 100% 자회사).
+  # DART 정기보고서는 2024 사업보고서(2025-03-17 제출)가 마지막. 이후 분기는 manual/company_quarterly.csv 수동 입력.
+  - {code: "115960", name: 연우, group: 원부자재, stage: 원부자재, delisted: "2024-02-14", dart_until: "2024Q4"}
+  # ODM
+  - {code: "192820", name: 코스맥스, group: ODM, stage: ODM}
+  - {code: "161890", name: 한국콜마, group: ODM, stage: ODM}
+  - {code: "241710", name: 코스메카코리아, group: ODM, stage: ODM}
+  - {code: "352480", name: 씨앤씨인터내셔널, group: ODM, stage: ODM}
+  # 브랜드사
+  - {code: "278470", name: 에이피알, group: 브랜드, stage: 브랜드사}
+  - {code: "090430", name: 아모레퍼시픽, group: 브랜드, stage: 브랜드사}
+  - {code: "483650", name: 달바글로벌, group: 브랜드, stage: 브랜드사}
+  - {code: "018290", name: 브이티, group: 브랜드, stage: 브랜드사}
+  - {code: "237880", name: 클리오, group: 브랜드, stage: 브랜드사}
+  - {code: "051900", name: LG생활건강, group: 브랜드}   # 리레이팅 탭 브랜드 PER에만 사용(밸류체인 제안 목록 밖)
+  # 유통
+  - {code: "257720", name: 실리콘투, group: 유통, stage: 유통}
+  - {code: "362320", name: 청담글로벌, group: 유통, stage: 유통}
+  # 메디컬 에스테틱 (밸류체인 밖, 리레이팅 탭)
+  - {code: "214450", name: 파마리서치, group: 메디컬}
+  - {code: "145020", name: 휴젤, group: 메디컬}
+  - {code: "214150", name: 클래시스, group: 메디컬}
+  - {code: "086900", name: 메디톡스, group: 메디컬}    # 기존 트래커에서 이관
+
+# 공시 재무가 없는 단계 구성원 — 화면에 등급과 함께 표시만 한다
+unlisted:
+  - {name: CJ올리브영, stage: 채널, grade: manual, note: "비상장(씨제이올리브영). 분기 실적 공시 없음 — manual/company_quarterly.csv에 기업=CJ올리브영으로 입력"}
+  - {name: 구다이글로벌, stage: 브랜드사, grade: none, note: "비상장(조선미녀·티르티르 등). 분기 재무 없음"}
+  - {name: 틱톡샵, stage: 채널, grade: none, note: "플랫폼 매출 비공개. 입점 뉴스 건수만(대용)"}
+
+# ── 관세청 품목·국가별 수출 ───────────────────────────────────────
+customs:
+  # API는 요청한 코드의 '한 단계 아래' 하위 코드(4→6자리, 6→10자리)를 돌려준다.
+  # store: children = 하위 코드별로 저장(세부 분석용) / total = 합계만 저장. weight: 중량도 저장(수출단가용)
+  queries:
+    "3304":   {store: children, weight: true}    # → 3304.10·20·30·91·99
+    "330499": {store: children, weight: true}    # → 3304.99-1000 기초·-2000 메이크업·-3000 어린이·-9000 기타
+    "3305":   {store: total, weight: false}
+    "3307":   {store: total, weight: false}
+    "9018":   {store: children, weight: false}   # → 9018.11…9018.90 (9018.90은 기존 트래커 시리즈)
+    "300510": {store: children, weight: false}   # → 3005.10-1000 반창고·-9000 기타
+    "300249": {store: total, weight: false}      # 보툴리눔 톡신 등 (기존 트래커에서 이관)
+    "300490": {store: total, weight: false}      # 기타 의약품 (기존 트래커에서 이관)
+  # 화면 표시 이름 (위 저장 결과에서 합산해 만들 수 있는 코드)
+  hs:
+    "3304": 화장품 전체(3304)
+    "330410": 입술화장용(3304.10)
+    "330420": 눈화장용(3304.20)
+    "330430": 매니큐어·페디큐어(3304.30)
+    "330491": 파우더(3304.91)
+    "330499": 기타 기초·메이크업(3304.99)
+    "3304991000": 기초화장용(3304.99-1000)
+    "3304992000": 메이크업용(3304.99-2000)
+    "3304993000": 어린이용(3304.99-3000)
+    "3304999000": 기타(3304.99-9000)
+    "3305": 두발용(3305)
+    "3307": 면도·향·기타(3307)
+    "9018": 의료기기(9018)
+    "901890": 기타 의료기기(9018.90)
+    "300510": 접착성 드레싱(3005.10, 여드름 패치 대용)
+    "3005101000": 반창고(3005.10-1000)
+    "3005109000": 기타 드레싱(3005.10-9000)
+    "300249": 보툴리눔 톡신 등(3002.49)
+    "300490": 기타 의약품(3004.90)
+  # 국가 묶음: 그래프·카드에서 쓰는 이름. 코드는 관세청 ISO 2자리
+  regions:
+    미국: [US]
+    중국: [CN]
+    일본: [JP]
+    홍콩: [HK]
+    유럽: [GB, DE, FR, NL, PL, ES, IT, BE, SE, CZ, AT, DK, IE, PT, HU, RO, FI, GR, SK, BG, HR, SI, LT, LV, EE, LU, "NO", CH, CY, MT]
+    동남아: [VN, TH, ID, MY, PH, SG]
+    러시아·CIS: [RU, KZ, KG, UZ, TJ, TM, BY, AZ, AM, MD]
+    중동: [AE, SA, KW, QA, OM, BH, IL, JO, TR, IQ, LB, EG]
+    중남미: [BR, MX, CL, CO, PE, AR, EC, UY, PY, BO, VE, GT, PA, CR, DO, SV, HN, NI, PR]
+  focus_countries: [US, CN, JP, GB, DE, FR, NL, PL, ES, IT, AE, SA, BR, MX]
+
+# ── 아마존 US 베스트셀러 (카테고리 노드) ───────────────────────────
+amazon:
+  categories:
+    뷰티 전체: "https://www.amazon.com/gp/bestsellers/beauty"
+    스킨케어: "https://www.amazon.com/Best-Sellers-Beauty-Personal-Care-Skin-Care-Products/zgbs/beauty/11060451"
+    선케어: "https://www.amazon.com/Best-Sellers-Beauty-Personal-Care-Sunscreens/zgbs/beauty/11062651"
+    # 여드름 패치는 아마존 US에 전용 베스트셀러 카테고리가 없다(2026-09 확인: Mighty Patch의 최하위 분류가
+    # 'Facial Treatments & Masks'). 이 카테고리를 받아 제품명으로 패치 제품을 골라 센다(amazon.patch_pattern).
+    페이셜 트리트먼트: "https://www.amazon.com/gp/bestsellers/beauty/11062031"
+  patch_pattern: "patch|pimple|hydrocolloid|blemish (?:sticker|dot)|spot (?:dot|cover)"
+  uv_filter_date: "2026-08-01"   # 비모트리졸(UV 필터) FDA 승인 기준선 — 날짜는 확인 후 수정
+
+# ── 위키백과 조회수 (해외 인지도 대용) ─────────────────────────────
+wikipedia:
+  # 영문 위키에 문서가 없는 브랜드(COSRX, Beauty of Joseon, Rejuran — 2026-09 확인)는 넣어도 404
+  en:
+    K-beauty: K-beauty
+    Laneige: Laneige
+    Innisfree: Innisfree
+    Amorepacific: Amorepacific
+    Medical spa: Medical_spa        # 메드스파 관심도 대용
+    Hydrocolloid: Hydrocolloid_dressing   # 여드름 패치 관심도 대용
+
+# ── 네이버 검색 트렌드 (수동: datalab.naver.com 엑셀 → raw/) ─────────
+# 네이버 개발자센터 신규 신청이 2026-07-31 종료돼 API 자동 수집은 하지 않는다.
+# 아래 제품명이 하나라도 들어간 조회는 '3-4 스킨부스터 제품별' 그래프·상승 시점 표로, 나머지(카테고리·연령대 조회 등)는
+# 그 아래 '기타 조회'로 간다. 제품을 새로 조회하면 여기에 이름을 추가.
+naver_manual:
+  booster_products: [리쥬란, 쥬베룩, 리투오, 셀르디엠, 레디어스, 스컬트라]
+
+# ── 방한 외국인 국적 (출입국관광통계 국가코드) ───────────────────────
+tourism:
+  # 응답의 국적명(natKorNm)과 같은 이름으로 적는다
+  nationalities: [중국, 일본, 미국, 대만, 홍콩, 베트남, 태국, 싱가포르, 필리핀, 인도네시아, 말레이시아, 러시아]
+
+# ── 환율 (ECOS 731Y001 항목코드) ──────────────────────────────────
+fx:
+  원/달러: "0000001"
+  원/유로: "0000003"
+  원/100엔: "0000002"
+  원/위안: "0000053"
+
+# ── 뉴스 (Google News RSS) ────────────────────────────────────────
+news:
+  groups:
+    ODM: [한국콜마, 코스맥스, 코스메카코리아, 화장품 ODM, 화장품 ODM 증설, "cosmetics ODM Korea"]
+    메디컬 에스테틱: [파마리서치, 리쥬란, 스킨부스터, 휴젤, 메디톡스, 클래시스, 보툴리눔 톡신 수출, PDRN 화장품, "Rejuran", "skin booster"]
+    채널·입점: [세포라 입점, 코스트코 입점, 울타 입점, 틱톡샵 K뷰티, "K-beauty Sephora", "K-beauty Ulta", "K-beauty Costco", "K-beauty TikTok Shop"]
+    규제: [화장품 규제, 화장품 관세, 화장품법 개정, 중국 화장품 규제, MoCRA 화장품, 비모트리졸, "bemotrizinol FDA", "MoCRA", "EU cosmetics regulation Korea"]
+    해외: [K뷰티 수출, 화장품 수출, 화장품 수출액 관세청, "K-beauty exports", "Korean skincare Europe", "K-beauty Amazon", "Korean skincare US market", "K-beauty Japan", "K-beauty Europe"]
+    브랜드·채널: [아마존 K뷰티, 올리브영 매출, 에이피알, 달바글로벌, K뷰티 브랜드 미국]   # 기존 트래커 그룹
+  store_keywords: [세포라, 코스트코, 울타, 월마트, 타겟, 부츠, 입점, 틱톡샵, Sephora, Ulta, Costco, Walmart, Target, Boots, TikTok Shop]
+  # 채널 단계의 채널별 기사 건수
+  channels:
+    세포라: [세포라, Sephora]
+    울타: [울타, Ulta]
+    코스트코: [코스트코, Costco]
+    틱톡샵: [틱톡샵, 틱톡 샵, TikTok Shop]
