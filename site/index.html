@@ -4,16 +4,21 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>K뷰티 트래커</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <link rel="stylesheet" href="style.css">
 <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js" defer></script>
+<script src="story.js" defer></script>
 <script src="app.js" defer></script>
 </head>
 <body>
 <header class="top">
   <div class="wrap">
     <h1>K뷰티 트래커</h1>
-    <p class="sub">전방수요 모니터 + 리레이팅·밸류체인 분석 — 데이터가 말하는 것과 말하지 못하는 것을 구분해서</p>
+    <p class="sub">K뷰티가 지금 좋은지, 왜 그런지 — 데이터가 말하는 것과 말하지 못하는 것을 구분해서</p>
     <p class="meta" id="meta">불러오는 중…</p>
+    <button id="mode" class="mode-switch" role="switch" aria-checked="false" type="button">
+      <span class="track" aria-hidden="true"><span class="knob"></span></span> 자세히 보기
+    </button>
   </div>
   <nav class="tabs wrap" id="tabs" role="tablist" aria-label="탭"></nav>
 </header>

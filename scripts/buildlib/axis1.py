@@ -304,7 +304,9 @@ def valuation(cfg) -> tuple[list[dict], dict, pd.DataFrame]:
         g_per[g] = wk[cols].where(pos.notna()).sum(axis=1, min_count=1) / pos.sum(axis=1, min_count=1)
     gap = (g_per.get("ODM") / g_per.get("브랜드")) if "ODM" in g_per and "브랜드" in g_per else pd.Series(dtype=float)
     kpi["gap"] = gap.dropna().tolist()
+    kpi["gap_s"] = [[d.strftime("%Y-%m-%d"), round(float(v), 4)] for d, v in gap.dropna().items()]
     kpi["per"] = {g: s.dropna().tolist() for g, s in g_per.items()}
+    kpi["per_s"] = {g: [[d.strftime("%Y-%m-%d"), round(float(v), 3)] for d, v in s.dropna().items()] for g, s in g_per.items()}
     per_note = ("후행 PER = 시가총액 ÷ 최근 4개 분기 지배주주순이익(계정이 일부 분기만 잡힌 회사는 당기순이익, 별도 기준 회사는 별도 당기순이익. 공시 기한이 지난 분기만 사용 — 1Q 5/15, 2Q 8/14, "
                 "3Q 11/14, 4Q 다음해 3/31). 그룹 PER은 흑자 기업의 시총 합 ÷ 순이익 합. 적자 기업은 제외.")
     charts = [

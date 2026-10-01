@@ -10,7 +10,7 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from buildlib import axis1, axis2, axis3, demand, news, pages  # noqa: E402
+from buildlib import axis1, axis2, axis3, demand, news, pages, story  # noqa: E402
 from lib.core import OBS, SITE_DATA, config, load_status, now_kst  # noqa: E402
 
 
@@ -38,6 +38,7 @@ def main() -> None:
         "generated": now_kst().strftime("%Y-%m-%d %H:%M"),
         "status": load_status(),
         "nav": NAV,
+        "story": story.build(cfg),
         "tabs": {"overview": ov, **d, "news": news.build(cfg),
                  "rerating": a1, "flywheel": a2, "indicators": a3, "limits": pages.limits(), "appendix": pages.appendix()},
     }

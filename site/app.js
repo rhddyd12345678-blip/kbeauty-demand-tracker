@@ -363,6 +363,7 @@ function renderAppendix(root) {
 // ── 탭 전환 ──────────────────────────────────────────────────────
 function show(tab, target) {
   state.tab = tab;
+  state.detailTab = tab;
   document.querySelectorAll("#tabs button").forEach((b) => b.setAttribute("aria-selected", b.dataset.tab === tab));
   const area = (state.data.nav || []).find((g) => g.tabs.some(([k]) => k === tab))?.area || "common";
   document.body.dataset.area = area;
@@ -385,6 +386,14 @@ function show(tab, target) {
   else window.scrollTo(0, 0);
 }
 
+function renderDetailNav() {
+  $("#tabs").innerHTML = (state.data.nav || []).map((g) => `<div class="tab-group area-${g.area}" role="group" aria-label="${esc(g.label || "공통")}">
+      ${g.label ? `<span class="group-label">${esc(g.label)}${g.new ? ' <i class="new">NEW</i>' : ""}</span>` : ""}
+      ${g.tabs.map(([k, l]) => `<button role="tab" data-tab="${esc(k)}" data-area="${esc(g.area)}" aria-selected="false">${esc(l)}</button>`).join("")}
+    </div>`).join("");
+  document.querySelectorAll("#tabs [data-tab]").forEach((b) => b.addEventListener("click", () => show(b.dataset.tab)));
+}
+
 async function init() {
   try {
     const r = await fetch("data/site.json", { cache: "no-cache" });
@@ -394,16 +403,24 @@ async function init() {
     return;
   }
   $("#meta").textContent = `빌드 ${state.data.generated} KST`;
-  $("#tabs").innerHTML = (state.data.nav || []).map((g) => `<div class="tab-group area-${g.area}" role="group" aria-label="${esc(g.label || "공통")}">
-      ${g.label ? `<span class="group-label">${esc(g.label)}${g.new ? ' <i class="new">NEW</i>' : ""}</span>` : ""}
-      ${g.tabs.map(([k, l]) => `<button role="tab" data-tab="${esc(k)}" data-area="${esc(g.area)}" aria-selected="false">${esc(l)}</button>`).join("")}
-    </div>`).join("");
-  document.querySelectorAll("#tabs button").forEach((b) => b.addEventListener("click", () => show(b.dataset.tab)));
-  let tab = location.hash.slice(1);
-  if (!tab) { try { tab = localStorage.getItem("tab") || ""; } catch (e) { tab = ""; } }
-  show(state.data.tabs[tab] ? tab : "overview");
+  Gloss.init(state.data.story?.glossary || []);
+  let saved = {};
+  try { saved = { mode: localStorage.getItem("mode"), story: localStorage.getItem("storyTab"), tab: localStorage.getItem("tab") }; } catch (e) { /* 저장소 없음 */ }
+  const hash = location.hash.slice(1);
+  const isStory = STORY_PAGES.some(([k]) => k === hash);
+  state.storyTab = isStory ? hash : (saved.story || "home");
+  state.detailTab = !isStory && state.data.tabs[hash] ? hash : (saved.tab && state.data.tabs[saved.tab] ? saved.tab : "overview");
+  const detail = !isStory && state.data.tabs[hash] ? true : saved.mode === "detail";
+  $("#mode").addEventListener("click", () => setMode(state.mode !== "detail"));
+  setMode(detail);
+  // 주소창에서 #페이지를 바꾸거나 링크로 들어온 경우 (replaceState는 이 이벤트를 부르지 않음)
+  window.addEventListener("hashchange", () => {
+    const h = location.hash.slice(1);
+    if (STORY_PAGES.some(([k]) => k === h)) { state.storyTab = h; if (state.mode === "detail") setMode(false); else showStory(h); }
+    else if (state.data.tabs[h]) { state.detailTab = h; if (state.mode !== "detail") setMode(true); else show(h); }
+  });
   let t;
   window.addEventListener("resize", () => { clearTimeout(t); t = setTimeout(() => state.charts.forEach((c) => c.resize()), 150); });
-  matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => show(state.tab));
+  matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => (state.mode === "detail" ? show(state.tab) : showStory(state.tab)));
 }
 document.addEventListener("DOMContentLoaded", init);
