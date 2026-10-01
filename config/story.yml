@@ -1,0 +1,88 @@
+# 쉬운 화면(홈·질문 페이지)의 판정 기준과 문장 템플릿. 여기만 고치면 다음 빌드에 반영된다.
+#
+# 판정 4단계: 변화의 크기를 '기준(band)'과 비교
+#   |변화| ≤ band            → 비슷해요
+#   band < 좋은 변화 < 2·band → 약하게 좋아지는 중
+#   좋은 변화 ≥ 2·band        → 좋아지는 중
+#   나쁜 변화 > band          → 나빠지는 중   (나빠지는 쪽은 '약하게'를 두지 않는다 — 보수적으로)
+#   데이터 없음·수동 입력 대기 → 판단 불가 (종합 판정의 분모에서 뺀다)
+# good: up = 오를수록 좋음, down = 내릴수록 좋음
+
+levels:
+  good:     {text: 좋아지는 중, arrow: "↑", tone: good}
+  weak:     {text: 약하게 좋아지는 중, arrow: "↗", tone: weak}
+  flat:     {text: 비슷해요, arrow: "→", tone: flat}
+  bad:      {text: 나빠지는 중, arrow: "↓", tone: bad}
+  unknown:  {text: 판단 불가, arrow: "·", tone: none}
+
+# 지표별 기준
+indicators:
+  exports_yoy:     {band: 3.0, unit: "%", good: up,   desc: "화장품 수출 최근 3개월 합의 YoY(%). 0과 비교"}
+  kbrand_count:    {band: 3,   unit: "개", good: up,  desc: "아마존 스킨케어 Top50 K브랜드 수, 1년 전 스냅샷과 비교"}
+  hhi:             {band: 50,  unit: "pt", good: down, desc: "수출 HHI(12개월 누적), 1년 전과 비교"}
+  odm_yoy:         {band: 3.0, unit: "%p", good: up,  desc: "ODM 합산 매출 YoY, 1년 전 같은 분기의 YoY와 비교"}
+  odm_opm_ttm:     {band: 0.5, unit: "%p", good: up,  desc: "ODM 영업이익률(TTM, 매출 가중), 1년 전과 비교"}
+  odm_rev_per_emp: {band: 3.0, unit: "%", good: up,   desc: "ODM 인당 매출(별도 합산 TTM ÷ 별도 직원 합), 1년 전 대비 %"}
+  seasonality:     {band: 0.05, unit: "", good: up,   desc: "4Q÷3Q 매출 비율(합산). 연결·별도 중 변화가 더 작은 쪽으로 판정(유리하게 읽지 않기)"}
+  per_ratio:       {band: 0.03, unit: "배", good: up, desc: "ODM PER ÷ 브랜드 PER, 52주 전과 비교"}
+  stage_opm_ttm:   {band: 0.5, unit: "%p", good: up,  desc: "밸류체인 단계별 영업이익률(TTM, 매출 가중), 1년 전과 비교"}
+  booster_yoy:     {band: 3.0, unit: "%", good: up,   desc: "의료기기(9018.90) 수출 최근 3개월 합의 YoY(%). 0과 비교"}
+
+# 여러 조건을 묶는 카드(주가·밸류체인)의 종합 판정: 판단 가능한 것 중
+#   '좋아지는 중'이 과반(> 50%)            → 좋아지는 중
+#   '좋아지는 중 + 약하게'가 과반           → 약하게 좋아지는 중
+#   '나빠지는 중'이 과반                   → 나빠지는 중
+#   그 밖                                 → 비슷해요
+aggregate_majority: 0.5
+
+# 증가율 문장 (수출·스킨부스터 등). 위에서부터 처음 맞는 구간을 쓴다
+change_words:
+  - {min: 10,   text: 크게 늘었어요}
+  - {min: 3,    text: 늘었어요}
+  - {min: -3,   text: 비슷해요}
+  - {min: -10,  text: 줄었어요}
+  - {min: -999, text: 크게 줄었어요}
+
+# 문장 템플릿 ({이름}은 빌드가 같은 그래프 데이터에서 계산해 채움)
+templates:
+  home_summary: "최근 3개월 수출이 1년 전보다 {exports_yoy} {exports_word}, 중국 비중은 {china_share}까지 내려왔어요."
+  exports_card: "최근 3개월 수출이 1년 전보다 {exports_yoy} {exports_word}."
+  consumer_card: "스킨케어 Top50 중 K브랜드 {kb_now}개예요(1년 전 {kb_prev}개)."
+  chain_card: "영업이익률이 가장 높은 단계는 {top_stage}({top_opm}), 1년 새 가장 많이 오른 단계는 {rise_stage}({rise_pp})예요."
+  stock_card: "판단 가능한 {n}개 중 뚜렷하게 좋아지는 것 {a}개, 약하게 {b}개예요."
+  booster_card: "의료기기(9018.90) 수출이 최근 3개월 {booster_yoy} {booster_word}."
+  no_data: "아직 데이터가 없어요({reason})."
+
+# '이번 달에 달라진 것': 각 지표의 변화 ÷ 기준이 큰 순서로 몇 개
+changes_top_n: 3
+
+# 같은 나라·제품·단계는 모든 페이지에서 같은 색 (핵심 선은 이 색, 나머지는 회색)
+colors:
+  default: "--s1"
+  중국: "--s1"
+  미국: "--s2"
+  유럽: "--s3"
+  일본: "--s4"
+  동남아: "--s6"
+  중동: "--s7"
+  기초: "--s1"
+  메이크업: "--s5"
+  기타: "--s4"
+  원부자재: "--s7"
+  ODM: "--s1"
+  브랜드사: "--s2"
+  유통: "--s3"
+  채널: "--s5"
+  K브랜드: "--s2"
+  한국생산: "--s1"
+
+# (추가) 페이지별 지표 기준
+more_indicators:
+  kprod_count:  {band: 3,   unit: "개", good: up,  desc: "아마존 스킨케어 Top50 한국생산 제품 수, 1년 전 스냅샷과 비교"}
+  wiki_yoy:     {band: 10.0, unit: "%", good: up,  desc: "영문 위키 'K-beauty' 최근 3개월 조회수 합의 YoY(%). 0과 비교"}
+  store_news:   {band: 20.0, unit: "%", good: up,  desc: "입점 기사 최근 4주 건수, 직전 4주 대비 변화율(%)"}
+  stage_yoy:    {band: 3.0, unit: "%", good: up,   desc: "밸류체인 단계 매출 YoY(%). 0과 비교"}
+  inv_days:     {band: 5.0, unit: "일", good: down, desc: "단계 재고회전일수, 1년 전 같은 분기와 비교"}
+  rel_return:   {band: 5.0, unit: "%p", good: up,  desc: "최근 1년 그룹 주가 수익률 − KOSPI 수익률"}
+  search_yoy:   {band: 10.0, unit: "%", good: up,  desc: "네이버 검색지수 최근 4주 평균, 1년 전 같은 4주 대비(%)"}
+  fx_change:    {band: 3.0, unit: "%", good: up,   desc: "원/달러 1년 변화율(%). 원화 약세(환율 상승)를 수출 기업에 유리한 방향으로 본다"}
