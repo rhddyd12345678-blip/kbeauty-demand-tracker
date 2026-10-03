@@ -105,13 +105,19 @@ def _set_jong(ch: str, j: int) -> str:
     return chr(_BASE + o - o % 28 + j)
 
 
+# 형용사: 동사처럼 '~는다/~한다'로 바꾸면 틀림 (많습니다→많다, 불과합니다→불과하다)
+ADJ_SEUB = set("많좋작높낮넓깊같적짧싫찮")
+ADJ_HA = ("불과|중요|필요|가능|충분|유사|동일|다양|활발|확실|분명|유효|적합|저렴|간편|편리|우수|부족|미흡|강력|탁월|뚜렷|"
+          "치열|풍부|특별|완벽|유리|불리|민감|안전|위험|유명|적절|시급|복잡|단순|비슷|어려|쉽|무관|가속|견조|양호|부진")
+
+
 def _plain(m: re.Match) -> str:
     """존댓말 종결 → 해라체. (찾습니다→찾는다, 커집니다→커진다, 있습니다→있다, 했습니다→했다)"""
     stem, end = m.group(1), m.group(2)
     if end == "니다":  # stem 마지막 글자에 받침 ㅂ (합니다, 됩니다, 커집니다)
         return stem[:-1] + _set_jong(stem[-1], _JONG_N) + "다"
     last = stem[-1]
-    if last in "있없" or _jong(last) == _JONG_SS:
+    if last in "있없" or last in ADJ_SEUB or _jong(last) == _JONG_SS:
         return stem + "다"
     return stem + "는다"
 
@@ -157,14 +163,19 @@ def post(ko: str) -> str:
         s = re.sub(r"(?<![A-Za-z])" + re.escape(en) + r"(?:'s)?(?![A-Za-z])", NAMES[en], s)
     for wrong, right in KO_FIX.items():
         s = replace_word(s, wrong, right)
+    # '세포라(Sephora)'가 '세포라(세포라)'로 된 중복 제거 — 뒤에 조사가 오면 그 앞 공백도 제거 (세포라 (세포라) 와 → 세포라와)
+    s = re.sub(r"([가-힣A-Za-z0-9]+)\s?\(\1\)\s?(?=(?:에서|으로|이|가|은|는|을|를|와|과|의|에|로|도|만)(?:\s|$|[,.]))", r"\1", s)
+    s = re.sub(r"([가-힣A-Za-z0-9]+)\s?\(\1\)", r"\1", s)
     s = QUARTER.sub(lambda m: f"{m.group(2)}년 {m.group(1)}분기", s)
     s = re.sub(r"\b(20\d\d)년?\s?Q([1-4])\b", r"\1년 \2분기", s)
     # 남은 금액 표기
     s = MONEY.sub(lambda m: _money(m.group(1), m.group(2)), s)
     s = re.sub(r"(\d[\d.,]*\s?[억만천]?)\s?\$", r"\1 달러", s)
     s = re.sub(r"\$\s?(\d[\d.,]*)\s?(억|만)", r"\1\2 달러", s)
+    s = re.sub(r"\$\s?(\d[\d,]*(?:\.\d+)?)(?![\d.,])", r"\1달러", s)  # 단위 없는 금액 ($10 → 10달러)
     # 존댓말 → 제목체
     s = s.replace("아닙니다", "아니다").replace("입니다", "이다")
+    s = re.sub(r"(" + ADJ_HA + r")합니다", r"\1하다", s)
     s = POLITE_SEUB.sub(_plain, s)
     s = re.sub(r"([가-힣])니다", lambda m: (_set_jong(m.group(1), _JONG_N) + "다") if _jong(m.group(1)) == _JONG_B else m.group(0), s)
     s = re.sub(r"(인가|나|까|는가)요\?", r"\1?", s)

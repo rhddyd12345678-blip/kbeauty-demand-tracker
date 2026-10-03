@@ -28,6 +28,14 @@ NAME = "news"
 ITEMS = DATA / "news_items.csv"
 FIELDS = ["날짜", "그룹", "키워드", "제목", "제목_ko", "제목_ko_원문", "번역", "매체", "링크", "수집일"]
 HANGUL = re.compile(r"[가-힣]")
+CJK = re.compile(r"[\u3040-\u30ff\u4e00-\u9fff]")
+
+
+def is_english(title: str) -> bool:
+    """번역 대상 영문 제목: 한글이 거의 없고 영문자가 충분. 중국어·일본어 제목은 제외(번역기를 sl=en으로 부르므로)."""
+    hangul, cjk = len(HANGUL.findall(title)), len(CJK.findall(title))
+    latin = len(re.findall(r"[A-Za-z]", title))
+    return latin >= 8 and latin / (latin + hangul + cjk) >= 0.9
 TRANSLATE_LIMIT = 80  # 한 번 실행에 번역할 최대 제목 수
 
 
@@ -123,7 +131,12 @@ def run() -> tuple[int, str]:
     if len(items) == before and errs:
         raise CollectError("; ".join(errs[:3]))
     # 번역 없는 영문 제목 먼저, 남는 몫으로 MyMemory 번역을 Google 번역으로 교체
-    en = [r for r in items.values() if not HANGUL.search(r["제목"])]
+    for r in items.values():
+        if r.get("번역") == "mymemory":  # 기존 트래커에서 이관된 표기 통일 (Google 교체 대상에서 빠지던 문제)
+            r["번역"] = "MyMemory"
+        if r.get("제목_ko") and not is_english(r["제목"]):  # 중국어 제목 등 잘못 번역된 것 제거
+            r["제목_ko"] = r["제목_ko_원문"] = r["번역"] = ""
+    en = [r for r in items.values() if is_english(r["제목"])]
     todo = sorted([r for r in en if not r["제목_ko"]], key=lambda r: r["날짜"], reverse=True)
     todo += sorted([r for r in en if r["번역"] == "MyMemory"], key=lambda r: r["날짜"], reverse=True)
     todo = todo[:TRANSLATE_LIMIT]
