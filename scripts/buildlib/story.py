@@ -542,6 +542,11 @@ def qpairs(d: dict) -> dict:
     return {q_first_day(k): v for k, v in d.items()}
 
 
+def people(x: float) -> str:
+    """6,736,123 → '673.6만 명'"""
+    return f"{x / 1e4:,.1f}만 명"
+
+
 def card_nodata(cid: str, q: str, reason: str) -> dict:
     return {"id": cid, "question": q, "answer": no_data(reason), "status": status("unknown")}
 
@@ -699,6 +704,10 @@ def verify_page(page: dict) -> list[str]:
             elif chk["op"] == "sum3_usd":
                 y, cur, _ = yoy3(m)
                 got = usd(m[cur].sum()) if cur else None
+                ok = got == f["text"]
+            elif chk["op"] == "sum3_people":
+                y, cur, _ = yoy3(m)
+                got = people(m[cur].sum()) if cur else None
                 ok = got == f["text"]
             elif chk["op"] == "value_at":
                 got = round(next((v for d, v in s["data"] if d == chk["date"]), float("nan")), 1)
@@ -1107,8 +1116,30 @@ def booster_page(cfg) -> dict:
         cards.append(card_nodata("b_products", "리쥬란·쥬베룩 같은 제품별 관심은 어때요?",
                                  "제품 키워드로 조회한 네이버 데이터랩 엑셀이 아직 없어요 — 도움말의 수동 입력 안내 참고"))
     tr = obs("tourism")
+    tq = "한국에 오는 외국인이 늘고 있나요?"
     if tr.empty:
-        cards.append(card_nodata("b_tourism", "한국에 오는 외국인이 늘고 있나요?", "출입국관광통계 사용 승인이 아직 반영되지 않아 매일 다시 시도하고 있어요"))
+        cards.append(card_nodata("b_tourism", tq, "출입국관광통계 수집 전"))
+    else:
+        tp = tr.assign(v=tr["값"].astype(float), m=pd.PeriodIndex(tr["기준일"], freq="M")).pivot_table(index="m", columns="구분", values="v").sort_index()
+        tot = tp["전체"].dropna()
+        ty, tcur, _ = yoy3(tot)
+        if ty is None:
+            cards.append(card_nodata("b_tourism", tq, "1년 전 같은 3개월 값 없음"))
+        else:
+            others = [c for c in tp.columns if c not in ("전체", "중국", "일본")]
+            cards.append({"id": "b_tourism", "question": tq,
+                          "answer": f"최근 3개월 방한 외국인은 {people(tot[tcur].sum())}으로, 1년 전보다 {abs(ty):.1f}% {word(ty)}.",
+                          "status": status(judge("tourism_yoy", ty)),
+                          "why": "피부과 시술을 받으러 오는 외국인이 늘면 국내 스킨부스터 수요에도 영향을 줄 수 있어요. 다만 관광객 수일 뿐, 시술받은 사람 수는 아니에요.",
+                          "chart": {"unit": "명", "freq": "M", "events": events("booster"),
+                                    "series": [mseries("방한 외국인 전체", tot, "main")]
+                                    + [mseries(c, tp[c], "context") for c in ("중국", "일본") if c in tp]
+                                    + [mseries(c, tp[c], "extra") for c in others]},
+                          "more": {"정의": "방한 외래관광객 수(API의 국적별 값을 모두 더한 월 합계)", "계산": "최근 3개월 합 ÷ 1년 전 같은 3개월 합 − 1. 기준 ±3%",
+                                   "기간": f"~{tot.index.max().strftime('%Y-%m')} (보통 다음 달 말 공표)",
+                                   "출처": "한국문화관광연구원 출입국관광통계(공공데이터포털)", "갱신": last_updated("tourism"), "등급": "대용 지표"},
+                          "facts": [{"text": people(tot[tcur].sum()), "check": {"op": "sum3_people", "series": "방한 외국인 전체"}},
+                                    {"text": f"{abs(ty):.1f}%", "check": {"op": "yoy3_series", "series": "방한 외국인 전체", "value": round(ty, 1)}}]})
     # 환율
     fx = obs("fx")
     if not fx.empty:

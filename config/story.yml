@@ -86,3 +86,4 @@ more_indicators:
   rel_return:   {band: 5.0, unit: "%p", good: up,  desc: "최근 1년 그룹 주가 수익률 − KOSPI 수익률"}
   search_yoy:   {band: 10.0, unit: "%", good: up,  desc: "네이버 검색지수 최근 4주 평균, 1년 전 같은 4주 대비(%)"}
   fx_change:    {band: 3.0, unit: "%", good: up,   desc: "원/달러 1년 변화율(%). 원화 약세(환율 상승)를 수출 기업에 유리한 방향으로 본다"}
+  tourism_yoy:  {band: 3.0, unit: "%", good: up,   desc: "방한 외국인 최근 3개월 합의 YoY(%). 0과 비교"}

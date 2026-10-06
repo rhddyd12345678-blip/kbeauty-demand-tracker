@@ -143,6 +143,7 @@ function unitFmt(v, unit, axis) {
     return axis ? `${e.toLocaleString("ko-KR", { maximumFractionDigits: 1 })}억` : `${e.toLocaleString("ko-KR", { maximumFractionDigits: 1 })}억 달러`;
   }
   if (unit === "usd_kg") return axis ? `${v.toFixed(0)}달러` : `${v.toFixed(1)}달러/kg`;
+  if (unit === "명") return axis ? `${(v / 1e4).toLocaleString("ko-KR", { maximumFractionDigits: 0 })}만` : `${(v / 1e4).toLocaleString("ko-KR", { maximumFractionDigits: 1 })}만 명`;
   if (unit === "%") return `${v.toFixed(1)}%`;
   return v.toLocaleString("ko-KR", { maximumFractionDigits: 1 });
 }

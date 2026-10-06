@@ -6,10 +6,12 @@
   serviceKey, YM(YYYYMM), ED_CD=E(방한), NAT_CD(생략 시 전체 국적)
 응답 item: ym, natCd, natKorNm(국적), num(인원), ed
 국적명은 config/tracker.yml의 tourism.nationalities와 같은 이름만 저장하고, 전체 합계도 함께 저장.
+응답 국적명은 '중  국'처럼 글자 사이 공백이 있고 '러시아(연방)'처럼 괄호가 붙어 있어 norm()으로 맞춘다.
 통상 다음 달 말쯤 공표 → 최근 3개월은 매번 다시 받는다.
 """
 from __future__ import annotations
 
+import re
 import sys
 import time
 import urllib.parse
@@ -26,6 +28,11 @@ ENDPOINTS = {
 }
 PINNED = DATA / "tourism_endpoint.txt"
 SOURCE = "한국문화관광연구원 출입국관광통계(공공데이터포털)"
+
+
+def norm(name: str) -> str:
+    """'중  국' → '중국', '러시아(연방)' → '러시아'"""
+    return re.sub(r"\(.*?\)", "", re.sub(r"\s+", "", name or ""))
 
 
 def fetch(key: str, ym: str, api: str) -> list[dict]:
@@ -76,13 +83,16 @@ def run() -> tuple[int, str]:
     PINNED.write_text(api_name)
     api = ENDPOINTS[api_name]
     now = now_kst()
-    have = {r["기준일"] for r in read_obs(NAME)}
+    have: dict[str, set] = {}
+    for r in read_obs(NAME):
+        have.setdefault(r["기준일"], set()).add(r["구분"])
     months = month_range(cfg["backfill_start"], f"{now.year}{now.month:02d}")
     recent = set(months[-4:])
     rows, empty, last = [], [], ""
     for ym in months:
         label = f"{ym[:4]}-{ym[4:]}"
-        if label in have and ym not in recent:
+        # 이미 있는 달은 건너뛴다. 단 받아야 할 국적이 빠진 달은 다시 받는다(없는 것만 추가, 기존 값은 그대로)
+        if ym not in recent and {"전체", *wanted} <= have.get(label, set()):
             continue
         items = fetch(key, ym, api)
         if not items:
@@ -92,8 +102,9 @@ def run() -> tuple[int, str]:
         for it in items:
             n = float((it.get("num") or "0").replace(",", ""))
             total += n
-            if it.get("natKorNm") in wanted:
-                rows.append({"기준일": label, "축": "개별지표", "지표": "방한 외국인", "구분": it["natKorNm"], "값": n,
+            nm = norm(it.get("natKorNm"))
+            if nm in wanted:
+                rows.append({"기준일": label, "축": "개별지표", "지표": "방한 외국인", "구분": nm, "값": n,
                              "단위": "명", "출처": SOURCE})
         rows.append({"기준일": label, "축": "개별지표", "지표": "방한 외국인", "구분": "전체", "값": total,
                      "단위": "명", "출처": SOURCE})
